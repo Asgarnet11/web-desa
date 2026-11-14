@@ -85,3 +85,4 @@ class PublicPagesTest extends TestCase
         ]);
     }
 }
+

@@ -24,3 +24,4 @@ Route::prefix('pengaduan')->name('pengaduan.')->group(function () {
     Route::post('/', [PengaduanController::class, 'store'])->name('store');
     Route::get('/cek', [PengaduanController::class, 'cek'])->name('cek');
 });
+

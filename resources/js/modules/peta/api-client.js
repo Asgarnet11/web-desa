@@ -19,3 +19,4 @@ export async function fetchChoroplethGeoJson(wilayahId, indikator = 'penduduk') 
     if (!response.ok) throw new Error('Gagal memuat data tematik');
     return await response.json();
 }
+

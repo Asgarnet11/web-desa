@@ -15,3 +15,4 @@ export function getChoroplethColor(value, min = 1000, max = 5000) {
     if (value <= min + range * 4) return choroplethPalette[3];
     return choroplethPalette[4];
 }
+

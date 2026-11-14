@@ -19,3 +19,4 @@ class StatistikController extends Controller
         return response()->json($data);
     }
 }
+

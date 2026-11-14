@@ -66,3 +66,4 @@ class KategoriFasilitasSeeder extends Seeder
         }
     }
 }
+

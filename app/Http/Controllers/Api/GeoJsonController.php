@@ -47,3 +47,4 @@ class GeoJsonController extends Controller
         return response()->json($featureCollection);
     }
 }
+

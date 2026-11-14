@@ -46,3 +46,4 @@ class PengaduanController extends Controller
         return view('pages.pengaduan.cek', compact('pengaduan', 'tiket'));
     }
 }
+

@@ -34,3 +34,4 @@ export function initCountUp() {
 
     counters.forEach(el => observer.observe(el));
 }
+

@@ -19,3 +19,4 @@ class PetaController extends Controller
         return view('pages.peta.index', compact('wilayah', 'kategoriList'));
     }
 }
+

@@ -25,3 +25,4 @@ export function createFacilityLayer(geojsonData) {
 
     return layerGroup;
 }
+

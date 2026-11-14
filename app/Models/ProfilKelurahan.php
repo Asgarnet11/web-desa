@@ -51,3 +51,4 @@ class ProfilKelurahan extends Model
         return $this->belongsTo(Wilayah::class);
     }
 }
+

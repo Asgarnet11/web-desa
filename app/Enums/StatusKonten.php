@@ -23,3 +23,4 @@ enum StatusKonten: string
         };
     }
 }
+

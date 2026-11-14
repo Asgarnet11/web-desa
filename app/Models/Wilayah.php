@@ -127,3 +127,4 @@ class Wilayah extends Model
         return $this->isDesa() ? 'Dusun' : 'Lingkungan';
     }
 }
+

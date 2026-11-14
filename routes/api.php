@@ -11,3 +11,4 @@ Route::middleware('throttle:60,1')->group(function () {
 
     Route::get('/statistik/{wilayah}', [StatistikController::class, 'show'])->name('api.statistik.show');
 });
+

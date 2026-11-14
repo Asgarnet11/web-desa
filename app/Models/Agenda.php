@@ -37,3 +37,4 @@ class Agenda extends Model
         return $this->belongsTo(Wilayah::class);
     }
 }
+

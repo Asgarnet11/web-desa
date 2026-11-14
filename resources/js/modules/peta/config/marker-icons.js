@@ -53,3 +53,4 @@ export function createCategoryIcon(kategoriSlug = 'default', color = null) {
         popupAnchor: [0, -36]
     });
 }
+

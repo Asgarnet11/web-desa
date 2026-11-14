@@ -19,3 +19,4 @@ class LayananController extends Controller
         return view('pages.layanan.index', compact('wilayah', 'layananGrouped'));
     }
 }
+

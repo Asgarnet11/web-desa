@@ -46,3 +46,4 @@
         @vite('resources/js/peta.js')
     @endpush
 </x-layouts.app>
+

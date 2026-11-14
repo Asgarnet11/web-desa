@@ -24,3 +24,4 @@ export function initMap(containerId = 'map', options = {}) {
 
     return map;
 }
+

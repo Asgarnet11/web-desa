@@ -47,3 +47,4 @@
         @vite('resources/js/landing.js')
     @endpush
 </x-layouts.app>
+
