@@ -1,0 +1,27 @@
+@import '@fontsource/comfortaa/700.css';
+@import '@fontsource/nunito/400.css';
+@import '@fontsource/nunito/600.css';
+@import '@fontsource/nunito/700.css';
+@import 'leaflet/dist/leaflet.css';
+
+@theme {
+  --color-primary: #2D6A4F;
+  --color-primary-dark: #1B4332;
+  --color-secondary: #FFB703;
+  --color-tertiary: #219EBC;
+  --color-tertiary-dark: #17708A;
+  --color-neutral: #FFF8E7;
+  --color-surface: #FFFFFF;
+  --color-accent: #52B788;
+  --color-ink: #1F2D26;
+  --color-sky: #8ECFEA;
+  --color-danger: #B3361A;
+
+  --font-display: "Comfortaa", system-ui, sans-serif;
+  --font-sans: "Nunito", system-ui, sans-serif;
+
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 40px;
+  --radius-organic: 36px 28px 40px 24px;
+}
