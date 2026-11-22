@@ -15,6 +15,10 @@
         <x-landing.visi-misi :data="$data" />
     @endif
 
+    @if($pengaturan['timeline'] ?? true)
+        <x-landing.timeline :data="$data" />
+    @endif
+
     @if($pengaturan['fasilitas'] ?? true)
         <x-landing.fasilitas-grid :data="$data" />
     @endif
