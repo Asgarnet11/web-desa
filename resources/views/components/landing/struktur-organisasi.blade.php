@@ -4,6 +4,121 @@
     $perangkatList = $data['perangkat'] ?? collect();
     $profil = $data['profil'] ?? null;
     $officeWatermark = $profil?->foto_kantor ?? 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80';
+
+    $divisiList = [
+        [
+            'header' => 'Pemerintahan',
+            'deskripsi' => 'Pengurusan administrasi kependudukan, KTP, KK, dan perizinan dasar.',
+            'kasi' => [
+                'role' => 'Kasi Pemerintahan',
+                'nama' => 'Budi Santoso, S.Sos',
+                'sub' => 'NIP: 19800620 200604 1 012',
+                'foto' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Staf Pelaksana',
+                'nama' => 'Abdullah Zubair, S.Ag',
+                'sub' => 'Pelayanan Kependudukan',
+                'foto' => 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+        [
+            'header' => 'Ekonomi & Bang',
+            'deskripsi' => 'Pengawasan infrastruktur jalan, drainase, dan fasilitasi izin usaha lokal.',
+            'kasi' => [
+                'role' => 'Kasi Ekbang',
+                'nama' => 'Ahmad Fauzi, S.T',
+                'sub' => 'NIP: 19881105 201101 1 003',
+                'foto' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Staf Pengawas',
+                'nama' => 'Taufik Kurrahman, S.H',
+                'sub' => 'Pengawas Pembangunan',
+                'foto' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+        [
+            'header' => 'Sosial & Kesra',
+            'deskripsi' => 'Penyaluran bantuan sosial, jaminan kesehatan, dan pembinaan keagamaan.',
+            'kasi' => [
+                'role' => 'Kasi Kesos',
+                'nama' => 'Dewi Sartika, S.Pd',
+                'sub' => 'NIP: 19860925 201001 2 005',
+                'foto' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Staf Bantuan',
+                'nama' => 'Lalu Yasin, S.H',
+                'sub' => 'Penyaluran PKH & Lansia',
+                'foto' => 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+        [
+            'header' => 'Trantib & Linmas',
+            'deskripsi' => 'Ketertiban umum, penanggulangan bencana, dan koordinasi keamanan 24 jam.',
+            'kasi' => [
+                'role' => 'Kasi Trantib',
+                'nama' => 'Hendra Gunawan',
+                'sub' => 'NIP: 19780315 200201 1 009',
+                'foto' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Komandan Regu',
+                'nama' => 'Adam Lubis, S.Ag',
+                'sub' => 'Ketertiban Lingkungan',
+                'foto' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+        [
+            'header' => 'IT & Data Spasial',
+            'deskripsi' => 'Pengelolaan portal peta digital kelurahan, sistem pengaduan, dan data GIS.',
+            'kasi' => [
+                'role' => 'Koordinator IT',
+                'nama' => 'Abdil Mahfuzi, S.Ag',
+                'sub' => 'NIP: 19910617 201601 1 003',
+                'foto' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Operator SIAK',
+                'nama' => 'Hasan Ali, S.H',
+                'sub' => 'Pemetaan & Portal Digital',
+                'foto' => 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+        [
+            'header' => 'Lingkungan Hidup',
+            'deskripsi' => 'Program Buruan Sae, ketahanan pangan pekarangan, dan tata kelola bank sampah.',
+            'kasi' => [
+                'role' => 'Koordinator LH',
+                'nama' => 'Hj. Enok Wartini',
+                'sub' => 'Buruan Sae & Asri',
+                'foto' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Bank Sampah',
+                'nama' => 'Rohman N., S.Ag',
+                'sub' => 'Pengelolaan Sampah',
+                'foto' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+        [
+            'header' => 'Karang Taruna',
+            'deskripsi' => 'Wadah kreativitas pemuda, pengembangan olahraga, dan komunikasi media sosial.',
+            'kasi' => [
+                'role' => 'Ketua Pemuda',
+                'nama' => 'Reza Pratama, S.Kom',
+                'sub' => 'Kepemudaan Wilayah',
+                'foto' => 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
+            ],
+            'anggota' => [
+                'role' => 'Staf Kreatif',
+                'nama' => 'Damu Azrial, S.Kom',
+                'sub' => 'Kreativitas & Humas',
+                'foto' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
+            ]
+        ],
+    ];
 @endphp
 
 <section id="struktur" class="py-20 lg:py-28 bg-[#F4F6F8] overflow-hidden">
@@ -21,30 +136,40 @@
             </p>
         </div>
 
-        <!-- Mode Toggle & Scroll Hint (UX Friendly) -->
-        <div class="flex items-center justify-between gap-4 text-xs">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 font-medium">
-                <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span>Geser horizontal untuk menjelajahi bagan lengkap bagan kepengurusan</span>
+        <!-- Mode Toggle Pill Bar (Seamless Responsive Experience) -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <!-- View Mode Switcher -->
+            <div class="inline-flex items-center p-1 rounded-full bg-white border border-gray-200 shadow-xs">
+                <button type="button" 
+                        onclick="switchStrukturMode('poster')" 
+                        id="btn-mode-poster"
+                        class="px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 bg-[#0284C7] text-white shadow-xs">
+                    Bagan Pohon Poster (Desktop)
+                </button>
+                <button type="button" 
+                        onclick="switchStrukturMode('card')" 
+                        id="btn-mode-card"
+                        class="px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#0284C7]">
+                    Daftar Kartu Responsif (Ponsel)
+                </button>
             </div>
 
-            <button type="button" 
-                    onclick="document.getElementById('org-chart-wrapper').scrollLeft += 250" 
-                    class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-bold shadow-xs">
-                <span>Geser Bagan</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </button>
+            <!-- Hint on Poster View -->
+            <div id="poster-scroll-hint" class="flex items-center gap-2 text-xs text-amber-800 bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-200">
+                <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Geser ke samping untuk melihat bagan horizontal secara menyeluruh</span>
+            </div>
         </div>
 
-        <!-- Poster-Style Organizational Chart Frame (Matching Reference Image) -->
-        <div id="org-chart-wrapper" class="overflow-x-auto pb-6 pt-2 rounded-3xl shadow-xl border border-gray-200/90 bg-white">
+        <!-- 1. POSTER VIEW: Wide Organizational Tree Chart (Reference Image Fidelity) -->
+        <div id="struktur-poster-container" class="overflow-x-auto pb-6 pt-2 rounded-3xl shadow-xl border border-gray-200/90 bg-white">
             <div class="relative min-w-[1150px] p-8 lg:p-12 bg-white rounded-3xl overflow-hidden">
-                <!-- Faint Watermark Background of Office Building (Reference Fidelity) -->
-                <div class="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-[0.07]">
+                <!-- Faint Watermark Background of Office Building -->
+                <div class="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-[0.06]">
                     <img src="{{ $officeWatermark }}" alt="Watermark Kantor Kelurahan" class="w-full h-full object-cover">
                 </div>
 
-                <!-- Diagonal Corner Graphic Accents (Bottom Right / Left Reference Motifs) -->
+                <!-- Diagonal Corner Graphic Accents -->
                 <div class="absolute bottom-0 right-0 w-36 h-36 bg-gradient-to-tl from-amber-400/20 via-orange-400/10 to-transparent pointer-events-none"></div>
                 <div class="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-emerald-500/10 via-teal-400/5 to-transparent pointer-events-none"></div>
 
@@ -53,7 +178,6 @@
                     <div class="flex items-start justify-between gap-6">
                         <!-- Top Left: Advisory / Pembina & Pengawas Boxes -->
                         <div class="w-64 space-y-2.5">
-                            <!-- Box 1: Camat Sukasari (Pembina) -->
                             <div class="rounded-xl overflow-hidden border border-amber-300 shadow-sm bg-white">
                                 <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-[10px] uppercase tracking-wider py-1 px-3 text-center">
                                     PEMBINA WILAYAH (CAMAT)
@@ -64,7 +188,6 @@
                                 </div>
                             </div>
 
-                            <!-- Box 2: Ketua LPM (Mitra Pengawas) -->
                             <div class="rounded-xl overflow-hidden border border-amber-300 shadow-sm bg-white">
                                 <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-[10px] uppercase tracking-wider py-1 px-3 text-center">
                                     LEMBAGA PEMBERDAYAAN (LPM)
@@ -122,25 +245,21 @@
 
                         <!-- 1. Lurah Sukawarna (Pimpinan Utama) -->
                         <div class="relative z-10 flex flex-col items-center">
-                            <!-- Small Orange Tag -->
                             <div class="px-3.5 py-0.5 rounded-full bg-orange-500 text-white font-bold text-[10px] uppercase tracking-wider mb-2 shadow-sm">
                                 Lurah
                             </div>
 
-                            <!-- Dual-Ring Avatar (Gold Ring + Crescent Dark Blue Ribbon) -->
                             <div class="relative">
                                 <div class="w-24 h-24 rounded-full border-4 border-amber-400 p-1 bg-white shadow-lg overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
                                          alt="Drs. H. Rahmat Hidayat, M.Si" 
                                          class="w-full h-full object-cover rounded-full">
                                 </div>
-                                <!-- Overlapping Crescent Ribbon Badge -->
                                 <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white font-serif font-bold text-[11px] uppercase tracking-wide px-3.5 py-0.5 rounded-full shadow-md border-2 border-white whitespace-nowrap">
                                     Lurah Sukawarna
                                 </div>
                             </div>
 
-                            <!-- Name Pill Card -->
                             <div class="mt-4 text-center bg-white rounded-xl border border-sky-200 p-2 shadow-sm min-w-[200px]">
                                 <h4 class="font-serif font-black text-xs text-[#0F172A] leading-tight">
                                     Drs. H. Rahmat Hidayat, M.Si
@@ -151,25 +270,21 @@
 
                         <!-- 2. Sekretaris Kelurahan -->
                         <div class="relative z-10 flex flex-col items-center">
-                            <!-- Small Orange Tag -->
                             <div class="px-3.5 py-0.5 rounded-full bg-orange-500 text-white font-bold text-[10px] uppercase tracking-wider mb-2 shadow-sm">
                                 Seklur
                             </div>
 
-                            <!-- Dual-Ring Avatar -->
                             <div class="relative">
                                 <div class="w-24 h-24 rounded-full border-4 border-amber-400 p-1 bg-white shadow-lg overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
                                          alt="Siti Nurhaliza, S.STP, M.AP" 
                                          class="w-full h-full object-cover rounded-full">
                                 </div>
-                                <!-- Overlapping Crescent Ribbon Badge -->
                                 <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white font-serif font-bold text-[11px] uppercase tracking-wide px-3.5 py-0.5 rounded-full shadow-md border-2 border-white whitespace-nowrap">
                                     Sekretaris Kelurahan
                                 </div>
                             </div>
 
-                            <!-- Name Pill Card -->
                             <div class="mt-4 text-center bg-white rounded-xl border border-sky-200 p-2 shadow-sm min-w-[200px]">
                                 <h4 class="font-serif font-black text-xs text-[#0F172A] leading-tight">
                                     Siti Nurhaliza, S.STP, M.AP
@@ -186,7 +301,6 @@
 
                     <!-- TIER 2: Sekretariat & Staf Pelaksana Administrasi -->
                     <div class="relative flex items-center justify-center gap-12">
-                        <!-- Horizontal connector for Sekretariat row -->
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-1 bg-gray-700 -z-0"></div>
 
                         <!-- Staf Umum 1 (Left Circular Avatar) -->
@@ -199,7 +313,7 @@
                             <span class="text-[10px] font-bold text-gray-700 mt-1">Staf Pelaksana</span>
                         </div>
 
-                        <!-- Center Box 1: Sekretaris 1 -->
+                        <!-- Center Box 1: Sekretariat 1 -->
                         <div class="relative z-10 bg-white rounded-xl border border-sky-300 shadow-sm overflow-hidden min-w-[170px]">
                             <div class="bg-amber-400 text-amber-950 font-bold text-[9px] uppercase tracking-wider py-0.5 px-3 text-center">
                                 SEKRETARIAT 1
@@ -210,7 +324,7 @@
                             </div>
                         </div>
 
-                        <!-- Center Box 2: Sekretaris 2 -->
+                        <!-- Center Box 2: Sekretariat 2 -->
                         <div class="relative z-10 bg-white rounded-xl border border-sky-300 shadow-sm overflow-hidden min-w-[170px]">
                             <div class="bg-amber-400 text-amber-950 font-bold text-[9px] uppercase tracking-wider py-0.5 px-3 text-center">
                                 SEKRETARIAT 2
@@ -237,131 +351,18 @@
                         <div class="w-1 h-8 bg-gray-700"></div>
                     </div>
 
-                    <!-- TIER 3: The 7 Seksi Divisions (Horizontal Spanning Bar & Two-Tier Cards) -->
+                    <!-- TIER 3: The 7 Seksi Divisions -->
                     <div class="relative">
-                        <!-- Horizontal Branch Bar Spanning all 7 Divisions (Reference Line) -->
                         <div class="absolute top-4 left-10 right-10 h-1 bg-gray-700 -z-0"></div>
 
-                        <!-- 7 Columns Grid -->
                         <div class="grid grid-cols-7 gap-3 pt-0 relative z-10">
-                            @php
-                                $divisiList = [
-                                    [
-                                        'header' => 'Pemerintahan',
-                                        'kasi' => [
-                                            'role' => 'Kasi Pemerintahan',
-                                            'nama' => 'Budi Santoso, S.Sos',
-                                            'sub' => 'NIP: 19800620 200604 1 012',
-                                            'foto' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Staf Pelaksana',
-                                            'nama' => 'Abdullah Zubair, S.Ag',
-                                            'sub' => 'Pelayanan Kependudukan',
-                                            'foto' => 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                    [
-                                        'header' => 'Ekonomi & Bang',
-                                        'kasi' => [
-                                            'role' => 'Kasi Ekbang',
-                                            'nama' => 'Ahmad Fauzi, S.T',
-                                            'sub' => 'NIP: 19881105 201101 1 003',
-                                            'foto' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Staf Pengawas',
-                                            'nama' => 'Taufik Kurrahman, S.H',
-                                            'sub' => 'Pengawas Pembangunan',
-                                            'foto' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                    [
-                                        'header' => 'Sosial & Kesra',
-                                        'kasi' => [
-                                            'role' => 'Kasi Kesos',
-                                            'nama' => 'Dewi Sartika, S.Pd',
-                                            'sub' => 'NIP: 19860925 201001 2 005',
-                                            'foto' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Staf Bantuan',
-                                            'nama' => 'Lalu Yasin, S.H',
-                                            'sub' => 'Penyaluran PKH & Lansia',
-                                            'foto' => 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                    [
-                                        'header' => 'Trantib & Linmas',
-                                        'kasi' => [
-                                            'role' => 'Kasi Trantib',
-                                            'nama' => 'Hendra Gunawan',
-                                            'sub' => 'NIP: 19780315 200201 1 009',
-                                            'foto' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Komandan Regu',
-                                            'nama' => 'Adam Lubis, S.Ag',
-                                            'sub' => 'Ketertiban Lingkungan',
-                                            'foto' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                    [
-                                        'header' => 'IT & Data Spasial',
-                                        'kasi' => [
-                                            'role' => 'Koordinator IT',
-                                            'nama' => 'Abdil Mahfuzi, S.Ag',
-                                            'sub' => 'NIP: 19910617 201601 1 003',
-                                            'foto' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Operator SIAK',
-                                            'nama' => 'Hasan Ali, S.H',
-                                            'sub' => 'Pemetaan & Portal Digital',
-                                            'foto' => 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                    [
-                                        'header' => 'Lingkungan Hidup',
-                                        'kasi' => [
-                                            'role' => 'Koordinator LH',
-                                            'nama' => 'Hj. Enok Wartini',
-                                            'sub' => 'Buruan Sae & Asri',
-                                            'foto' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Bank Sampah',
-                                            'nama' => 'Rohman N., S.Ag',
-                                            'sub' => 'Pengelolaan Sampah',
-                                            'foto' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                    [
-                                        'header' => 'Karang Taruna',
-                                        'kasi' => [
-                                            'role' => 'Ketua Pemuda',
-                                            'nama' => 'Reza Pratama, S.Kom',
-                                            'sub' => 'Kepemudaan Wilayah',
-                                            'foto' => 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
-                                        ],
-                                        'anggota' => [
-                                            'role' => 'Staf Kreatif',
-                                            'nama' => 'Damu Azrial, S.Kom',
-                                            'sub' => 'Kreativitas & Humas',
-                                            'foto' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
-                                        ]
-                                    ],
-                                ];
-                            @endphp
-
                             @foreach($divisiList as $div)
                                 <div class="flex flex-col items-center space-y-6">
-                                    <!-- Orange Division Header Tag (Top of Column) -->
+                                    <!-- Orange Division Header Tag -->
                                     <div class="w-full py-1.5 px-1 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-[10px] text-center uppercase tracking-wider shadow-sm border border-amber-300">
                                         {{ $div['header'] }}
                                     </div>
 
-                                    <!-- Vertical Line from Header to Kasi -->
                                     <div class="w-0.5 h-3 bg-gray-600 -my-3"></div>
 
                                     <!-- Upper Node: Kepala Seksi / Koordinator -->
@@ -372,13 +373,11 @@
                                                      alt="{{ $div['kasi']['nama'] }}" 
                                                      class="w-full h-full object-cover rounded-full">
                                             </div>
-                                            <!-- Ribbon under avatar -->
                                             <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white font-bold text-[9px] uppercase px-2.5 py-0.5 rounded-full border border-white whitespace-nowrap shadow-xs">
                                                 Ketua / Kasi
                                             </div>
                                         </div>
 
-                                        <!-- Name Box -->
                                         <div class="mt-3.5 w-full bg-white rounded-lg border border-sky-200 p-1.5 shadow-xs">
                                             <div class="font-bold text-[11px] text-[#0F172A] leading-tight">
                                                 {{ $div['kasi']['nama'] }}
@@ -389,7 +388,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Vertical Connecting Line between Kasi & Anggota -->
                                     <div class="w-0.5 h-6 bg-gray-600 -my-2"></div>
 
                                     <!-- Lower Node: Staf Pelaksana / Anggota -->
@@ -400,13 +398,11 @@
                                                      alt="{{ $div['anggota']['nama'] }}" 
                                                      class="w-full h-full object-cover rounded-full">
                                             </div>
-                                            <!-- Ribbon under avatar -->
                                             <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white font-bold text-[9px] uppercase px-2.5 py-0.5 rounded-full border border-white whitespace-nowrap shadow-xs">
                                                 Anggota / Staf
                                             </div>
                                         </div>
 
-                                        <!-- Name Box -->
                                         <div class="mt-3.5 w-full bg-white rounded-lg border border-sky-200 p-1.5 shadow-xs">
                                             <div class="font-bold text-[11px] text-[#0F172A] leading-tight">
                                                 {{ $div['anggota']['nama'] }}
@@ -423,5 +419,181 @@
                 </div>
             </div>
         </div>
+
+        <!-- 2. MOBILE CARD VIEW: Dedicated Responsive Hierarchy List (Zero Horizontal Pan Required) -->
+        <div id="struktur-card-container" class="hidden space-y-8">
+            <!-- Level 1: Pimpinan Kelurahan -->
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
+                <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
+                    <span class="text-xs font-black uppercase tracking-wider text-[#0284C7]">Pimpinan Utama Kelurahan</span>
+                    <span class="text-[10px] bg-sky-100 text-[#0284C7] px-2 py-0.5 rounded-full font-bold">Tingkat 1</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Lurah Card -->
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-sky-50/50 border border-sky-100">
+                        <div class="relative flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full border-2 border-amber-400 p-0.5 bg-white shadow-sm overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
+                                     alt="Drs. H. Rahmat Hidayat, M.Si" 
+                                     class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white text-[8px] font-bold uppercase px-2 py-0.5 rounded-full shadow-xs whitespace-nowrap">Lurah</span>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-black text-sm text-[#0F172A]">Drs. H. Rahmat Hidayat, M.Si</h4>
+                            <p class="text-[10px] text-gray-500 font-mono mt-0.5">NIP: 19750812 200003 1 004</p>
+                            <span class="inline-block mt-1 text-[10px] font-semibold text-[#1B4332] bg-emerald-100/80 px-2 py-0.5 rounded">Kepala Wilayah Kelurahan</span>
+                        </div>
+                    </div>
+
+                    <!-- Seklur Card -->
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-sky-50/50 border border-sky-100">
+                        <div class="relative flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full border-2 border-amber-400 p-0.5 bg-white shadow-sm overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
+                                     alt="Siti Nurhaliza, S.STP, M.AP" 
+                                     class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white text-[8px] font-bold uppercase px-2 py-0.5 rounded-full shadow-xs whitespace-nowrap">Seklur</span>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-black text-sm text-[#0F172A]">Siti Nurhaliza, S.STP, M.AP</h4>
+                            <p class="text-[10px] text-gray-500 font-mono mt-0.5">NIP: 19840315 200801 2 006</p>
+                            <span class="inline-block mt-1 text-[10px] font-semibold text-[#1B4332] bg-emerald-100/80 px-2 py-0.5 rounded">Sekretaris Kelurahan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 2: Sekretariat & Administrasi -->
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
+                <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
+                    <span class="text-xs font-black uppercase tracking-wider text-amber-600">Sekretariat & Staf Administrasi</span>
+                    <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">Tingkat 2</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" 
+                             alt="Kafa Birrasyid, S.Ag" 
+                             class="w-12 h-12 rounded-full border-2 border-amber-400 object-cover flex-shrink-0">
+                        <div>
+                            <h5 class="font-bold text-xs text-[#0F172A]">Kafa Birrasyid, S.Ag</h5>
+                            <p class="text-[10px] text-gray-500">Staf Umum & Kepegawaian</p>
+                            <span class="text-[9px] text-[#0284C7] font-semibold">Sekretariat 1</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80" 
+                             alt="Luthfi Abdul Karim, S.Ag" 
+                             class="w-12 h-12 rounded-full border-2 border-amber-400 object-cover flex-shrink-0">
+                        <div>
+                            <h5 class="font-bold text-xs text-[#0F172A]">Luthfi Abdul Karim, S.Ag</h5>
+                            <p class="text-[10px] text-gray-500">Pengadministrasi Keuangan</p>
+                            <span class="text-[9px] text-[#0284C7] font-semibold">Sekretariat 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 3: 7 Seksi Pelayanan Warga -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-serif font-black text-lg text-[#1B4332]">Seksi Pelayanan & Bidang Kerja (7 Divisi)</h3>
+                    <span class="text-xs text-gray-500">Tingkat 3</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach($divisiList as $div)
+                        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow">
+                            <!-- Division Orange Header Bar -->
+                            <div class="bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2 text-white flex items-center justify-between">
+                                <span class="font-black text-xs uppercase tracking-wider">{{ $div['header'] }}</span>
+                                <span class="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-bold">2 Petugas</span>
+                            </div>
+
+                            <div class="p-4 space-y-4">
+                                <p class="text-[11px] text-gray-600 leading-relaxed border-b border-gray-100 pb-2.5">
+                                    {{ $div['deskripsi'] }}
+                                </p>
+
+                                <!-- Kasi Item -->
+                                <div class="flex items-center gap-3">
+                                    <div class="relative flex-shrink-0">
+                                        <img src="{{ $div['kasi']['foto'] }}" alt="{{ $div['kasi']['nama'] }}" class="w-11 h-11 rounded-full border-2 border-amber-400 object-cover">
+                                        <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-[#0284C7] text-white rounded-full flex items-center justify-center text-[8px] font-bold">K</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-[10px] font-bold text-[#0284C7] uppercase block">{{ $div['kasi']['role'] }}</span>
+                                        <h5 class="font-bold text-xs text-[#0F172A] truncate">{{ $div['kasi']['nama'] }}</h5>
+                                        <p class="text-[10px] text-gray-500 font-mono">{{ $div['kasi']['sub'] }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Anggota Item -->
+                                <div class="flex items-center gap-3 pt-2 border-t border-gray-100/80">
+                                    <div class="relative flex-shrink-0">
+                                        <img src="{{ $div['anggota']['foto'] }}" alt="{{ $div['anggota']['nama'] }}" class="w-11 h-11 rounded-full border-2 border-sky-300 object-cover">
+                                        <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[8px] font-bold">A</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-[10px] font-bold text-emerald-700 uppercase block">{{ $div['anggota']['role'] }}</span>
+                                        <h5 class="font-bold text-xs text-[#0F172A] truncate">{{ $div['anggota']['nama'] }}</h5>
+                                        <p class="text-[10px] text-gray-500">{{ $div['anggota']['sub'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<script>
+    function switchStrukturMode(mode) {
+        const posterContainer = document.getElementById('struktur-poster-container');
+        const cardContainer = document.getElementById('struktur-card-container');
+        const btnPoster = document.getElementById('btn-mode-poster');
+        const btnCard = document.getElementById('btn-mode-card');
+        const scrollHint = document.getElementById('poster-scroll-hint');
+
+        if (mode === 'poster') {
+            if (posterContainer) posterContainer.classList.remove('hidden');
+            if (cardContainer) cardContainer.classList.add('hidden');
+            if (scrollHint) scrollHint.classList.remove('hidden');
+
+            if (btnPoster) {
+                btnPoster.classList.add('bg-[#0284C7]', 'text-white', 'shadow-xs');
+                btnPoster.classList.remove('text-gray-600');
+            }
+            if (btnCard) {
+                btnCard.classList.remove('bg-[#0284C7]', 'text-white', 'shadow-xs');
+                btnCard.classList.add('text-gray-600');
+            }
+        } else {
+            if (posterContainer) posterContainer.classList.add('hidden');
+            if (cardContainer) cardContainer.classList.remove('hidden');
+            if (scrollHint) scrollHint.classList.add('hidden');
+
+            if (btnCard) {
+                btnCard.classList.add('bg-[#0284C7]', 'text-white', 'shadow-xs');
+                btnCard.classList.remove('text-gray-600');
+            }
+            if (btnPoster) {
+                btnPoster.classList.remove('bg-[#0284C7]', 'text-white', 'shadow-xs');
+                btnPoster.classList.add('text-gray-600');
+            }
+        }
+    }
+
+    // Auto-detect mobile screen on load to default to card view
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.innerWidth < 1024) {
+            switchStrukturMode('card');
+        } else {
+            switchStrukturMode('poster');
+        }
+    });
+</script>
