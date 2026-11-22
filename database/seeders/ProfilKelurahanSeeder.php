@@ -352,6 +352,8 @@ class ProfilKelurahanSeeder extends Seeder
         $katIbadah = KategoriFasilitas::where('slug', 'tempat-ibadah')->first();
         $katPemerintahan = KategoriFasilitas::where('slug', 'pemerintahan')->first();
         $katEkonomi = KategoriFasilitas::where('slug', 'ekonomi-pasar')->first();
+        $katInfrastruktur = KategoriFasilitas::where('slug', 'infrastruktur-utilitas')->first();
+        $katSosial = KategoriFasilitas::where('slug', 'sosial-olahraga')->first();
 
         $fasilitas = [
             [
@@ -407,6 +409,39 @@ class ProfilKelurahanSeeder extends Seeder
                 'kondisi' => KondisiFisik::Baik,
                 'keterangan' => 'Pusat perputaran ekonomi warga, komoditas sayur segar, dan kuliner UMKM lokal.',
                 'foto' => 'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=600&q=80',
+                'status_verifikasi' => StatusVerifikasi::Terverifikasi,
+            ],
+            [
+                'kategori_id' => $katInfrastruktur?->id,
+                'nama' => 'Posko Siaga Bencana & Damkar Wilayah',
+                'alamat' => 'Jl. Sukawarna Baru No. 3',
+                'lat' => -6.886100,
+                'lng' => 107.575300,
+                'kondisi' => KondisiFisik::Baik,
+                'keterangan' => 'Posko kesiapsiagaan bencana, mobil ambulans desa 24 jam, dan pos pemadam kebakaran darurat.',
+                'foto' => 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80',
+                'status_verifikasi' => StatusVerifikasi::Terverifikasi,
+            ],
+            [
+                'kategori_id' => $katSosial?->id,
+                'nama' => 'Lapangan Olahraga & RTH Ramah Anak Sukawarna',
+                'alamat' => 'Jl. Sukasari Asri No. 10',
+                'lat' => -6.887900,
+                'lng' => 107.577200,
+                'kondisi' => KondisiFisik::Baik,
+                'keterangan' => 'Fasilitas lapangan futsal, jogging track, taman bermain anak, dan area senam lansia mingguan.',
+                'foto' => 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80',
+                'status_verifikasi' => StatusVerifikasi::Terverifikasi,
+            ],
+            [
+                'kategori_id' => $katInfrastruktur?->id,
+                'nama' => 'Bank Sampah Induk & Rumah Kompos Buruan Sae',
+                'alamat' => 'Jl. Babakan Sukawarna No. 18',
+                'lat' => -6.889800,
+                'lng' => 107.576000,
+                'kondisi' => KondisiFisik::Baik,
+                'keterangan' => 'Pusat daur ulang sampah anorganik warga, penukaran tabungan emas sampah, dan kebun bibit organik.',
+                'foto' => 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80',
                 'status_verifikasi' => StatusVerifikasi::Terverifikasi,
             ],
         ];

@@ -5,20 +5,48 @@ export function createBoundaryLayer(geojsonData) {
 
     return L.geoJSON(geojsonData, {
         style: {
-            color: '#2D6A4F',
-            weight: 3,
-            opacity: 0.9,
-            fillColor: '#52B788',
-            fillOpacity: 0.15
+            color: '#1B4332',
+            weight: 3.5,
+            dashArray: '6, 6',
+            opacity: 0.95,
+            fillColor: '#2D6A4F',
+            fillOpacity: 0.08
         },
         onEachFeature: (feature, layer) => {
-            if (feature.properties && feature.properties.nama) {
-                layer.bindTooltip(`<b>${feature.properties.nama}</b>`, {
-                    sticky: true,
-                    className: 'rounded-xl px-2 py-1 shadow-sm font-sans text-xs bg-white text-[#1B4332]'
-                });
-            }
+            const props = feature.properties || {};
+            const nama = props.nama || 'Wilayah Kelurahan Sukawarna';
+            const luas = props.luas ? `${props.luas} km²` : null;
+
+            layer.bindTooltip(`
+                <div class="px-2 py-1 font-sans text-xs">
+                    <span class="font-bold text-[#1B4332] block">${nama}</span>
+                    ${luas ? `<span class="text-[10px] text-gray-500">Luas: ${luas}</span>` : ''}
+                </div>
+            `, {
+                sticky: true,
+                className: 'rounded-xl shadow-md border border-emerald-200 bg-white/95 backdrop-blur-sm'
+            });
+
+            layer.on({
+                mouseover: (e) => {
+                    const l = e.target;
+                    l.setStyle({
+                        weight: 4.5,
+                        dashArray: '',
+                        color: '#0284C7',
+                        fillOpacity: 0.14
+                    });
+                },
+                mouseout: (e) => {
+                    const l = e.target;
+                    l.setStyle({
+                        weight: 3.5,
+                        dashArray: '6, 6',
+                        color: '#1B4332',
+                        fillOpacity: 0.08
+                    });
+                }
+            });
         }
     });
 }
-

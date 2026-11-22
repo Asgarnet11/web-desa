@@ -14,15 +14,18 @@ export function createFacilityLayer(geojsonData) {
         const icon = createCategoryIcon(props.kategori_slug, props.warna);
         const marker = L.marker([coords[1], coords[0]], { icon });
 
-        marker.bindPopup(renderFacilityPopup(props), {
+        marker.bindPopup(renderFacilityPopup(props, coords), {
             className: 'solarpunk-map-popup',
-            maxWidth: 300
+            maxWidth: 320,
+            closeButton: false,
+            offset: [0, -10]
         });
 
+        // Store feature reference and custom ID on marker for quick programmatic access
         marker.feature = feature;
+        marker.facilityId = props.id;
         layerGroup.addLayer(marker);
     });
 
     return layerGroup;
 }
-
