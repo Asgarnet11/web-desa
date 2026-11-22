@@ -79,4 +79,3 @@ class GeoJsonApiTest extends TestCase
         ]);
     }
 }
-

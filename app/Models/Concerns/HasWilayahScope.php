@@ -37,4 +37,3 @@ trait HasWilayahScope
         return $query->whereIn($this->getTable().'.wilayah_id', $wilayahIds);
     }
 }
-

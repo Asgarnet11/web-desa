@@ -15,20 +15,30 @@
         <x-landing.visi-misi :data="$data" />
     @endif
 
-    @if($pengaturan['struktur_organisasi'] ?? true)
-        <x-landing.struktur-organisasi :data="$data" />
+    @if($pengaturan['fasilitas'] ?? true)
+        <x-landing.fasilitas-grid :data="$data" />
+    @endif
+
+    @if($pengaturan['galeri'] ?? true)
+        <x-landing.galeri :data="$data" />
+    @endif
+
+    <x-landing.cta-banner :data="$data" />
+
+    @if($pengaturan['peta_interaktif'] ?? true)
+        <x-landing.peta-ringkas :data="$data" />
     @endif
 
     @if($pengaturan['wilayah_statistik'] ?? true)
         <x-landing.wilayah-statistik :data="$data" />
     @endif
 
-    @if($pengaturan['peta_interaktif'] ?? true)
-        <x-landing.peta-ringkas :data="$data" />
-    @endif
-
     @if($pengaturan['layanan'] ?? true)
         <x-landing.layanan :data="$data" />
+    @endif
+
+    @if($pengaturan['struktur_organisasi'] ?? true)
+        <x-landing.struktur-organisasi :data="$data" />
     @endif
 
     @if($pengaturan['umkm'] ?? true)
@@ -47,4 +57,3 @@
         @vite('resources/js/landing.js')
     @endpush
 </x-layouts.app>
-

@@ -19,4 +19,3 @@ class LandingController extends Controller
         return view('pages.landing.index', compact('data'));
     }
 }
-

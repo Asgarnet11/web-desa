@@ -50,4 +50,3 @@ class Pengaduan extends Model
         return $this->belongsTo(User::class, 'ditanggapi_oleh');
     }
 }
-

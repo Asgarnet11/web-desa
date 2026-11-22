@@ -25,4 +25,3 @@ class KategoriFasilitas extends Model
         return $this->hasMany(Fasilitas::class, 'kategori_id');
     }
 }
-

@@ -3,85 +3,112 @@
 @php
     $profil = $data['profil'] ?? null;
     $wilayah = $data['wilayah'] ?? null;
+    $statistik = $data['statistik'] ?? [];
+    $demografi = $statistik['demografi'] ?? [];
+    $officePhoto = $profil?->foto_kantor ?? 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1000&q=80';
 @endphp
 
-<section id="profil" class="py-16 md:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <!-- Left Column: Story & History -->
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#52B788]/20 text-[#1B4332] text-xs font-bold uppercase tracking-wider">
-                    Profil Kelurahan
-                </div>
-
-                <h2 class="font-display font-bold text-3xl sm:text-4xl text-[#1B4332] leading-tight">
-                    Mengenal Lebih Dekat Wilayah Sukawarna
-                </h2>
-
-                <p class="text-base text-[#1F2D26]/85 leading-relaxed">
-                    {{ $profil?->sejarah ?? 'Kelurahan Sukawarna terbentuk dengan semangat gotong royong dan kemandirian masyarakatnya dalam merawat lingkungan yang asri dan berdaya.' }}
-                </p>
-
-                <div class="p-5 rounded-[24px] bg-[#FFF8E7] border border-[#52B788]/20 space-y-2">
-                    <h4 class="font-display font-bold text-sm text-[#1B4332]">Makna Lambang</h4>
-                    <p class="text-xs text-[#1F2D26]/80 leading-relaxed">
-                        {{ $profil?->makna_lambang ?? 'Pohon Hayat berakar kuat melambangkan solidaritas warga; mentari emas melambangkan kemandirian energi dan optimisme masa depan.' }}
-                    </p>
-                </div>
-
-                <!-- Boundaries Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                    <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
-                        <span class="text-[10px] font-bold text-[#17708A] uppercase">Batas Utara</span>
-                        <p class="text-xs font-semibold text-[#1B4332] mt-0.5">{{ $profil?->batas_utara ?? 'Sarijadi' }}</p>
+<section id="profil" class="py-20 lg:py-28 bg-[#FDFDFC]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <!-- Left Column: Framed Image (Visual Reference Fidelity) -->
+            <div class="lg:col-span-6">
+                <div class="relative group">
+                    <!-- Subtle background decoration shadow -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-[#2D6A4F]/20 to-[#FFB703]/20 rounded-3xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500"></div>
+                    
+                    <div class="relative rounded-2xl overflow-hidden border border-gray-200/80 shadow-lg bg-gray-100 aspect-[4/3]">
+                        <img src="{{ $officePhoto }}" 
+                             alt="Kantor Kelurahan Sukawarna dan Kebersamaan Warga" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
-                        <span class="text-[10px] font-bold text-[#17708A] uppercase">Batas Selatan</span>
-                        <p class="text-xs font-semibold text-[#1B4332] mt-0.5">{{ $profil?->batas_selatan ?? 'Cicendo' }}</p>
-                    </div>
-                    <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
-                        <span class="text-[10px] font-bold text-[#17708A] uppercase">Batas Timur</span>
-                        <p class="text-xs font-semibold text-[#1B4332] mt-0.5">{{ $profil?->batas_timur ?? 'Gegerkalong' }}</p>
-                    </div>
-                    <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-100">
-                        <span class="text-[10px] font-bold text-[#17708A] uppercase">Batas Barat</span>
-                        <p class="text-xs font-semibold text-[#1B4332] mt-0.5">{{ $profil?->batas_barat ?? 'Kota Cimahi' }}</p>
+
+                    <!-- Small floating badge at bottom left -->
+                    <div class="absolute -bottom-5 left-6 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-gray-200 shadow-md flex items-center gap-2.5">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span class="text-xs font-bold text-[#1B4332]">Pelayanan Aktif &middot; Senin &ndash; Jumat</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Visual Card -->
-            <div class="lg:col-span-5">
-                <div class="bg-[#1B4332] text-[#FFF8E7] rounded-[36px] p-8 space-y-6 shadow-soft relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-[#52B788]/20 blur-2xl"></div>
-                    
-                    <div class="space-y-2">
-                        <span class="text-xs font-bold text-[#FFB703] uppercase tracking-wider">Identitas Wilayah</span>
-                        <h3 class="font-display font-bold text-2xl text-white">Kelurahan Sukawarna</h3>
-                        <p class="text-xs text-[#8ECFEA]">Kecamatan Sukasari &bull; Kota Bandung</p>
+            <!-- Right Column: Welcome Description & Key Stats -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Golden Subtitle Badge -->
+                <span class="text-xs font-bold tracking-[0.2em] text-[#FFB703] uppercase block">
+                    SELAMAT DATANG DI
+                </span>
+
+                <!-- Section Heading -->
+                <h2 class="font-serif font-black text-3xl sm:text-4xl text-[#1B4332] leading-tight tracking-tight">
+                    Kelurahan Sukawarna
+                </h2>
+
+                <!-- Descriptive Lead Paragraphs -->
+                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    {{ $profil?->sejarah ?? 'Kelurahan Sukawarna merupakan wilayah berdaya di Kecamatan Sukasari, Kota Bandung, yang berdedikasi membangun masyarakat berkarakter, rukun, dan mandiri. Kami memadukan keterbukaan data spasial dengan semangat gotong royong warga demi mewujudkan kemajuan masa depan yang berkelanjutan.' }}
+                </p>
+
+                <p class="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                    Dengan luas wilayah yang strategis dan keberagaman potensi lokal, kami senantiasa mengedepankan pelayanan prima berprinsip CERIA (Cepat, Efisien, Ramah, Ikhlas, dan Akuntabel) untuk seluruh lapisan masyarakat.
+                </p>
+
+                <!-- Key Metrics Row (4 Metrics in a Row with Icons) -->
+                <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-b border-gray-100 py-6">
+                    <!-- Metric 1: Kode Kemendagri -->
+                    <div class="space-y-1">
+                        <div class="text-[#2D6A4F]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div class="font-serif font-black text-lg text-[#1B4332]">32.73.01</div>
+                        <div class="text-[11px] text-gray-500 leading-tight">Kode Wilayah</div>
                     </div>
 
-                    <div class="divide-y divide-white/10 text-xs">
-                        <div class="py-2.5 flex justify-between">
-                            <span class="text-white/70">Kode Wilayah</span>
-                            <span class="font-mono font-bold text-[#FFB703]">{{ $wilayah?->kode ?? '32.73.01.1001' }}</span>
+                    <!-- Metric 2: Pamong Ratio -->
+                    <div class="space-y-1">
+                        <div class="text-[#2D6A4F]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
                         </div>
-                        <div class="py-2.5 flex justify-between">
-                            <span class="text-white/70">Tahun Terbentuk</span>
-                            <span class="font-bold text-white">{{ $profil?->tahun_terbentuk ?? '1982' }}</span>
-                        </div>
-                        <div class="py-2.5 flex justify-between">
-                            <span class="text-white/70">Motto Pelayanan</span>
-                            <span class="font-bold text-white">{{ $profil?->motto_pelayanan ?? 'CERIA' }}</span>
-                        </div>
-                        <div class="py-2.5 flex justify-between">
-                            <span class="text-white/70">Jumlah Rukun Warga</span>
-                            <span class="font-bold text-white">3 RW (18 RT)</span>
-                        </div>
+                        <div class="font-serif font-black text-lg text-[#1B4332]">18 RT / 3 RW</div>
+                        <div class="text-[11px] text-gray-500 leading-tight">Rasio Pamong Wilayah</div>
                     </div>
+
+                    <!-- Metric 3: Pengabdian -->
+                    <div class="space-y-1">
+                        <div class="text-[#2D6A4F]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div class="font-serif font-black text-lg text-[#1B4332]">40+ Tahun</div>
+                        <div class="text-[11px] text-gray-500 leading-tight">Dedikasi Pengabdian</div>
+                    </div>
+
+                    <!-- Metric 4: Komitmen Pelayanan -->
+                    <div class="space-y-1">
+                        <div class="text-[#2D6A4F]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="font-serif font-black text-lg text-[#1B4332]">100%</div>
+                        <div class="text-[11px] text-gray-500 leading-tight">Layanan Bebas Biaya</div>
+                    </div>
+                </div>
+
+                <!-- CTA Button (Deep Forest Green) -->
+                <div class="pt-2">
+                    <a href="#program" class="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#1B4332] hover:bg-[#2D6A4F] text-white font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md transition-all hover:scale-[1.02]">
+                        <span>BACA PROFIL LENGKAP</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-

@@ -137,4 +137,3 @@ class WilayahContohSeeder extends Seeder
         );
     }
 }
-

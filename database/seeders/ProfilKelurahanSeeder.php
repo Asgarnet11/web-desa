@@ -9,6 +9,7 @@ use App\Models\Agenda;
 use App\Models\Berita;
 use App\Models\Demografi;
 use App\Models\Fasilitas;
+use App\Models\Galeri;
 use App\Models\Infrastruktur;
 use App\Models\KategoriFasilitas;
 use App\Models\KondisiSosial;
@@ -457,5 +458,51 @@ class ProfilKelurahanSeeder extends Seeder
                 'status_verifikasi' => StatusVerifikasi::Terverifikasi,
             ]
         );
+
+        // 13. Galeri Foto Kegiatan Warga
+        $galeriList = [
+            [
+                'judul' => 'Kerja Bakti Massal Kebersihan Saluran & Lingkungan Asri',
+                'keterangan' => 'Gotong royong warga RW 01 dan RW 02 membersihkan drainase menyambut musim penghujan.',
+                'tipe' => 'foto',
+                'file_url' => 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80',
+                'tanggal' => now()->subDays(3),
+            ],
+            [
+                'judul' => 'Senam Sehat Lansia & Posyandu Balita Terpadu',
+                'keterangan' => 'Pemeriksaan kesehatan rutin dan pemberian makanan tambahan bergizi di Balai RW 02.',
+                'tipe' => 'foto',
+                'file_url' => 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80',
+                'tanggal' => now()->subDays(7),
+            ],
+            [
+                'judul' => 'Pelatihan Pemasaran Digital & Kemasan Produk UMKM',
+                'keterangan' => 'Pendampingan wirausaha mandiri meningkatkan daya saing produk olahan makanan warga.',
+                'tipe' => 'foto',
+                'file_url' => 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
+                'tanggal' => now()->subDays(12),
+            ],
+            [
+                'judul' => 'Panen Bersama Kebun Komunitas Urban Farming Buruan Sae',
+                'keterangan' => 'Ketahanan pangan mandiri hasil budidaya sayur hidroponik dan tanaman obat keluarga.',
+                'tipe' => 'foto',
+                'file_url' => 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=800&q=80',
+                'tanggal' => now()->subDays(18),
+            ],
+            [
+                'judul' => 'Musyawarah Warga Perencanaan Pembangunan (Musrenbang)',
+                'keterangan' => 'Rembug warga menyepakati prioritas perbaikan infrastruktur jalan dan sarana olahraga.',
+                'tipe' => 'foto',
+                'file_url' => 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80',
+                'tanggal' => now()->subDays(25),
+            ],
+        ];
+
+        foreach ($galeriList as $g) {
+            Galeri::updateOrCreate(
+                ['wilayah_id' => $sukawarna->id, 'judul' => $g['judul']],
+                $g
+            );
+        }
     }
 }

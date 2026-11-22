@@ -48,4 +48,3 @@ class Demografi extends Model
         return $this->belongsTo(Wilayah::class);
     }
 }
-

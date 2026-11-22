@@ -66,4 +66,3 @@ class AuthorizationAndRolesTest extends TestCase
         $this->assertFalse(Gate::forUser($operator)->allows('update', $fasilitasLain));
     }
 }
-

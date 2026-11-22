@@ -43,4 +43,3 @@ class Pengumuman extends Model
         return $query->where('status', StatusKonten::Terbit->value);
     }
 }
-

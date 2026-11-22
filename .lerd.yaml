@@ -9,4 +9,3 @@ services:
   - mysql
 workers:
   - vite
-

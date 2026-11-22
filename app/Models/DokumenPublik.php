@@ -34,4 +34,3 @@ class DokumenPublik extends Model
         return $this->belongsTo(Wilayah::class);
     }
 }
-

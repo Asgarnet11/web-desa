@@ -53,4 +53,3 @@ trait HasVerifikasi
             || $this->status_verifikasi === StatusVerifikasi::Ditolak;
     }
 }
-

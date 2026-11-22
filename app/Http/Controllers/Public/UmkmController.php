@@ -30,4 +30,3 @@ class UmkmController extends Controller
         return view('pages.umkm.index', compact('umkmList', 'kategoriList'));
     }
 }
-

@@ -80,4 +80,3 @@ class StatistikService
         Cache::forget("landing_page_data_{$wilayahId}");
     }
 }
-

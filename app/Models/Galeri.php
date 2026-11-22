@@ -34,4 +34,3 @@ class Galeri extends Model
         return $this->belongsTo(Wilayah::class);
     }
 }
-

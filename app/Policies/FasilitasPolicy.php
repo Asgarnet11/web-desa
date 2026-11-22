@@ -53,4 +53,3 @@ class FasilitasPolicy
         return $user->isSuperAdmin() || ($user->isAdminWilayah() && $user->wilayah_id === $fasilitas->wilayah_id);
     }
 }
-

@@ -56,4 +56,3 @@ class Fasilitas extends Model
         return $this->belongsTo(KategoriFasilitas::class, 'kategori_id');
     }
 }
-

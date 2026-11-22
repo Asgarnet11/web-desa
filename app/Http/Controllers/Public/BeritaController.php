@@ -38,4 +38,3 @@ class BeritaController extends Controller
         return view('pages.berita.show', compact('berita', 'beritaTerkait'));
     }
 }
-
