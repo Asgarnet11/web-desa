@@ -100,6 +100,9 @@
                     <a href="{{ route('landing') }}#timeline" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors">
                         Timeline
                     </a>
+                    <a href="{{ route('landing') }}#struktur" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors">
+                        Kepengurusan
+                    </a>
                     <a href="{{ route('landing') }}#fasilitas" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors">
                         Fasilitas
                     </a>
@@ -145,6 +148,7 @@
                 <a href="{{ route('landing') }}#profil" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Tentang Kami</a>
                 <a href="{{ route('landing') }}#program" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Program</a>
                 <a href="{{ route('landing') }}#timeline" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Timeline</a>
+                <a href="{{ route('landing') }}#struktur" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Kepengurusan</a>
                 <a href="{{ route('landing') }}#fasilitas" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Fasilitas</a>
                 <a href="{{ route('layanan.index') }}" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Layanan</a>
                 <a href="{{ route('peta.index') }}" class="px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100">Peta Digital</a>
