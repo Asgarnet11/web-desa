@@ -65,4 +65,13 @@ class AuthorizationAndRolesTest extends TestCase
         $this->assertTrue(Gate::forUser($operator)->allows('update', $fasilitasSukawarna));
         $this->assertFalse(Gate::forUser($operator)->allows('update', $fasilitasLain));
     }
+
+    public function test_authenticated_user_can_access_filament_dashboard(): void
+    {
+        $superAdmin = User::where('email', 'superadmin@kelurahan.test')->first();
+
+        $response = $this->actingAs($superAdmin)->get('/admin');
+
+        $response->assertSuccessful();
+    }
 }
