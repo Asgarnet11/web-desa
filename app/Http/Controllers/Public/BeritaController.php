@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agenda;
 use App\Models\Berita;
+use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -20,7 +22,10 @@ class BeritaController extends Controller
         $beritaList = $query->paginate(9)->withQueryString();
         $kategoriList = Berita::terbit()->pluck('kategori')->unique();
 
-        return view('pages.berita.index', compact('beritaList', 'kategoriList'));
+        $pengumumanList = Pengumuman::terbit()->latest('published_at')->take(6)->get();
+        $agendaList = Agenda::where('tanggal_mulai', '>=', now()->subDays(1))->orderBy('tanggal_mulai')->take(6)->get();
+
+        return view('pages.berita.index', compact('beritaList', 'kategoriList', 'pengumumanList', 'agendaList'));
     }
 
     public function show(string $slug): View

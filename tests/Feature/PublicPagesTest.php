@@ -123,4 +123,32 @@ class PublicPagesTest extends TestCase
             'is_publik' => false,
         ]);
     }
+
+    public function test_satu_data_page_renders_successfully(): void
+    {
+        $response = $this->get(route('satu-data.index'));
+
+        $response->assertStatus(200);
+        $response->assertSee('Satu Data');
+        $response->assertSee('Open Data Hub');
+    }
+
+    public function test_satu_data_export_csv_downloads_successfully(): void
+    {
+        $response = $this->get(route('satu-data.export-csv'));
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+        $response->assertSee('Sukawarna');
+    }
+
+    public function test_verifikasi_page_renders_and_validates_code(): void
+    {
+        $indexResponse = $this->get(route('verifikasi.index'));
+        $indexResponse->assertStatus(200);
+
+        $showResponse = $this->get(route('verifikasi.show', 'FAST-SKW-2026-99999'));
+        $showResponse->assertStatus(200);
+        $showResponse->assertSee('DOKUMEN RESMI TERDAFTAR');
+    }
 }

@@ -180,6 +180,10 @@
                         UMKM
                     </a>
 
+                    <a href="{{ route('satu-data.index') }}" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors {{ request()->routeIs('satu-data.*') ? 'text-[#2D6A4F] font-black' : '' }}">
+                        Satu Data
+                    </a>
+
                     <a href="{{ route('berita.index') }}" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors {{ request()->routeIs('berita.*') ? 'text-[#2D6A4F] font-black' : '' }}">
                         Kabar
                     </a>
@@ -261,6 +265,14 @@
                 <a href="{{ route('landing') }}#kontak" class="px-3.5 py-3 rounded-xl bg-gray-50 hover:bg-emerald-50 hover:text-[#1B4332] flex items-center gap-2 border border-gray-100">
                     <span class="w-2 h-2 rounded-full bg-[#2D6A4F]"></span>
                     <span>Kontak</span>
+                </a>
+                <a href="{{ route('satu-data.index') }}" class="px-3.5 py-3 rounded-xl bg-amber-50/70 hover:bg-amber-100 hover:text-[#1B4332] flex items-center gap-2 border border-amber-200/60">
+                    <span class="w-2 h-2 rounded-full bg-[#FFB703]"></span>
+                    <span>Satu Data</span>
+                </a>
+                <a href="{{ route('verifikasi.index') }}" class="px-3.5 py-3 rounded-xl bg-sky-50/70 hover:bg-sky-100 hover:text-[#1B4332] flex items-center gap-2 border border-sky-200/60">
+                    <span class="w-2 h-2 rounded-full bg-[#0284C7]"></span>
+                    <span>Cek Dokumen</span>
                 </a>
             </div>
             <div class="pt-2 border-t border-gray-100 flex flex-col gap-2.5">
@@ -489,6 +501,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Sapa Sukawarna Virtual Civic AI Assistant Widget -->
+    <x-ui.sapa-sukawarna />
 
     @stack('scripts')
 </body>
