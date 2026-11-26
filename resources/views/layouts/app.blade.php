@@ -120,10 +120,12 @@
                             <svg class="w-3 h-3 text-gray-400 group-hover/menu:text-[#2D6A4F] transition-transform group-hover/menu:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
                         </a>
                         <div class="absolute left-0 top-full pt-1 hidden group-hover/menu:block z-50">
-                            <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-2 min-w-[220px] space-y-1">
+                            <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-2 min-w-[240px] space-y-1">
                                 <a href="{{ route('landing') }}#program" class="block px-3 py-2 rounded-lg text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#1B4332]">Program Prioritas Warga</a>
                                 <a href="{{ route('landing') }}#timeline" class="block px-3 py-2 rounded-lg text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#1B4332]">Timeline Pengadaan & Seleksi</a>
-                                <a href="{{ route('landing') }}#statistik" class="block px-3 py-2 rounded-lg text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#1B4332]">Data Statistik Wilayah</a>
+                                <a href="{{ route('satu-data.index') }}" class="block px-3 py-2 rounded-lg text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#1B4332]">Satu Data & Statistik Wilayah</a>
+                                <a href="{{ route('dokumen.index') }}" class="block px-3 py-2 rounded-lg text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#1B4332]">Repositori Dokumen (KIP)</a>
+                                <a href="{{ route('regulasi.index') }}" class="block px-3 py-2 rounded-lg text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#1B4332]">Regulasi & Privasi Data (UU PDP)</a>
                             </div>
                         </div>
                     </div>
@@ -308,6 +310,8 @@
                         <li><a href="{{ route('pengaduan.cek') }}" class="hover:text-white transition-colors">Cek Status Tiket Pengaduan</a></li>
                         <li><a href="{{ route('umkm.index') }}" class="hover:text-white transition-colors">Direktori UMKM & Ekonomi Kreatif</a></li>
                         <li><a href="{{ route('berita.index') }}" class="hover:text-white transition-colors">Warta & Kabar Terkini Sukawarna</a></li>
+                        <li><a href="{{ route('dokumen.index') }}" class="hover:text-white transition-colors">Repositori Dokumen & Perdes (KIP)</a></li>
+                        <li><a href="{{ route('regulasi.index') }}" class="hover:text-white transition-colors">Regulasi & Privasi Data Warga</a></li>
                     </ul>
                 </div>
 
@@ -360,9 +364,9 @@
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
                 <p>&copy; {{ date('Y') }} Kelurahan Sukawarna, Kota Bandung. Seluruh Hak Cipta Dilindungi.</p>
                 <div class="flex items-center gap-4 text-xs">
-                    <a href="{{ route('landing') }}#profil" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                    <a href="{{ route('regulasi.index') }}" class="hover:text-white transition-colors">Kebijakan Privasi (UU PDP)</a>
                     <span>&bull;</span>
-                    <a href="{{ route('landing') }}#kontak" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                    <a href="{{ route('regulasi.index') }}" class="hover:text-white transition-colors">Regulasi Pengelolaan Data</a>
                 </div>
             </div>
         </div>

@@ -85,7 +85,7 @@ class AuthorizationAndRolesTest extends TestCase
         $response->assertSee('operator@kelurahan.test');
         $response->assertSee('admin@kelurahan.test');
         $response->assertSee('superadmin@kelurahan.test');
-        $response->assertSee('Audit Trail Aktivitas Aktif');
+        $response->assertSee('Kepatuhan UU PDP &amp; Audit Aktif', false);
     }
 
     public function test_pimpinan_role_can_access_dashboard(): void

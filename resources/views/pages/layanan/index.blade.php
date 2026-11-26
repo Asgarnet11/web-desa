@@ -9,6 +9,9 @@
             <p class="text-xs sm:text-sm text-gray-600 max-w-2xl leading-relaxed">
                 Panduan lengkap alur tahapan, persyaratan berkas, dan estimasi waktu penyelesaian layanan kependudukan di Kelurahan Sukawarna. Bebas biaya dan transparan.
             </p>
+            <p class="text-[11px] text-gray-500">
+                Pencatatan mutasi datang, pindah, lahir, dan wafat berpedoman pada <strong>UU No. 24/2013</strong>, <strong>Permendagri No. 47/2016</strong>, dan <strong>UU No. 27/2022 (UU PDP)</strong>. <a href="{{ route('regulasi.index') }}" class="font-bold text-[#1B4332] underline">Baca Ketentuan Regulasi &rarr;</a>
+            </p>
         </div>
 
         <!-- Timeline Stepper UI/UX Component (Reference Fidelity) -->

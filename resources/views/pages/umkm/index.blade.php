@@ -146,9 +146,9 @@
                               class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none"></textarea>
                 </div>
 
-                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 space-y-0.5">
-                    <strong>Catatan Kurasi:</strong>
-                    <p>Setelah formulir dikirim, petugas kelurahan akan memverifikasi keabsahan usaha untuk ditampilkan di peta digital & direktori publik.</p>
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 space-y-1">
+                    <strong>Catatan Kurasi &amp; Pelindungan Data (UU No. 27/2022):</strong>
+                    <p>Setelah formulir dikirim, petugas kelurahan akan memverifikasi keabsahan usaha sebelum ditampilkan di peta digital. <a href="{{ route('regulasi.index') }}" class="font-bold underline text-[#1B4332]">Lihat Regulasi Pengelolaan Data &rarr;</a></p>
                 </div>
 
                 <div class="pt-3 border-t border-gray-100 flex items-center justify-end gap-3">

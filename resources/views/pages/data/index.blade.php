@@ -12,6 +12,19 @@
             <p class="text-xs sm:text-sm text-gray-600 max-w-3xl leading-relaxed">
                 Akses terbuka data agregat kependudukan, capaian pembangunan, sebaran infrastruktur publik, dan direktori ekonomi Kelurahan Sukawarna. Terbuka bagi masyarakat, perencana kota, dan akademisi.
             </p>
+            <div class="pt-1 flex flex-wrap items-center gap-2 text-[11px] text-gray-600">
+                <span class="font-semibold text-[#1B4332]">Acuan Regulasi:</span>
+                <span>UU No. 24/2013</span>
+                <span>&middot;</span>
+                <span>Permendagri No. 47/2016</span>
+                <span>&middot;</span>
+                <span>Perpres No. 39/2019 (Satu Data)</span>
+                <span>&middot;</span>
+                <span>Permendagri No. 13/2024</span>
+                <span>&middot;</span>
+                <span>UU No. 27/2022 (UU PDP — agregat anonim tanpa data pribadi)</span>
+                <a href="{{ route('regulasi.index') }}" class="font-bold text-[#1B4332] underline hover:text-[#2D6A4F] ml-1">Rincian Tata Kelola Data &rarr;</a>
+            </div>
         </div>
 
         @php

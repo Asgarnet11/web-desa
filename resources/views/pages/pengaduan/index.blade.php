@@ -89,6 +89,10 @@
                               placeholder="Jelaskan kendala, kronologi, dan harapan penanganan..."></textarea>
                 </div>
 
+                <div class="rounded-xl bg-[#F4F7F4] border border-[#1B4332]/15 px-4 py-3 text-[11px] text-gray-700 leading-relaxed">
+                    <strong class="text-[#1B4332]">Jaminan Privasi Data (UU No. 27 Tahun 2022):</strong> Identitas pelapor dan nomor telepon digunakan khusus untuk verifikasi tindak lanjut petugas kelurahan serta tidak ditayangkan secara publik. <a href="{{ route('regulasi.index') }}" class="font-bold text-[#1B4332] underline">Lihat Dasar Hukum &amp; Pengelolaan Data</a>.
+                </div>
+
                 <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                     <button type="submit" class="btn-organic px-8 py-3 bg-[#FFB703] text-[#1B4332] font-bold text-xs shadow-sm hover:scale-[1.02] transition-transform">
                         Kirim Laporan Pengaduan

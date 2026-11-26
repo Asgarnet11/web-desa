@@ -163,6 +163,22 @@ class PublicPagesTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Repositori Dokumen');
         $response->assertSee('Keterbukaan Informasi Publik');
+        $response->assertSee('UU No. 24 Tahun 2013');
+        $response->assertSee('UU No. 27 Tahun 2022');
+    }
+
+    public function test_regulasi_page_displays_all_five_data_governance_laws(): void
+    {
+        $response = $this->get(route('regulasi.index'));
+
+        $response->assertStatus(200);
+        $response->assertSee('Regulasi Acuan Pengambilan, Penyimpanan & Pemrosesan Data Warga', false);
+        $response->assertSee('UU No. 24 Tahun 2013');
+        $response->assertSee('Permendagri No. 47 Tahun 2016');
+        $response->assertSee('Perpres No. 39 Tahun 2019');
+        $response->assertSee('Permendagri No. 13 Tahun 2024');
+        $response->assertSee('UU No. 27 Tahun 2022');
+        $response->assertSee('Matriks Siklus Pengambilan, Penyimpanan, Pemrosesan & Publikasi Data', false);
     }
 
     public function test_dokumen_publik_download_increments_counter(): void

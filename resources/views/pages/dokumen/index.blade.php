@@ -79,6 +79,21 @@
             </form>
         </div>
 
+        <!-- Regulatory Basis Summary Banner -->
+        <div class="mb-8 rounded-2xl border border-[#1B4332]/20 bg-[#F4F7F4] p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div class="space-y-1">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-[#2D6A4F] block">
+                    Payung Hukum Pengambilan, Penyimpanan & Pemrosesan Data Warga
+                </span>
+                <p class="text-xs text-gray-700 leading-relaxed max-w-4xl">
+                    Seluruh pendataan kependudukan (lahir, mati, datang, pindah), Posyandu/ibu hamil, dan publikasi Satu Data mengacu resmi pada <strong>UU No. 24 Tahun 2013</strong>, <strong>Permendagri No. 47 Tahun 2016</strong>, <strong>Perpres No. 39 Tahun 2019</strong>, <strong>Permendagri No. 13 Tahun 2024</strong>, dan <strong>UU No. 27 Tahun 2022 (UU PDP)</strong>.
+                </p>
+            </div>
+            <a href="{{ route('regulasi.index') }}" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#1B4332] text-white text-xs font-bold hover:bg-[#2D6A4F] transition-colors shrink-0">
+                <span>Baca Penjelasan Lengkap &amp; Matriks Data &rarr;</span>
+            </a>
+        </div>
+
         <!-- Document Grid -->
         @if($dokumenList->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -93,6 +93,41 @@ class DokumenPublikSeeder extends Seeder
                 'ukuran_file' => '650 KB PDF',
                 'download_count' => 110,
             ],
+            [
+                'judul' => 'Pedoman Pencatatan Mutasi Penduduk (LAMPID) Berdasarkan UU No. 24 Tahun 2013',
+                'kategori' => 'Peraturan',
+                'file_path' => 'dokumen/pedoman-adminduk-uu-24-2013.pdf',
+                'ukuran_file' => '1.2 MB PDF',
+                'download_count' => 164,
+            ],
+            [
+                'judul' => 'Petunjuk Teknis Buku Induk & Mutasi Penduduk Mengacu Permendagri No. 47 Tahun 2016',
+                'kategori' => 'Peraturan',
+                'file_path' => 'dokumen/juknis-buku-induk-permendagri-47-2016.pdf',
+                'ukuran_file' => '980 KB PDF',
+                'download_count' => 142,
+            ],
+            [
+                'judul' => 'Standar Tata Kelola Satu Data Kelurahan Mengacu Perpres No. 39 Tahun 2019',
+                'kategori' => 'Peraturan',
+                'file_path' => 'dokumen/standar-satu-data-perpres-39-2019.pdf',
+                'ukuran_file' => '1.1 MB PDF',
+                'download_count' => 119,
+            ],
+            [
+                'judul' => 'Pedoman Pemantauan Kesehatan Ibu Hamil, Balita & Lansia Mengacu Permendagri No. 13 Tahun 2024',
+                'kategori' => 'Peraturan',
+                'file_path' => 'dokumen/pedoman-posyandu-permendagri-13-2024.pdf',
+                'ukuran_file' => '890 KB PDF',
+                'download_count' => 151,
+            ],
+            [
+                'judul' => 'Kebijakan Pelindungan Data Pribadi Warga (UU No. 27 Tahun 2022 - UU PDP)',
+                'kategori' => 'Peraturan',
+                'file_path' => 'dokumen/kebijakan-pdp-uu-27-2022.pdf',
+                'ukuran_file' => '760 KB PDF',
+                'download_count' => 205,
+            ],
         ];
 
         foreach ($docs as $doc) {

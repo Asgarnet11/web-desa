@@ -7,6 +7,7 @@ use App\Http\Controllers\Public\LandingController;
 use App\Http\Controllers\Public\LayananController;
 use App\Http\Controllers\Public\PengaduanController;
 use App\Http\Controllers\Public\PetaController;
+use App\Http\Controllers\Public\RegulasiController;
 use App\Http\Controllers\Public\UmkmController;
 use App\Http\Controllers\Public\VerifikasiController;
 use Illuminate\Support\Facades\Route;
@@ -45,3 +46,6 @@ Route::prefix('dokumen')->name('dokumen.')->group(function () {
     Route::get('/', [DokumenPublikController::class, 'index'])->name('index');
     Route::get('/{dokumen}/unduh', [DokumenPublikController::class, 'download'])->name('download');
 });
+
+// Dasar Hukum & Tata Kelola Data Pribadi Warga
+Route::get('/regulasi', [RegulasiController::class, 'index'])->name('regulasi.index');

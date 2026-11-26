@@ -98,12 +98,12 @@
                 <span>Kembali ke Portal Publik</span>
             </a>
 
-            <span class="inline-flex items-center gap-1.5 text-[11px] text-gray-500 dark:text-zinc-500">
+            <a href="/regulasi" class="inline-flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-[#1B4332] dark:text-zinc-400 dark:hover:text-emerald-400 transition-colors">
                 <svg class="w-3.5 h-3.5 shrink-0 text-gray-400 dark:text-zinc-500" style="width: 14px; height: 14px;" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <span>Audit Trail Aktivitas Aktif</span>
-            </span>
+                <span>Kepatuhan UU PDP &amp; Audit Aktif</span>
+            </a>
         </div>
     </div>
 </x-filament-panels::page.simple>
