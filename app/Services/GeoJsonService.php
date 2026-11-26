@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\StatusVerifikasi;
 use App\Models\Fasilitas;
+use App\Models\Umkm;
 use App\Models\Wilayah;
 use Illuminate\Support\Collection;
 
@@ -106,6 +107,54 @@ class GeoJsonService
                 'geometry' => $w->batas ? ($w->batas['geometry'] ?? $w->batas) : null,
             ];
         })->filter(fn ($f) => $f['geometry'] !== null)->values()->all();
+
+        return [
+            'type' => 'FeatureCollection',
+            'features' => $features,
+        ];
+    }
+
+    /**
+     * Get GeoJSON FeatureCollection for UMKM.
+     */
+    public function getUmkmFeatureCollection(?int $wilayahId = null, ?string $kategori = null): array
+    {
+        $query = Umkm::where('is_publik', true)
+            ->whereNotNull('lat')
+            ->whereNotNull('lng');
+
+        if ($wilayahId) {
+            $query->where('wilayah_id', $wilayahId);
+        }
+
+        if ($kategori) {
+            $query->where('kategori', $kategori);
+        }
+
+        $features = $query->get()->map(function (Umkm $item) {
+            return [
+                'type' => 'Feature',
+                'id' => $item->id,
+                'properties' => [
+                    'id' => $item->id,
+                    'nama' => $item->nama_usaha,
+                    'nama_pemilik' => $item->nama_pemilik,
+                    'kategori' => $item->kategori,
+                    'kategori_slug' => 'umkm',
+                    'warna' => '#EA580C',
+                    'ikon' => 'shopping-bag',
+                    'alamat' => $item->alamat,
+                    'deskripsi' => $item->deskripsi,
+                    'kontak_wa' => $item->kontak_wa,
+                    'foto' => $item->foto,
+                    'is_unggulan' => $item->is_unggulan,
+                ],
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [$item->lng, $item->lat],
+                ],
+            ];
+        })->values()->all();
 
         return [
             'type' => 'FeatureCollection',

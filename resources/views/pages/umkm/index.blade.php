@@ -1,14 +1,31 @@
 <x-layouts.app :title="'Direktori UMKM & Potensi - Kelurahan Sukawarna'">
     <div class="max-w-7xl mx-auto px-6 py-10 space-y-8">
-        <div>
-            <span class="text-xs font-bold text-[#FFB703] uppercase tracking-wider">Pemberdayaan Warga</span>
-            <h1 class="font-display font-bold text-3xl sm:text-4xl text-[#1B4332] mt-1">
-                Direktori UMKM & Produk Unggulan
-            </h1>
-            <p class="text-xs sm:text-sm text-[#1F2D26]/75 mt-1">
-                Temukan dan dukung produk usaha mikro, kecil, dan menengah binaan warga Sukawarna.
-            </p>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <span class="text-xs font-bold text-[#FFB703] uppercase tracking-wider">Pemberdayaan Warga</span>
+                <h1 class="font-display font-bold text-3xl sm:text-4xl text-[#1B4332] mt-1">
+                    Direktori UMKM & Produk Unggulan
+                </h1>
+                <p class="text-xs sm:text-sm text-[#1F2D26]/75 mt-1">
+                    Temukan dan dukung produk usaha mikro, kecil, dan menengah binaan warga Sukawarna.
+                </p>
+            </div>
+
+            <!-- Tombol Daftarkan Usaha Warga -->
+            <button type="button" 
+                    onclick="document.getElementById('daftar-umkm-modal').classList.remove('hidden')"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1B4332] hover:bg-[#2D6A4F] text-[#FFB703] font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                <span>Daftarkan Usaha Anda</span>
+            </button>
         </div>
+
+        @if(session('success'))
+            <div class="p-4 rounded-2xl bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold flex items-center gap-2">
+                <span class="text-base">✓</span>
+                <span>{{ session('success') }}</span>
+            </div>
+        @endif
 
         <!-- Search & Filter Bar -->
         <div class="bg-white rounded-[28px] p-5 border border-[#52B788]/20 shadow-soft flex flex-col sm:flex-row gap-4 justify-between items-center">
@@ -67,6 +84,82 @@
 
         <div class="pt-6">
             {{ $umkmList->links() }}
+        </div>
+    </div>
+
+    <!-- Modal Pendaftaran UMKM Mandiri Warga -->
+    <div id="daftar-umkm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-start justify-between gap-4 pb-3 border-b border-gray-100">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#FFB703] block">Pemberdayaan Ekonomi Warga</span>
+                    <h3 class="font-serif font-black text-xl text-[#1B4332]">Formulir Pendaftaran UMKM</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Daftarkan usaha Anda agar terpetakan di direktori & peta spasial Sukawarna.</p>
+                </div>
+                <button type="button" onclick="document.getElementById('daftar-umkm-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 p-1 rounded-full text-xl leading-none">
+                    &times;
+                </button>
+            </div>
+
+            <form action="{{ route('umkm.store') }}" method="POST" class="space-y-4">
+                @csrf
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-[#1B4332]">Nama Usaha / Toko *</label>
+                    <input type="text" name="nama_usaha" required placeholder="Contoh: Kopi Kebun Sukawarna" 
+                           class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-[#1B4332]">Nama Pemilik Usaha *</label>
+                        <input type="text" name="nama_pemilik" required placeholder="Nama Anda" 
+                               class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-[#1B4332]">Kategori Usaha *</label>
+                        <select name="kategori" required class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
+                            <option value="Kuliner">Kuliner & Minuman</option>
+                            <option value="Fashion">Fashion & Pakaian</option>
+                            <option value="Kerajinan">Kerajinan Tangan</option>
+                            <option value="Pertanian">Pertanian & Hidroponik</option>
+                            <option value="Jasa">Jasa & Servis</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-[#1B4332]">Nomor WhatsApp Bisnis *</label>
+                        <input type="text" name="kontak_wa" required placeholder="081234567890" 
+                               class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-[#1B4332]">Alamat Lengkap (RT/RW) *</label>
+                        <input type="text" name="alamat" required placeholder="Jl. Sukagalih RW 02" 
+                               class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-[#1B4332]">Deskripsi Produk & Layanan</label>
+                    <textarea name="deskripsi" rows="3" placeholder="Ceritakan produk unggulan, jam operasional, atau keunikan usaha Anda..." 
+                              class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none"></textarea>
+                </div>
+
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 space-y-0.5">
+                    <strong>Catatan Kurasi:</strong>
+                    <p>Setelah formulir dikirim, petugas kelurahan akan memverifikasi keabsahan usaha untuk ditampilkan di peta digital & direktori publik.</p>
+                </div>
+
+                <div class="pt-3 border-t border-gray-100 flex items-center justify-end gap-3">
+                    <button type="button" onclick="document.getElementById('daftar-umkm-modal').classList.add('hidden')" class="px-4 py-2 rounded-xl border border-gray-200 text-gray-600 font-bold text-xs hover:bg-gray-50">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-6 py-2 rounded-xl bg-[#2D6A4F] hover:bg-[#1B4332] text-white font-bold text-xs shadow-sm transition-all">
+                        Kirim Pendaftaran
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </x-layouts.app>

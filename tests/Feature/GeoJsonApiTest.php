@@ -64,6 +64,32 @@ class GeoJsonApiTest extends TestCase
         ]);
     }
 
+    public function test_api_returns_geojson_umkm_collection(): void
+    {
+        $response = $this->getJson(route('api.geojson.umkm'));
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'type',
+            'features' => [
+                '*' => [
+                    'type',
+                    'id',
+                    'properties' => [
+                        'nama',
+                        'kategori',
+                        'warna',
+                        'ikon',
+                    ],
+                    'geometry' => [
+                        'type',
+                        'coordinates',
+                    ],
+                ],
+            ],
+        ]);
+    }
+
     public function test_api_returns_statistik_wilayah(): void
     {
         $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();

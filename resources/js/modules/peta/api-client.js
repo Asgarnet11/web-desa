@@ -13,6 +13,14 @@ export async function fetchFasilitasGeoJson(params = {}) {
     return await response.json();
 }
 
+export async function fetchUmkmGeoJson(params = {}) {
+    const query = new URLSearchParams(params).toString();
+    const url = `/api/geojson/umkm${query ? '?' + query : ''}`;
+    const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!response.ok) throw new Error('Gagal memuat data UMKM');
+    return await response.json();
+}
+
 export async function fetchChoroplethGeoJson(wilayahId, indikator = 'penduduk') {
     const url = `/api/geojson/choropleth/${wilayahId}?indikator=${indikator}`;
     const response = await fetch(url, { headers: { 'Accept': 'application/json' } });

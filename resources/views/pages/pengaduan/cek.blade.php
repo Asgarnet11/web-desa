@@ -119,6 +119,23 @@
                                 Laporan Anda telah tercatat dan sedang dalam antrean verifikasi oleh petugas kelurahan.
                             </div>
                         @endif
+
+                        @if($pengaduan->lat && $pengaduan->lng)
+                            <div class="mt-4 pt-4 border-t border-gray-100 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-[#1B4332] flex items-center gap-1.5">
+                                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        <span>Titik Geospasial Lokasi Laporan (GPS Terverifikasi)</span>
+                                    </span>
+                                    <a href="https://www.google.com/maps/dir/?api=1&destination={{ $pengaduan->lat }},{{ $pengaduan->lng }}" 
+                                       target="_blank" 
+                                       class="text-xs text-[#0284C7] font-bold hover:underline flex items-center gap-1">
+                                        <span>Buka Petunjuk Arah &rarr;</span>
+                                    </a>
+                                </div>
+                                <div id="cek-pengaduan-map" class="w-full h-44 rounded-xl border border-gray-200 overflow-hidden relative z-0"></div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @else
@@ -128,4 +145,53 @@
             @endif
         @endif
     </div>
+
+    @if($pengaduan && $pengaduan->lat && $pengaduan->lng)
+        @push('scripts')
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function loadAndShowMap() {
+                if (typeof L === 'undefined') {
+                    const script = document.createElement('script');
+                    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                    script.onload = renderTicketMap;
+                    document.head.appendChild(script);
+
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                    document.head.appendChild(link);
+                } else {
+                    renderTicketMap();
+                }
+            }
+
+            function renderTicketMap() {
+                const mapEl = document.getElementById('cek-pengaduan-map');
+                if (!mapEl) return;
+
+                const lat = {{ $pengaduan->lat }};
+                const lng = {{ $pengaduan->lng }};
+
+                const map = L.map('cek-pengaduan-map', {
+                    center: [lat, lng],
+                    zoom: 16,
+                    scrollWheelZoom: false
+                });
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; CARTO',
+                    maxZoom: 19
+                }).addTo(map);
+
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup('<b>{{ $pengaduan->nomor_tiket }}</b><br>{{ $pengaduan->judul }}')
+                    .openPopup();
+            }
+
+            loadAndShowMap();
+        });
+        </script>
+        @endpush
+    @endif
 </x-layouts.app>

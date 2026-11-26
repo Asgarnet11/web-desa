@@ -37,6 +37,12 @@ class PengaduanForm
                     ->columnSpanFull(),
                 TextInput::make('foto'),
                 TextInput::make('lokasi'),
+                TextInput::make('lat')
+                    ->numeric()
+                    ->label('Latitude GPS'),
+                TextInput::make('lng')
+                    ->numeric()
+                    ->label('Longitude GPS'),
                 Select::make('status')
                     ->options(StatusPengaduan::class)
                     ->default('menunggu')

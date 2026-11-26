@@ -29,6 +29,8 @@ class BuatPengaduanAction
             'isi' => $data['isi'],
             'foto' => $data['foto'] ?? null,
             'lokasi' => $data['lokasi'] ?? null,
+            'lat' => $data['lat'] ?? null,
+            'lng' => $data['lng'] ?? null,
             'status' => StatusPengaduan::Menunggu,
         ]);
     }

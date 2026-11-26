@@ -26,6 +26,8 @@ class Pengaduan extends Model
         'isi',
         'foto',
         'lokasi',
+        'lat',
+        'lng',
         'status',
         'tanggapan',
         'ditanggapi_oleh',
@@ -36,6 +38,8 @@ class Pengaduan extends Model
     {
         return [
             'status' => StatusPengaduan::class,
+            'lat' => 'float',
+            'lng' => 'float',
             'ditanggapi_pada' => 'datetime',
         ];
     }

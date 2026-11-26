@@ -18,6 +18,7 @@ Route::prefix('berita')->name('berita.')->group(function () {
 
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
 Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
+Route::post('/umkm', [UmkmController::class, 'store'])->name('umkm.store');
 
 Route::prefix('pengaduan')->name('pengaduan.')->group(function () {
     Route::get('/', [PengaduanController::class, 'index'])->name('index');

@@ -39,6 +39,16 @@ class GeoJsonController extends Controller
         return response()->json($featureCollection);
     }
 
+    public function umkm(Request $request): JsonResponse
+    {
+        $wilayahId = $request->get('wilayah_id');
+        $kategori = $request->get('kategori');
+
+        $featureCollection = $this->geoJsonService->getUmkmFeatureCollection($wilayahId, $kategori);
+
+        return response()->json($featureCollection);
+    }
+
     public function choropleth(int $wilayahId, Request $request): JsonResponse
     {
         $indikator = $request->get('indikator', 'penduduk');

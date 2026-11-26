@@ -6,6 +6,7 @@ use App\Enums\StatusVerifikasi;
 use App\Http\Controllers\Controller;
 use App\Models\Fasilitas;
 use App\Models\KategoriFasilitas;
+use App\Models\Umkm;
 use App\Models\Wilayah;
 use Illuminate\View\View;
 
@@ -26,6 +27,12 @@ class PetaController extends Controller
             ->orderBy('nama')
             ->get();
 
-        return view('pages.peta.index', compact('wilayah', 'kategoriList', 'fasilitasList'));
+        $umkmList = Umkm::where('is_publik', true)
+            ->whereNotNull('lat')
+            ->whereNotNull('lng')
+            ->orderBy('nama_usaha')
+            ->get();
+
+        return view('pages.peta.index', compact('wilayah', 'kategoriList', 'fasilitasList', 'umkmList'));
     }
 }

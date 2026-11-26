@@ -84,4 +84,43 @@ class PublicPagesTest extends TestCase
             'judul' => 'Lampu PJU Padam di RW 01',
         ]);
     }
+
+    public function test_citizen_can_submit_complaint_with_coordinates(): void
+    {
+        $response = $this->post(route('pengaduan.store'), [
+            'nama_pelapor' => 'Budi Warga Sukawarna',
+            'telepon_pelapor' => '081234567890',
+            'kategori' => 'Infrastruktur',
+            'lokasi' => 'Jl. Sukagalih RW 02',
+            'lat' => -6.8872,
+            'lng' => 107.5765,
+            'judul' => 'Lampu PJU Padam',
+            'isi' => 'Lampu jalan mati sejak kemarin malam dan gelap gulita.',
+        ]);
+
+        $response->assertRedirect(route('pengaduan.index'));
+        $this->assertDatabaseHas('pengaduan', [
+            'nama_pelapor' => 'Budi Warga Sukawarna',
+            'lat' => -6.8872,
+            'lng' => 107.5765,
+        ]);
+    }
+
+    public function test_citizen_can_register_umkm(): void
+    {
+        $response = $this->post(route('umkm.store'), [
+            'nama_usaha' => 'Warung Nasi Barokah',
+            'nama_pemilik' => 'Bu Barokah',
+            'kategori' => 'Kuliner',
+            'alamat' => 'Jl. Sukasari Gang 2 RW 01',
+            'kontak_wa' => '081299887766',
+            'deskripsi' => 'Nasi uduk dan masakan sunda gurih.',
+        ]);
+
+        $response->assertRedirect(route('umkm.index'));
+        $this->assertDatabaseHas('umkm', [
+            'nama_usaha' => 'Warung Nasi Barokah',
+            'is_publik' => false,
+        ]);
+    }
 }

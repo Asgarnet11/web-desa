@@ -26,6 +26,8 @@ class PengaduanController extends Controller
             'judul' => 'required|string|max:200',
             'isi' => 'required|string|max:2000',
             'lokasi' => 'nullable|string|max:200',
+            'lat' => 'nullable|numeric|between:-90,90',
+            'lng' => 'nullable|numeric|between:-180,180',
         ]);
 
         $pengaduan = $buatPengaduan($validated);

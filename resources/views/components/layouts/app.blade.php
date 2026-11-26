@@ -17,6 +17,28 @@
 </head>
 <body class="bg-[#F8F9FA] text-[#1F2D26] font-sans antialiased min-h-[100dvh] flex flex-col selection:bg-[#FFB703] selection:text-[#1B4332] overflow-x-hidden">
 
+    <!-- Crisis / Emergency Dynamic Alert Banner (Dismissible) -->
+    <div id="crisis-alert-bar" class="bg-gradient-to-r from-amber-600 via-rose-600 to-amber-700 text-white text-xs px-4 py-2 border-b border-rose-800 shadow-xs relative z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5 overflow-hidden">
+                <span class="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-white animate-pulse">
+                    ⚠️
+                </span>
+                <p class="truncate text-[11px] sm:text-xs">
+                    <strong class="font-bold">POSKO SIAGA 24 JAM:</strong> Tim Trantib & Satgas Kebencanaan Kelurahan Sukawarna siaga penuh. Hubungi Call Center 112 atau Hotline Posko untuk kondisi darurat.
+                </p>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+                <button type="button" onclick="document.getElementById('sos-modal').classList.remove('hidden')" class="px-2.5 py-1 bg-white text-rose-700 hover:bg-rose-50 font-black text-[10px] uppercase rounded tracking-wider shadow-2xs transition-colors">
+                    Daftar Kontak
+                </button>
+                <button type="button" onclick="document.getElementById('crisis-alert-bar').style.display='none'" class="text-white/80 hover:text-white p-0.5 text-base leading-none" title="Tutup Notifikasi">
+                    &times;
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Header Bar (Dark Forest Green - Single Clean Non-Wrapping Line) -->
     <div class="bg-[#1B4332] text-[#FFF8E7] text-[11px] font-medium border-b border-[#2D6A4F]/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-10 flex items-center justify-between gap-3">
@@ -48,7 +70,15 @@
             </div>
 
             <!-- Right Links & CTA Button (Non-wrapping) -->
-            <div class="flex items-center gap-2.5 sm:gap-4 flex-shrink-0">
+            <div class="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
+                <!-- SOS 24H Button -->
+                <button type="button" 
+                        onclick="document.getElementById('sos-modal').classList.remove('hidden')" 
+                        class="inline-flex items-center gap-1 px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white font-black text-[10px] uppercase tracking-wider rounded transition-colors shadow-2xs whitespace-nowrap">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                    <span>SOS 24 Jam</span>
+                </button>
+
                 <a href="{{ route('pengaduan.cek') }}" class="hidden sm:inline-block hover:text-[#FFB703] transition-colors whitespace-nowrap font-medium">
                     Lacak Pengaduan
                 </a>
@@ -367,6 +397,98 @@
             </div>
         </div>
     </footer>
+
+    <!-- SOS 24 Jam Emergency Contacts Modal -->
+    <div id="sos-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-start justify-between gap-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl flex-shrink-0">
+                        🚨
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-rose-600 block">Siaga Tanggap Darurat 24 Jam</span>
+                        <h3 class="font-serif font-black text-xl text-[#1B4332]">Kontak Gawat Darurat</h3>
+                    </div>
+                </div>
+                <button type="button" onclick="document.getElementById('sos-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 p-1 rounded-full text-2xl leading-none">
+                    &times;
+                </button>
+            </div>
+
+            <p class="text-xs text-gray-600 leading-relaxed">
+                Sentuh salah satu nomor di bawah untuk langsung terhubung dengan unit layanan darurat terdekat di wilayah Kelurahan Sukawarna.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <!-- 112 Bandung -->
+                <a href="tel:112" class="p-3.5 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors flex items-center justify-between group">
+                    <div>
+                        <span class="text-[10px] text-rose-600 font-bold block uppercase">Bebas Pulsa</span>
+                        <strong class="font-bold text-gray-900 block text-sm">Call Center 112</strong>
+                        <span class="text-[10px] text-gray-500">Kedaruratan Kota Bandung</span>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">📞</span>
+                </a>
+
+                <!-- Bhabinkamtibmas -->
+                <a href="tel:081234567891" class="p-3.5 rounded-2xl bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors flex items-center justify-between group">
+                    <div>
+                        <span class="text-[10px] text-blue-600 font-bold block uppercase">Kepolisian</span>
+                        <strong class="font-bold text-gray-900 block text-sm">Bhabinkamtibmas</strong>
+                        <span class="text-[10px] text-gray-500">Aipda Rahmat &bull; 24 Jam</span>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">👮</span>
+                </a>
+
+                <!-- Babinsa -->
+                <a href="tel:081234567892" class="p-3.5 rounded-2xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center justify-between group">
+                    <div>
+                        <span class="text-[10px] text-emerald-600 font-bold block uppercase">TNI / Koramil</span>
+                        <strong class="font-bold text-gray-900 block text-sm">Babinsa Sukawarna</strong>
+                        <span class="text-[10px] text-gray-500">Serka Mulyadi &bull; 24 Jam</span>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">🎖️</span>
+                </a>
+
+                <!-- Puskesmas -->
+                <a href="tel:0222013456" class="p-3.5 rounded-2xl bg-sky-50 hover:bg-sky-100 border border-sky-200 transition-colors flex items-center justify-between group">
+                    <div>
+                        <span class="text-[10px] text-sky-600 font-bold block uppercase">Medis / Ambulans</span>
+                        <strong class="font-bold text-gray-900 block text-sm">Puskesmas Sukasari</strong>
+                        <span class="text-[10px] text-gray-500">Unit IGD & Ambulans</span>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">🚑</span>
+                </a>
+
+                <!-- Damkar -->
+                <a href="tel:113" class="p-3.5 rounded-2xl bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors flex items-center justify-between group">
+                    <div>
+                        <span class="text-[10px] text-amber-700 font-bold block uppercase">Kebakaran</span>
+                        <strong class="font-bold text-gray-900 block text-sm">Damkar Bandung (113)</strong>
+                        <span class="text-[10px] text-gray-500">Diskar PB Kota Bandung</span>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">🚒</span>
+                </a>
+
+                <!-- PLN Gangguan -->
+                <a href="tel:123" class="p-3.5 rounded-2xl bg-purple-50 hover:bg-purple-100 border border-purple-200 transition-colors flex items-center justify-between group">
+                    <div>
+                        <span class="text-[10px] text-purple-600 font-bold block uppercase">Kelistrikan</span>
+                        <strong class="font-bold text-gray-900 block text-sm">PLN Gangguan (123)</strong>
+                        <span class="text-[10px] text-gray-500">Pohon tumbang & kabel</span>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">⚡</span>
+                </a>
+            </div>
+
+            <div class="pt-3 border-t border-gray-100 text-center">
+                <button type="button" onclick="document.getElementById('sos-modal').classList.add('hidden')" class="px-6 py-2 rounded-xl bg-gray-100 text-gray-700 font-bold text-xs hover:bg-gray-200 transition-colors">
+                    Tutup Jendela Darurat
+                </button>
+            </div>
+        </div>
+    </div>
 
     @stack('scripts')
 </body>

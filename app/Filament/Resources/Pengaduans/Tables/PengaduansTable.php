@@ -56,6 +56,13 @@ class PengaduansTable
                     ]),
             ])
             ->recordActions([
+                Action::make('buka_peta')
+                    ->label('Peta GPS')
+                    ->icon('heroicon-o-map-pin')
+                    ->color('info')
+                    ->url(fn (Pengaduan $record): ?string => ($record->lat && $record->lng) ? "https://www.google.com/maps/dir/?api=1&destination={$record->lat},{$record->lng}" : null)
+                    ->openUrlInNewTab()
+                    ->visible(fn (Pengaduan $record): bool => ! empty($record->lat) && ! empty($record->lng)),
                 Action::make('tanggapi')
                     ->label('Tindak Lanjut')
                     ->icon('heroicon-o-chat-bubble-bottom-center-text')

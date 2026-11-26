@@ -1,7 +1,8 @@
 import { initMap, switchBasemap, locateUser } from './modules/peta/init-map';
-import { fetchBatasWilayah, fetchFasilitasGeoJson } from './modules/peta/api-client';
+import { fetchBatasWilayah, fetchFasilitasGeoJson, fetchUmkmGeoJson } from './modules/peta/api-client';
 import { createBoundaryLayer } from './modules/peta/layers/boundary-layer';
 import { createFacilityLayer } from './modules/peta/layers/facility-layer';
+import { createUmkmLayer } from './modules/peta/layers/umkm-layer';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const mapElement = document.getElementById('map');
@@ -18,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let boundaryLayer = null;
     let facilityLayerGroup = null;
+    let umkmLayerGroup = null;
+    let isUmkmVisible = true;
     let allMarkers = [];
     const markersById = {};
 
@@ -44,6 +47,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             facilityLayerGroup.eachLayer(marker => {
                 if (marker.facilityId) {
                     markersById[marker.facilityId] = marker;
+                    allMarkers.push(marker);
+                }
+            });
+        }
+
+        // 2b. Load UMKM GeoJSON
+        const umkmGeoJson = await fetchUmkmGeoJson();
+        if (umkmGeoJson && umkmGeoJson.features) {
+            umkmLayerGroup = createUmkmLayer(umkmGeoJson);
+            umkmLayerGroup.addTo(map);
+
+            umkmLayerGroup.eachLayer(marker => {
+                if (marker.umkmId) {
+                    markersById['umkm-' + marker.umkmId] = marker;
                     allMarkers.push(marker);
                 }
             });
@@ -83,6 +100,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                 isBoundaryVisible = true;
                 toggleBoundaryBtn.classList.add('text-emerald-800', 'bg-emerald-50');
                 toggleBoundaryBtn.classList.remove('text-gray-400', 'bg-gray-100');
+            }
+        });
+    }
+
+    // 4b. Toggle UMKM Layer Button
+    const toggleUmkmBtn = document.getElementById('toggle-umkm-btn');
+    if (toggleUmkmBtn) {
+        toggleUmkmBtn.addEventListener('click', () => {
+            if (!umkmLayerGroup) return;
+            if (isUmkmVisible) {
+                map.removeLayer(umkmLayerGroup);
+                isUmkmVisible = false;
+                toggleUmkmBtn.classList.remove('text-orange-700', 'bg-orange-50', 'border-orange-200');
+                toggleUmkmBtn.classList.add('text-gray-400', 'bg-gray-100', 'border-gray-200');
+            } else {
+                umkmLayerGroup.addTo(map);
+                isUmkmVisible = true;
+                toggleUmkmBtn.classList.add('text-orange-700', 'bg-orange-50', 'border-orange-200');
+                toggleUmkmBtn.classList.remove('text-gray-400', 'bg-gray-100', 'border-gray-200');
             }
         });
     }
@@ -288,6 +324,75 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
+
+    // 9b. UMKM Card Interactions: Focus Marker & Open Popup on Click
+    const umkmCards = document.querySelectorAll('.umkm-card');
+    umkmCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const umkmId = card.dataset.umkmId;
+            const lat = parseFloat(card.dataset.lat);
+            const lng = parseFloat(card.dataset.lng);
+            const marker = markersById['umkm-' + umkmId];
+
+            if (marker && !isNaN(lat) && !isNaN(lng)) {
+                if (!map.hasLayer(marker)) {
+                    marker.addTo(map);
+                }
+
+                map.flyTo([lat, lng], 17, { duration: 1 });
+                setTimeout(() => {
+                    marker.openPopup();
+                }, 800);
+
+                if (window.innerWidth < 1024) {
+                    const mapFrameEl = document.getElementById('map-container-frame');
+                    if (mapFrameEl) {
+                        mapFrameEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }
+        });
+    });
+
+    // 9c. Tab Switcher (Fasilitas vs UMKM)
+    const tabFasilitasBtn = document.getElementById('tab-fasilitas-btn');
+    const tabUmkmBtn = document.getElementById('tab-umkm-btn');
+    const facilityListContainer = document.getElementById('facility-list-container');
+    const umkmListContainer = document.getElementById('umkm-list-container');
+
+    if (tabFasilitasBtn && tabUmkmBtn && facilityListContainer && umkmListContainer) {
+        tabFasilitasBtn.addEventListener('click', () => {
+            tabFasilitasBtn.classList.add('bg-[#0284C7]', 'text-white', 'shadow-xs');
+            tabFasilitasBtn.classList.remove('text-gray-600', 'hover:bg-orange-50', 'hover:text-orange-600');
+
+            tabUmkmBtn.classList.remove('bg-orange-600', 'text-white', 'shadow-xs');
+            tabUmkmBtn.classList.add('text-gray-600', 'hover:bg-orange-50', 'hover:text-orange-600');
+
+            facilityListContainer.classList.remove('hidden');
+            umkmListContainer.classList.add('hidden');
+        });
+
+        tabUmkmBtn.addEventListener('click', () => {
+            tabUmkmBtn.classList.add('bg-orange-600', 'text-white', 'shadow-xs');
+            tabUmkmBtn.classList.remove('text-gray-600', 'hover:bg-orange-50', 'hover:text-orange-600');
+
+            tabFasilitasBtn.classList.remove('bg-[#0284C7]', 'text-white', 'shadow-xs');
+            tabFasilitasBtn.classList.add('text-gray-600', 'hover:bg-orange-50', 'hover:text-orange-600');
+
+            facilityListContainer.classList.add('hidden');
+            umkmListContainer.classList.remove('hidden');
+
+            // If UMKM layer is currently hidden on map, turn it on
+            if (!isUmkmVisible && umkmLayerGroup) {
+                umkmLayerGroup.addTo(map);
+                isUmkmVisible = true;
+                if (toggleUmkmBtn) {
+                    toggleUmkmBtn.classList.add('text-orange-700', 'bg-orange-50', 'border-orange-200');
+                    toggleUmkmBtn.classList.remove('text-gray-400', 'bg-gray-100', 'border-gray-200');
+                }
+            }
+        });
+    }
 
     // 10. Mobile Drawer Toggle Button
     const mobileDrawerToggleBtn = document.getElementById('mobile-drawer-toggle-btn');

@@ -53,6 +53,28 @@
                     </div>
                 </div>
 
+                <!-- Geo-Civic Reporting Map Picker Component -->
+                <div class="space-y-2 p-4 rounded-2xl bg-slate-50 border border-[#52B788]/30">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-[#1B4332] block">Tandai Titik Lokasi pada Peta (Geo-Civic Reporting)</span>
+                            <span id="coord-label" class="text-[11px] text-gray-500 block">Klik pada peta di bawah atau gunakan tombol GPS untuk akurasi tinggi.</span>
+                        </div>
+                        <button type="button" 
+                                id="gps-detect-btn" 
+                                class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#52B788]/60 hover:bg-emerald-50 text-emerald-800 font-bold text-xs shadow-2xs transition-all">
+                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <span>Deteksi Lokasi GPS Saya</span>
+                        </button>
+                    </div>
+
+                    <div id="pengaduan-map" class="w-full h-52 rounded-xl border border-gray-300 overflow-hidden relative z-0"></div>
+
+                    <!-- Hidden Coordinate Inputs -->
+                    <input type="hidden" name="lat" id="pengaduan-lat" value="{{ old('lat') }}">
+                    <input type="hidden" name="lng" id="pengaduan-lng" value="{{ old('lng') }}">
+                </div>
+
                 <div class="space-y-1.5">
                     <label class="block text-xs font-bold text-[#1B4332]">Judul Pengaduan *</label>
                     <input type="text" name="judul" required value="{{ old('judul') }}" 
@@ -79,5 +101,107 @@
             </form>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const defaultLat = -6.8872;
+        const defaultLng = 107.5765;
+        
+        function loadLeafletAndInit() {
+            if (typeof L === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                script.onload = initPicker;
+                document.head.appendChild(script);
+
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                document.head.appendChild(link);
+            } else {
+                initPicker();
+            }
+        }
+
+        function initPicker() {
+            const mapEl = document.getElementById('pengaduan-map');
+            if (!mapEl) return;
+
+            const map = L.map('pengaduan-map', {
+                center: [defaultLat, defaultLng],
+                zoom: 15,
+                scrollWheelZoom: false
+            });
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; CARTO',
+                maxZoom: 19
+            }).addTo(map);
+
+            let marker = null;
+            const latInput = document.getElementById('pengaduan-lat');
+            const lngInput = document.getElementById('pengaduan-lng');
+            const coordLabel = document.getElementById('coord-label');
+            const gpsBtn = document.getElementById('gps-detect-btn');
+
+            function updateMarker(lat, lng) {
+                latInput.value = Number(lat).toFixed(7);
+                lngInput.value = Number(lng).toFixed(7);
+                if (coordLabel) {
+                    coordLabel.innerHTML = `📍 Titik Terpilih: <strong class="text-[#1B4332] font-mono">${Number(lat).toFixed(5)}, ${Number(lng).toFixed(5)}</strong>`;
+                    coordLabel.classList.remove('text-gray-500');
+                    coordLabel.classList.add('text-emerald-700', 'font-semibold');
+                }
+
+                if (!marker) {
+                    marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+                    marker.on('dragend', (e) => {
+                        const pos = e.target.getLatLng();
+                        updateMarker(pos.lat, pos.lng);
+                    });
+                } else {
+                    marker.setLatLng([lat, lng]);
+                }
+            }
+
+            map.on('click', (e) => {
+                updateMarker(e.latlng.lat, e.latlng.lng);
+            });
+
+            if (gpsBtn) {
+                gpsBtn.addEventListener('click', () => {
+                    if (!navigator.geolocation) {
+                        alert('Browser Anda tidak mendukung deteksi lokasi otomatis.');
+                        return;
+                    }
+                    gpsBtn.disabled = true;
+                    gpsBtn.innerHTML = '<span>Mendeteksi GPS...</span>';
+
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => {
+                            const lat = pos.coords.latitude;
+                            const lng = pos.coords.longitude;
+                            updateMarker(lat, lng);
+                            map.setView([lat, lng], 17);
+                            gpsBtn.disabled = false;
+                            gpsBtn.innerHTML = '<span>✓ Lokasi Terdeteksi</span>';
+                            gpsBtn.classList.add('bg-emerald-600', 'text-white');
+                        },
+                        (err) => {
+                            gpsBtn.disabled = false;
+                            gpsBtn.innerHTML = '<span>📍 Deteksi Lokasi GPS Saya</span>';
+                            alert('Gagal mendeteksi lokasi GPS. Pastikan izin akses lokasi diizinkan di browser Anda.');
+                        },
+                        { enableHighAccuracy: true, timeout: 8000 }
+                    );
+                });
+            }
+        }
+
+        loadLeafletAndInit();
+    });
+    </script>
+    @endpush
 </x-layouts.app>
 
