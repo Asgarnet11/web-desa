@@ -10,9 +10,14 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class PengaduanTerbaruWidget extends BaseWidget
 {
-    protected static ?int $sort = 4;
+    protected static bool $isLazy = false;
 
-    protected int|string|array $columnSpan = 'full';
+    protected static ?int $sort = 3;
+
+    protected int|string|array $columnSpan = [
+        'default' => 'full',
+        'lg' => 2,
+    ];
 
     protected static ?string $heading = 'Aspirasi & Pengaduan Warga Terbaru';
 

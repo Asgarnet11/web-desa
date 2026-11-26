@@ -22,6 +22,8 @@ class StatistikRingkasanWidget extends BaseWidget
 
     protected static ?int $sort = 1;
 
+    protected int|string|array $columnSpan = 'full';
+
     protected function getStats(): array
     {
         $user = Auth::user();
@@ -54,185 +56,109 @@ class StatistikRingkasanWidget extends BaseWidget
         $totalDokumen = DokumenPublik::count();
         $totalBerita = Berita::count();
 
-        // 1. Pimpinan (Lurah) - Ruang Kendali Eksekutif
+        // 1. Pimpinan (Lurah) - Ruang Kendali Eksekutif (4 KPI seimbang)
         if ($user?->isPimpinan()) {
             return [
                 Stat::make('Penyelesaian Aspirasi', "{$persenSelesai}%")
-                    ->description("{$pengaduanSelesai} dari {$totalPengaduan} laporan tuntas")
-                    ->descriptionIcon('heroicon-m-check-badge')
-                    ->chart([70, 75, 82, 88, 92, $persenSelesai])
-                    ->color('success'),
+                    ->description("{$pengaduanSelesai} dari {$totalPengaduan} laporan selesai")
+                    ->color($persenSelesai >= 75 ? 'success' : 'warning'),
 
-                Stat::make('Kependudukan Sukawarna', number_format($totalPenduduk, 0, ',', '.').' Jiwa')
-                    ->description('Tersebar di '.number_format($totalKk, 0, ',', '.').' Kepala Keluarga')
-                    ->descriptionIcon('heroicon-m-user-group')
-                    ->chart([12100, 12250, 12380, 12450, 12510, 12580])
-                    ->color('primary'),
+                Stat::make('Penduduk Terdaftar', number_format($totalPenduduk, 0, ',', '.').' jiwa')
+                    ->description(number_format($totalKk, 0, ',', '.').' kepala keluarga aktif')
+                    ->color('gray'),
 
                 Stat::make('Kondisi Infrastruktur', "{$persenInfra}%")
-                    ->description('Jalan, drainase & fasilitas fisik prima')
-                    ->descriptionIcon('heroicon-m-wrench-screwdriver')
+                    ->description('Prasarana fisik berkondisi baik')
                     ->color('success'),
 
-                Stat::make('Ekonomi & UMKM Warga', number_format($totalUmkm, 0, ',', '.').' Unit')
-                    ->description('Potensi ekonomi mandiri binaan aktif')
-                    ->descriptionIcon('heroicon-m-building-storefront')
-                    ->color('warning'),
-
-                Stat::make('Aset Fasilitas GIS', number_format($totalFasilitas, 0, ',', '.').' Titik')
-                    ->description('Sarana publik terpetakan di wilayah')
-                    ->descriptionIcon('heroicon-m-map-pin')
-                    ->color('info'),
-
-                Stat::make('Keterbukaan Publik (KIP)', number_format($totalDokumen, 0, ',', '.').' Berkas')
-                    ->description('Regulasi, SOP, dan transparansi warga')
-                    ->descriptionIcon('heroicon-m-document-text')
-                    ->color('primary'),
+                Stat::make('UMKM & Sarana GIS', number_format($totalUmkm, 0, ',', '.').' unit')
+                    ->description("{$totalFasilitas} titik sarana · {$totalDokumen} dokumen KIP")
+                    ->color('gray'),
             ];
         }
 
-        // 2. Operator - Meja Kerja Operasional & Loket Pelayanan
+        // 2. Operator - Antrean Kerja Pelayanan Warga (4 KPI seimbang)
         if ($user?->isOperator()) {
             return [
-                Stat::make('Aduan Butuh Verifikasi', (string) $pengaduanMenunggu)
-                    ->description($pengaduanMenunggu > 0 ? 'Perlu tindakan loket & verifikasi segera' : 'Seluruh aduan telah terdisposisi')
-                    ->descriptionIcon('heroicon-m-inbox-stack')
+                Stat::make('Antrean Verifikasi Aduan', (string) $pengaduanMenunggu)
+                    ->description($pengaduanMenunggu > 0 ? 'Tiket masuk menunggu pemeriksaan loket' : 'Semua aduan telah terdisposisi')
                     ->color($pengaduanMenunggu > 0 ? 'danger' : 'success'),
 
-                Stat::make('Pendaftaran UMKM Baru', (string) $umkmPending)
-                    ->description($umkmPending > 0 ? "{$umkmPending} pengajuan mandiri menunggu kurasi" : 'Seluruh UMKM warga telah dikurasi')
-                    ->descriptionIcon('heroicon-m-building-storefront')
+                Stat::make('Kurasi UMKM Baru', (string) $umkmPending)
+                    ->description($umkmPending > 0 ? 'Pengajuan mandiri menunggu verifikasi' : 'Seluruh profil UMKM terverifikasi')
                     ->color($umkmPending > 0 ? 'warning' : 'success'),
 
-                Stat::make('Aduan Sedang Diproses', (string) $pengaduanProses)
-                    ->description('Dalam pengerjaan lapangan & tindak lanjut')
-                    ->descriptionIcon('heroicon-m-arrow-path')
-                    ->color('info'),
+                Stat::make('Aduan Dalam Penanganan', (string) $pengaduanProses)
+                    ->description("{$pengaduanSelesai} aduan tuntas dari total {$totalPengaduan}")
+                    ->color('gray'),
 
-                Stat::make('Titik Fasilitas GIS', number_format($totalFasilitas, 0, ',', '.').' Titik')
-                    ->description('Sarana publik terdata di peta digital')
-                    ->descriptionIcon('heroicon-m-map-pin')
-                    ->color('primary'),
-
-                Stat::make('Blangko & Layanan', number_format($totalDokumen, 0, ',', '.').' Berkas')
-                    ->description('Formulir persyaratan pelayanan warga')
-                    ->descriptionIcon('heroicon-m-document-duplicate')
-                    ->color('primary'),
-
-                Stat::make('Warta & Informasi', number_format($totalBerita, 0, ',', '.').' Rilis')
-                    ->description('Kabar kelurahan & publikasi aktif')
-                    ->descriptionIcon('heroicon-m-newspaper')
-                    ->color('success'),
+                Stat::make('Data Spasial & Publikasi', number_format($totalFasilitas, 0, ',', '.').' titik')
+                    ->description("{$totalBerita} warta terbit · {$totalDokumen} blangko layanan")
+                    ->color('gray'),
             ];
         }
 
-        // 3. Admin Wilayah - Supervisi Kewilayahan (Kecamatan Sukasari)
+        // 3. Admin Wilayah - Supervisi Kewilayahan (4 KPI seimbang)
         if ($user?->isAdminWilayah()) {
             return [
-                Stat::make('Agregat Jiwa Sukasari', number_format($totalPenduduk, 0, ',', '.').' Jiwa')
-                    ->description('Kependudukan terpadu wilayah binaan')
-                    ->descriptionIcon('heroicon-m-user-group')
-                    ->chart([12100, 12250, 12380, 12450, 12510, 12580])
-                    ->color('primary'),
+                Stat::make('Agregat Jiwa Sukasari', number_format($totalPenduduk, 0, ',', '.').' jiwa')
+                    ->description(number_format($totalKk, 0, ',', '.').' kepala keluarga tercatat')
+                    ->color('gray'),
 
-                Stat::make('Kondisi Infrastruktur', "{$persenInfra}%")
-                    ->description('Kelaikan fisik sarana & prasarana wilayah')
-                    ->descriptionIcon('heroicon-m-shield-check')
+                Stat::make('Kelaikan Infrastruktur', "{$persenInfra}%")
+                    ->description('Kondisi jalan, drainase & fasilitas RW')
                     ->color('success'),
 
-                Stat::make('Sebaran Sarana GIS', number_format($totalFasilitas, 0, ',', '.').' Titik')
-                    ->description('Aset fasilitas publik lintas RW')
-                    ->descriptionIcon('heroicon-m-map-pin')
-                    ->color('info'),
+                Stat::make('Sebaran Sarana GIS', number_format($totalFasilitas, 0, ',', '.').' titik')
+                    ->description("{$totalUmkm} unit UMKM aktif lintas wilayah")
+                    ->color('gray'),
 
-                Stat::make('Volume Aspirasi Masuk', number_format($totalPengaduan, 0, ',', '.').' Tiket')
-                    ->description($pengaduanMenunggu > 0 ? "{$pengaduanMenunggu} tiket menunggu penanganan aparat" : 'Seluruh tiket aspirasi tertangani')
-                    ->descriptionIcon('heroicon-m-chat-bubble-left-right')
+                Stat::make('Volume Aspirasi Wilayah', number_format($totalPengaduan, 0, ',', '.').' tiket')
+                    ->description($pengaduanMenunggu > 0 ? "{$pengaduanMenunggu} menunggu tindak lanjut" : 'Seluruh tiket tertangani')
                     ->color($pengaduanMenunggu > 0 ? 'warning' : 'success'),
-
-                Stat::make('Pemberdayaan UMKM', number_format($totalUmkm, 0, ',', '.').' Unit')
-                    ->description('Sektor usaha mikro lokal aktif binaan')
-                    ->descriptionIcon('heroicon-m-building-storefront')
-                    ->color('warning'),
-
-                Stat::make('Regulasi & KIP Wilayah', number_format($totalDokumen, 0, ',', '.').' Dokumen')
-                    ->description('Transparansi & dokumen publik kewilayahan')
-                    ->descriptionIcon('heroicon-m-document-text')
-                    ->color('primary'),
             ];
         }
 
-        // 4. Super Admin - Tata Kelola Sistem & Keamanan Data
+        // 4. Super Admin - Tata Kelola & Keamanan (4 KPI seimbang)
         if ($user?->isSuperAdmin()) {
             $totalUsers = User::count();
             $totalLogs = LogAktivitas::count();
             $totalWilayah = Wilayah::count();
 
             return [
-                Stat::make('Pengguna Terdaftar', number_format($totalUsers, 0, ',', '.').' Akun')
-                    ->description('Aparatur berizin akses dalam sistem')
-                    ->descriptionIcon('heroicon-m-users')
-                    ->color('primary'),
+                Stat::make('Akun Aparatur Aktif', number_format($totalUsers, 0, ',', '.').' akun')
+                    ->description('Hak akses terkelola berbasis peran')
+                    ->color('gray'),
 
-                Stat::make('Audit Trail Log', number_format($totalLogs, 0, ',', '.').' Entri')
-                    ->description('Rekaman mutasi data & operasi sistem')
-                    ->descriptionIcon('heroicon-m-clipboard-document-list')
-                    ->color('info'),
+                Stat::make('Rekaman Audit Trail', number_format($totalLogs, 0, ',', '.').' entri')
+                    ->description('Pencatatan mutasi & aktivitas sistem')
+                    ->color('gray'),
 
-                Stat::make('Master Wilayah & GIS', number_format($totalWilayah, 0, ',', '.').' Unit')
-                    ->description('Entitas polygon batas kelurahan & RW')
-                    ->descriptionIcon('heroicon-m-globe-alt')
+                Stat::make('Master Wilayah GeoJSON', number_format($totalWilayah, 0, ',', '.').' entitas')
+                    ->description("{$totalFasilitas} koordinat sarana publik terpetakan")
                     ->color('success'),
 
-                Stat::make('Integritas Spasial', number_format($totalFasilitas, 0, ',', '.').' Titik')
-                    ->description('Koordinat sarana publik terverifikasi')
-                    ->descriptionIcon('heroicon-m-map-pin')
-                    ->color('info'),
-
-                Stat::make('Arsip Pengaduan Masuk', number_format($totalPengaduan, 0, ',', '.').' Tiket')
-                    ->description("{$pengaduanSelesai} tuntas, {$pengaduanMenunggu} menunggu")
-                    ->descriptionIcon('heroicon-m-chat-bubble-bottom-center-text')
-                    ->color('warning'),
-
-                Stat::make('Repositori Berkas Publik', number_format($totalDokumen, 0, ',', '.').' File')
-                    ->description('Berkas keterbukaan publik & media')
-                    ->descriptionIcon('heroicon-m-folder-arrow-down')
-                    ->color('primary'),
+                Stat::make('Arsip Aduan & Berkas', number_format($totalPengaduan, 0, ',', '.').' tiket')
+                    ->description("{$totalDokumen} dokumen publik di repositori")
+                    ->color('gray'),
             ];
         }
 
-        // Fallback default
         return [
-            Stat::make('Total Penduduk', number_format($totalPenduduk, 0, ',', '.'))
-                ->description('Jiwa terdaftar di basis data')
-                ->descriptionIcon('heroicon-m-user-group')
-                ->chart([12100, 12250, 12380, 12450, 12510, 12580])
-                ->color('success'),
+            Stat::make('Total Penduduk', number_format($totalPenduduk, 0, ',', '.').' jiwa')
+                ->description(number_format($totalKk, 0, ',', '.').' kepala keluarga')
+                ->color('gray'),
 
-            Stat::make('Kepala Keluarga', number_format($totalKk, 0, ',', '.'))
-                ->description('Jumlah KK aktif wilayah')
-                ->descriptionIcon('heroicon-m-home')
-                ->chart([3100, 3140, 3170, 3200, 3220, 3240])
-                ->color('info'),
+            Stat::make('Fasilitas Spasial', number_format($totalFasilitas, 0, ',', '.').' titik')
+                ->description('Titik sarana publik terpetakan')
+                ->color('gray'),
 
-            Stat::make('Fasilitas Spasial', number_format($totalFasilitas, 0, ',', '.'))
-                ->description('Titik fasilitas publik terpeta')
-                ->descriptionIcon('heroicon-m-map-pin')
-                ->color('primary'),
-
-            Stat::make('Pengaduan Warga', number_format($totalPengaduan, 0, ',', '.'))
-                ->description($pengaduanMenunggu > 0 ? "{$pengaduanMenunggu} menunggu verifikasi" : 'Seluruh keluhan tertangani')
-                ->descriptionIcon('heroicon-m-chat-bubble-left-right')
+            Stat::make('Pengaduan Warga', number_format($totalPengaduan, 0, ',', '.').' tiket')
+                ->description($pengaduanMenunggu > 0 ? "{$pengaduanMenunggu} menunggu verifikasi" : 'Seluruh aduan tertangani')
                 ->color($pengaduanMenunggu > 0 ? 'warning' : 'success'),
 
-            Stat::make('UMKM Binaan', number_format($totalUmkm, 0, ',', '.'))
-                ->description('Unit usaha aktif terverifikasi')
-                ->descriptionIcon('heroicon-m-building-storefront')
-                ->color('warning'),
-
-            Stat::make('Kondisi Infrastruktur', $persenInfra.'%')
-                ->description('Jalan, drainase & fasilitas fisik')
-                ->descriptionIcon('heroicon-m-wrench-screwdriver')
+            Stat::make('Kondisi Infrastruktur', "{$persenInfra}%")
+                ->description("{$totalUmkm} UMKM binaan aktif")
                 ->color('success'),
         ];
     }

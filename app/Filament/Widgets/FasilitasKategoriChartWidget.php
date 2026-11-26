@@ -7,30 +7,72 @@ use Filament\Widgets\ChartWidget;
 
 class FasilitasKategoriChartWidget extends ChartWidget
 {
-    protected ?string $heading = 'Distribusi Kategori Fasilitas Publik';
+    protected static bool $isLazy = false;
 
-    protected static ?int $sort = 3;
+    protected ?string $heading = 'Sebaran Fasilitas Publik';
 
-    protected ?string $maxHeight = '280px';
+    protected ?string $description = 'Jumlah titik sarana publik terverifikasi per kategori.';
+
+    protected static ?int $sort = 4;
+
+    protected int|string|array $columnSpan = [
+        'default' => 'full',
+        'lg' => 1,
+    ];
+
+    protected ?string $maxHeight = '290px';
 
     protected function getType(): string
     {
-        return 'doughnut';
+        return 'bar';
     }
 
     protected function getData(): array
     {
-        $kategori = KategoriFasilitas::withCount(['fasilitas' => fn ($q) => $q->where('is_publik', true)])->get();
+        $kategori = KategoriFasilitas::withCount(['fasilitas' => fn ($q) => $q->where('is_publik', true)])
+            ->orderByDesc('fasilitas_count')
+            ->get();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Jumlah Fasilitas',
+                    'label' => 'Titik Fasilitas',
                     'data' => $kategori->pluck('fasilitas_count')->toArray(),
-                    'backgroundColor' => $kategori->map(fn ($k) => $k->warna ?? '#2D6A4F')->toArray(),
+                    'backgroundColor' => '#1B4332',
+                    'borderRadius' => 4,
+                    'barThickness' => 16,
                 ],
             ],
             'labels' => $kategori->pluck('nama')->toArray(),
+        ];
+    }
+
+    protected function getOptions(): array
+    {
+        return [
+            'indexAxis' => 'y',
+            'plugins' => [
+                'legend' => [
+                    'display' => false,
+                ],
+            ],
+            'scales' => [
+                'x' => [
+                    'beginAtZero' => true,
+                    'ticks' => [
+                        'precision' => 0,
+                        'stepSize' => 1,
+                    ],
+                    'grid' => [
+                        'color' => 'rgba(148, 163, 184, 0.18)',
+                    ],
+                ],
+                'y' => [
+                    'grid' => [
+                        'display' => false,
+                    ],
+                ],
+            ],
         ];
     }
 }

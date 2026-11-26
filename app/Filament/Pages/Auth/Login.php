@@ -9,18 +9,22 @@ class Login extends BaseLogin
 {
     protected string $view = 'filament.pages.auth.login';
 
+    public ?string $selectedDemoEmail = null;
+
     public function getHeading(): string|Htmlable
     {
-        return 'Masuk Portal Petugas & Aparatur';
+        return 'Portal Aparatur Kelurahan';
     }
 
     public function getSubheading(): string|Htmlable|null
     {
-        return 'Sistem Informasi Pelayanan, Administrasi & Data Spasial Sukawarna';
+        return 'Administrasi Pelayanan, Aspirasi & Data Spasial Sukawarna';
     }
 
     public function selectRole(string $email): void
     {
+        $this->selectedDemoEmail = $email;
+
         $this->form->fill([
             'email' => $email,
             'password' => 'password',

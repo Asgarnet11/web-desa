@@ -80,12 +80,12 @@ class AuthorizationAndRolesTest extends TestCase
         $response = $this->get('/admin/login');
 
         $response->assertSuccessful();
-        $response->assertSee('Masuk Portal Petugas &amp; Aparatur', false);
+        $response->assertSee('Portal Aparatur Kelurahan');
         $response->assertSee('lurah@kelurahan.test');
         $response->assertSee('operator@kelurahan.test');
         $response->assertSee('admin@kelurahan.test');
         $response->assertSee('superadmin@kelurahan.test');
-        $response->assertSee('Akses Terbatas Khusus Aparatur Resmi');
+        $response->assertSee('Audit Trail Aktivitas Aktif');
     }
 
     public function test_pimpinan_role_can_access_dashboard(): void
@@ -93,6 +93,7 @@ class AuthorizationAndRolesTest extends TestCase
         $pimpinan = User::where('email', 'lurah@kelurahan.test')->first();
         $response = $this->actingAs($pimpinan)->get('/admin');
         $response->assertSuccessful();
+        $response->assertSee('Ringkasan Eksekutif Wilayah');
         $response->assertSee('Pimpinan Wilayah / Lurah');
         $response->assertSee('Ruang Kendali Eksekutif');
         $response->assertSee('Pusat Komando &amp; Disposisi Eksekutif', false);
@@ -103,6 +104,7 @@ class AuthorizationAndRolesTest extends TestCase
         $operator = User::where('email', 'operator@kelurahan.test')->first();
         $response = $this->actingAs($operator)->get('/admin');
         $response->assertSuccessful();
+        $response->assertSee('Meja Kerja Pelayanan Warga');
         $response->assertSee('Operator Pelayanan &amp; Loket', false);
         $response->assertSee('Meja Kerja Operasional');
         $response->assertSee('Meja Kerja &amp; Navigasi Operasional Loket', false);
@@ -113,6 +115,7 @@ class AuthorizationAndRolesTest extends TestCase
         $adminWilayah = User::where('email', 'admin@kelurahan.test')->first();
         $response = $this->actingAs($adminWilayah)->get('/admin');
         $response->assertSuccessful();
+        $response->assertSee('Supervisi Kecamatan Sukasari');
         $response->assertSee('Admin Wilayah / Kecamatan Sukasari');
         $response->assertSee('Supervisi Kewilayahan');
         $response->assertSee('Supervisi Wilayah &amp; Koordinasi Kewilayahan', false);
@@ -123,6 +126,7 @@ class AuthorizationAndRolesTest extends TestCase
         $superAdmin = User::where('email', 'superadmin@kelurahan.test')->first();
         $response = $this->actingAs($superAdmin)->get('/admin');
         $response->assertSuccessful();
+        $response->assertSee('Tata Kelola &amp; Keamanan Sistem', false);
         $response->assertSee('Super Administrator Sistem');
         $response->assertSee('Audit Trail &amp; Rekaman Log Aktivitas', false);
         $response->assertSee('Pusat Tata Kelola Sistem &amp; Keamanan Data', false);
