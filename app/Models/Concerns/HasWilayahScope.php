@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 trait HasWilayahScope
 {
     /**
-     * Scope a query to only include records in the user's assigned wilayah (and sub-wilayah).
+     * Scope a query to only include records in the user's assigned wilayah and recursive descendants.
      */
     public function scopeForCurrentUserWilayah(Builder $query): Builder
     {
@@ -19,7 +19,6 @@ trait HasWilayahScope
             return $query;
         }
 
-        // Super Admin can access all wilayah
         if ($user->isSuperAdmin()) {
             return $query;
         }
@@ -28,12 +27,12 @@ trait HasWilayahScope
             return $query;
         }
 
-        // Include user's own wilayah and descendant wilayah IDs
-        $wilayahIds = Wilayah::where('id', $user->wilayah_id)
-            ->orWhere('parent_id', $user->wilayah_id)
-            ->pluck('id')
-            ->toArray();
+        $wilayah = Wilayah::find($user->wilayah_id);
 
-        return $query->whereIn($this->getTable().'.wilayah_id', $wilayahIds);
+        if (! $wilayah) {
+            return $query->where($this->getTable().'.wilayah_id', $user->wilayah_id);
+        }
+
+        return $query->whereIn($this->getTable().'.wilayah_id', $wilayah->getDescendantIds(true));
     }
 }

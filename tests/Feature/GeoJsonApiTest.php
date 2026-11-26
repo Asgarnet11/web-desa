@@ -104,4 +104,17 @@ class GeoJsonApiTest extends TestCase
             'infrastruktur' => ['total', 'baik', 'persentase_baik'],
         ]);
     }
+
+    public function test_api_choropleth_returns_deterministic_real_rw_aggregates(): void
+    {
+        $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();
+
+        $firstCall = $this->getJson(route('api.geojson.choropleth', ['wilayah' => $sukawarna->id, 'indikator' => 'penduduk']));
+        $secondCall = $this->getJson(route('api.geojson.choropleth', ['wilayah' => $sukawarna->id, 'indikator' => 'penduduk']));
+
+        $firstCall->assertStatus(200);
+        $this->assertCount(7, $firstCall->json('features'));
+        $this->assertSame($firstCall->json('features'), $secondCall->json('features'));
+        $this->assertGreaterThan(0, $firstCall->json('features.0.properties.nilai'));
+    }
 }

@@ -7,6 +7,7 @@ use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Support\Facades\Auth;
 
 class PengaduanTerbaruWidget extends BaseWidget
 {
@@ -20,6 +21,11 @@ class PengaduanTerbaruWidget extends BaseWidget
     ];
 
     protected static ?string $heading = 'Aspirasi & Pengaduan Warga Terbaru';
+
+    public static function canView(): bool
+    {
+        return ! (Auth::user()?->isPetugasLapangan() ?? false);
+    }
 
     public function table(Table $table): Table
     {

@@ -14,19 +14,30 @@
             </p>
         </div>
 
+        @php
+            $demografiData = $statistik['demografi'] ?? [];
+            $totalPendudukReal = (int) ($demografiData['total_penduduk'] ?? 0);
+            $totalKkReal = (int) ($demografiData['total_kk'] ?? 0);
+            $rwCountReal = (int) ($statistik['wilayah']['rw_count'] ?? 0);
+            $luasWilayah = (float) ($wilayah?->luas ?? 1.48);
+            $kepadatanReal = $luasWilayah > 0 ? round($totalPendudukReal / $luasWilayah, 0) : 0;
+            $rincianData = $demografiData['rincian'] ?? [];
+            $mutasiReal = $rincianData['mutasi_tahun_ini'] ?? [];
+            $kesehatanReal = $rincianData['kesehatan_keluarga'] ?? [];
+        @endphp
+
         <!-- Section 1: Key Metric Highlight Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             <!-- Penduduk -->
             <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-xs space-y-2">
                 <div class="flex items-center justify-between text-gray-400">
                     <span class="text-[10px] font-bold uppercase tracking-wider">Total Penduduk</span>
-                    <span class="text-lg">👥</span>
                 </div>
-                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#1B4332]">
-                    {{ number_format($statistik['demografi']['total_penduduk'] ?? 14250, 0, ',', '.') }}
+                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#1B4332] tabular-nums">
+                    {{ number_format($totalPendudukReal, 0, ',', '.') }}
                 </h3>
-                <span class="text-[11px] text-gray-500 block">
-                    {{ number_format($statistik['demografi']['total_kk'] ?? 4180, 0, ',', '.') }} Kepala Keluarga
+                <span class="text-[11px] text-gray-500 block tabular-nums">
+                    {{ number_format($totalKkReal, 0, ',', '.') }} Kepala Keluarga
                 </span>
             </div>
 
@@ -34,13 +45,12 @@
             <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-xs space-y-2">
                 <div class="flex items-center justify-between text-gray-400">
                     <span class="text-[10px] font-bold uppercase tracking-wider">Luas Wilayah</span>
-                    <span class="text-lg">🗺️</span>
                 </div>
-                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#1B4332]">
-                    {{ $wilayah?->luas ?? '1.45' }} <span class="text-base font-bold text-gray-500">km²</span>
+                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#1B4332] tabular-nums">
+                    {{ $wilayah?->luas ?? '1.48' }} <span class="text-base font-bold text-gray-500">km²</span>
                 </h3>
-                <span class="text-[11px] text-gray-500 block">
-                    {{ $statistik['wilayah']['rw_count'] ?? 7 }} Rukun Warga (RW)
+                <span class="text-[11px] text-gray-500 block tabular-nums">
+                    {{ $rwCountReal }} Rukun Warga (RW)
                 </span>
             </div>
 
@@ -48,13 +58,12 @@
             <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-xs space-y-2">
                 <div class="flex items-center justify-between text-gray-400">
                     <span class="text-[10px] font-bold uppercase tracking-wider">Sarana Publik</span>
-                    <span class="text-lg">🏥</span>
                 </div>
-                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#0284C7]">
-                    {{ $statistik['fasilitas']['total'] ?? 7 }} <span class="text-base font-bold text-gray-500">Titik</span>
+                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#0284C7] tabular-nums">
+                    {{ $statistik['fasilitas']['total'] ?? 0 }} <span class="text-base font-bold text-gray-500">Titik</span>
                 </h3>
-                <span class="text-[11px] text-emerald-700 font-bold block">
-                    {{ $statistik['infrastruktur']['persentase_baik'] ?? 95 }}% Kondisi Baik
+                <span class="text-[11px] text-emerald-700 font-bold block tabular-nums">
+                    {{ $statistik['infrastruktur']['persentase_baik'] ?? 100 }}% Kondisi Baik
                 </span>
             </div>
 
@@ -62,12 +71,11 @@
             <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-xs space-y-2">
                 <div class="flex items-center justify-between text-gray-400">
                     <span class="text-[10px] font-bold uppercase tracking-wider">Respon Aduan Warga</span>
-                    <span class="text-lg">✅</span>
                 </div>
-                <h3 class="font-serif font-black text-2xl sm:text-3xl text-emerald-700">
+                <h3 class="font-serif font-black text-2xl sm:text-3xl text-emerald-700 tabular-nums">
                     {{ $rasioSelesai }}%
                 </h3>
-                <span class="text-[11px] text-gray-500 block">
+                <span class="text-[11px] text-gray-500 block tabular-nums">
                     {{ $pengaduanSelesai }} dari {{ $totalPengaduan }} Tiket Selesai
                 </span>
             </div>
@@ -81,12 +89,12 @@
                     <h3 class="font-serif font-bold text-lg text-[#1B4332] flex items-center gap-2">
                         <span>Komposisi Penduduk Berdasarkan Jenis Kelamin</span>
                     </h3>
-                    <span class="text-xs text-gray-400 font-mono">Tahun 2026</span>
+                    <span class="text-xs text-gray-400 font-mono">Tahun {{ now()->year }}</span>
                 </div>
 
                 @php
-                    $lk = $statistik['demografi']['laki_laki'] ?? 7180;
-                    $pr = $statistik['demografi']['perempuan'] ?? 7070;
+                    $lk = (int) ($demografiData['laki_laki'] ?? 0);
+                    $pr = (int) ($demografiData['perempuan'] ?? 0);
                     $tot = $lk + $pr > 0 ? $lk + $pr : 1;
                     $pctLk = round(($lk / $tot) * 100, 1);
                     $pctPr = round(($pr / $tot) * 100, 1);
@@ -120,9 +128,20 @@
                     </div>
                 </div>
 
-                <div class="p-4 rounded-2xl bg-[#FFF8E7] border border-amber-200/60 text-xs text-gray-700 leading-relaxed space-y-1">
-                    <strong class="text-[#1B4332] block">Kepadatan Penduduk:</strong>
-                    <p>Rasio kepadatan berada pada kisaran <strong>9.827 Jiwa/km²</strong> yang tersebar di sepanjang 7 Rukun Warga (RW) dengan tingkat kohesi sosial dan ketahanan lingkungan yang tinggi.</p>
+                <div class="p-4 rounded-2xl bg-[#FFF8E7] border border-amber-200/60 text-xs text-gray-700 leading-relaxed space-y-2">
+                    <strong class="text-[#1B4332] block">Kepadatan & Dinamika Kependudukan (LAMPID Real-Time):</strong>
+                    <p>Kepadatan tercatat sebesar <strong>{{ number_format($kepadatanReal, 0, ',', '.') }} Jiwa/km²</strong> tersebar di {{ $rwCountReal }} Rukun Warga (RW).</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-amber-200/60 text-[11px] tabular-nums">
+                        <div>Lahir: <strong>{{ $mutasiReal['kelahiran'] ?? 0 }}</strong></div>
+                        <div>Datang: <strong>{{ $mutasiReal['datang'] ?? 0 }}</strong></div>
+                        <div>Pindah: <strong>{{ $mutasiReal['pindah_keluar'] ?? 0 }}</strong></div>
+                        <div>Wafat: <strong>{{ $mutasiReal['kematian'] ?? 0 }}</strong></div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-2 border-t border-amber-200/60 text-[11px] text-emerald-900 tabular-nums">
+                        <div>Ibu Hamil: <strong>{{ $kesehatanReal['ibu_hamil'] ?? 0 }}</strong></div>
+                        <div>Balita Posyandu: <strong>{{ $kesehatanReal['balita_gizi'] ?? 0 }}</strong></div>
+                        <div>Lansia Terdata: <strong>{{ $kesehatanReal['lansia_rentan'] ?? 0 }}</strong></div>
+                    </div>
                 </div>
             </div>
 

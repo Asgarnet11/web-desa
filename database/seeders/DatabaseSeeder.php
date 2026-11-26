@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProfilKelurahanSeeder::class,
             DokumenPublikSeeder::class,
+            KependudukanSeeder::class,
         ]);
     }
 }

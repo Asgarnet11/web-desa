@@ -4,8 +4,13 @@
     $statistik = $data['statistik'] ?? [];
     $demografi = $statistik['demografi'] ?? [];
     $rincian = $demografi['rincian'] ?? [];
-    $usia = $rincian['usia'] ?? ['0-14' => 2650, '15-39' => 4890, '40-64' => 3720, '65+' => 1190];
-    $pendidikan = $rincian['pendidikan'] ?? ['SD' => 1850, 'SMP' => 2420, 'SMA/SMK' => 5230, 'Diploma/Sarjana' => 2950];
+    $lakiLaki = (int) ($demografi['laki_laki'] ?? 0);
+    $perempuan = (int) ($demografi['perempuan'] ?? 0);
+    $totalPop = max(1, (int) ($demografi['total_penduduk'] ?? ($lakiLaki + $perempuan)));
+    $pctLaki = round(($lakiLaki / $totalPop) * 100, 1);
+    $pctPerempuan = round(($perempuan / $totalPop) * 100, 1);
+    $usia = $rincian['usia'] ?? ['0-14' => 0, '15-39' => 0, '40-64' => 0, '65+' => 0];
+    $pendidikan = $rincian['pendidikan'] ?? ['SD/Sederajat' => 0, 'SMP/Sederajat' => 0, 'SMA/SMK' => 0, 'Diploma/Sarjana' => 0];
 @endphp
 
 <section id="statistik" class="py-16 md:py-24 bg-[#FFF8E7]">
@@ -31,18 +36,18 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="p-4 rounded-2xl bg-[#8ECFEA]/15 border border-[#8ECFEA]/30">
                         <span class="text-xs font-bold text-[#17708A] uppercase">Laki-Laki</span>
-                        <div class="font-display font-bold text-2xl sm:text-3xl text-[#1B4332] tabular-nums mt-1" data-count-target="{{ $demografi['laki_laki'] ?? 6180 }}">
-                            0
+                        <div class="font-display font-bold text-2xl sm:text-3xl text-[#1B4332] tabular-nums mt-1" data-count-target="{{ $lakiLaki }}">
+                            {{ number_format($lakiLaki, 0, ',', '.') }}
                         </div>
-                        <span class="text-[11px] text-[#1F2D26]/70">49.6% dari total</span>
+                        <span class="text-[11px] text-[#1F2D26]/70">{{ $pctLaki }}% dari total</span>
                     </div>
 
                     <div class="p-4 rounded-2xl bg-[#52B788]/15 border border-[#52B788]/30">
                         <span class="text-xs font-bold text-[#2D6A4F] uppercase">Perempuan</span>
-                        <div class="font-display font-bold text-2xl sm:text-3xl text-[#1B4332] tabular-nums mt-1" data-count-target="{{ $demografi['perempuan'] ?? 6270 }}">
-                            0
+                        <div class="font-display font-bold text-2xl sm:text-3xl text-[#1B4332] tabular-nums mt-1" data-count-target="{{ $perempuan }}">
+                            {{ number_format($perempuan, 0, ',', '.') }}
                         </div>
-                        <span class="text-[11px] text-[#1F2D26]/70">50.4% dari total</span>
+                        <span class="text-[11px] text-[#1F2D26]/70">{{ $pctPerempuan }}% dari total</span>
                     </div>
                 </div>
 
@@ -56,7 +61,7 @@
                                     <span>{{ number_format($jumlah, 0, ',', '.') }} Jiwa</span>
                                 </div>
                                 <div class="w-full h-2.5 rounded-full bg-gray-100 overflow-hidden">
-                                    <div class="h-full bg-[#2D6A4F] rounded-full" style="width: {{ min(100, round(($jumlah / 12450) * 100 * 2.2)) }}%"></div>
+                                    <div class="h-full bg-[#2D6A4F] rounded-full" style="width: {{ min(100, round(($jumlah / $totalPop) * 100 * 1.8)) }}%"></div>
                                 </div>
                             </div>
                         @endforeach

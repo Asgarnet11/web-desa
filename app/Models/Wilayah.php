@@ -107,6 +107,74 @@ class Wilayah extends Model
         return $this->hasMany(Berita::class);
     }
 
+    public function kartuKeluarga(): HasMany
+    {
+        return $this->hasMany(KartuKeluarga::class);
+    }
+
+    public function penduduk(): HasMany
+    {
+        return $this->hasMany(Penduduk::class);
+    }
+
+    public function mutasiPenduduk(): HasMany
+    {
+        return $this->hasMany(MutasiPenduduk::class);
+    }
+
+    public function pemantauanKesehatan(): HasMany
+    {
+        return $this->hasMany(PemantauanKesehatan::class);
+    }
+
+    /**
+     * Traverse recursive descendant wilayah IDs cleanly (Kelurahan -> RW -> RT).
+     *
+     * @return array<int, int>
+     */
+    public function getDescendantIds(bool $includeSelf = true): array
+    {
+        $ids = $includeSelf ? [$this->id] : [];
+        $frontier = [$this->id];
+        $visited = [$this->id => true];
+
+        while ($frontier !== []) {
+            $children = self::query()
+                ->whereIn('parent_id', $frontier)
+                ->pluck('id')
+                ->all();
+
+            $frontier = [];
+            foreach ($children as $childId) {
+                if (! isset($visited[$childId])) {
+                    $visited[$childId] = true;
+                    $ids[] = $childId;
+                    $frontier[] = $childId;
+                }
+            }
+        }
+
+        return $ids;
+    }
+
+    /**
+     * Format human-readable hierarchical label such as "RT 01 · RW 01 · Sukawarna".
+     */
+    public function getBreadcrumbNamaAttribute(): string
+    {
+        $parts = [$this->nama];
+        $current = $this->parent;
+        $depth = 0;
+
+        while ($current && $depth < 2) {
+            $parts[] = $current->nama;
+            $current = $current->parent;
+            $depth++;
+        }
+
+        return implode(' · ', $parts);
+    }
+
     public function isDesa(): bool
     {
         return $this->tipe === TipeWilayah::Desa;

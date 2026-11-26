@@ -49,12 +49,14 @@ class User extends Authenticatable implements FilamentUser
             return false;
         }
 
-        // Public role cannot access admin panel; staff and leaders can
+        // Public role cannot access admin panel; staff, leaders, and field officers can
         return in_array($this->peran, [
             PeranUser::SuperAdmin,
             PeranUser::AdminWilayah,
             PeranUser::Operator,
             PeranUser::Pimpinan,
+            PeranUser::KetuaRtRw,
+            PeranUser::KaderKesehatan,
         ], true);
     }
 
@@ -76,5 +78,20 @@ class User extends Authenticatable implements FilamentUser
     public function isPimpinan(): bool
     {
         return $this->peran === PeranUser::Pimpinan;
+    }
+
+    public function isKetuaRtRw(): bool
+    {
+        return $this->peran === PeranUser::KetuaRtRw;
+    }
+
+    public function isKaderKesehatan(): bool
+    {
+        return $this->peran === PeranUser::KaderKesehatan;
+    }
+
+    public function isPetugasLapangan(): bool
+    {
+        return $this->isKetuaRtRw() || $this->isKaderKesehatan();
     }
 }

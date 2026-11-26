@@ -85,15 +85,33 @@ class GeoJsonService
     }
 
     /**
-     * Get Choropleth thematic data for sub-wilayahs (e.g. RWs).
+     * Get Choropleth thematic data for sub-wilayahs (e.g. RWs) using real synced aggregates.
      */
     public function getChoroplethData(int $wilayahId, string $indikator = 'penduduk'): array
     {
-        $subWilayah = Wilayah::where('parent_id', $wilayahId)->with('demografi')->get();
+        $subWilayah = Wilayah::where('parent_id', $wilayahId)
+            ->with(['demografi' => fn ($q) => $q->latest('periode')])
+            ->get();
 
-        $features = $subWilayah->map(function (Wilayah $w) {
+        $features = $subWilayah->map(function (Wilayah $w) use ($indikator) {
             $demografi = $w->demografi->first();
-            $nilai = $demografi?->jumlah_penduduk ?? rand(1200, 3500);
+            $rincian = $demografi?->rincian ?? [];
+
+            $nilai = match ($indikator) {
+                'kk' => $demografi?->jumlah_kk ?? 0,
+                'ibu_hamil' => (int) ($rincian['kesehatan_keluarga']['ibu_hamil'] ?? 0),
+                'kepadatan' => ($w->luas && $w->luas > 0)
+                    ? round(($demografi?->jumlah_penduduk ?? 0) / $w->luas, 1)
+                    : ($demografi?->jumlah_penduduk ?? 0),
+                default => $demografi?->jumlah_penduduk ?? 0,
+            };
+
+            $satuan = match ($indikator) {
+                'kk' => 'KK',
+                'ibu_hamil' => 'Ibu Hamil Terpantau',
+                'kepadatan' => 'Jiwa/km²',
+                default => 'Jiwa',
+            };
 
             return [
                 'type' => 'Feature',
@@ -102,7 +120,8 @@ class GeoJsonService
                     'nama' => $w->nama,
                     'kode' => $w->kode,
                     'nilai' => $nilai,
-                    'label' => "{$w->nama}: {$nilai} Jiwa",
+                    'indikator' => $indikator,
+                    'label' => "{$w->nama}: {$nilai} {$satuan}",
                 ],
                 'geometry' => $w->batas ? ($w->batas['geometry'] ?? $w->batas) : null,
             ];

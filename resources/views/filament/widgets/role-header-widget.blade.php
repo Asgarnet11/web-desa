@@ -10,18 +10,23 @@
 
     <div class="flex flex-wrap items-center gap-2 shrink-0 text-xs">
         @if ($user?->isOperator() || $user?->isPimpinan())
-            @if ($pendingPengaduan > 0)
+            @if ($pendingMutasi > 0)
                 <a
-                    href="/admin/pengaduans"
+                    href="/admin/mutasi-penduduks"
                     class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-200 dark:border-amber-800 font-medium tabular-nums transition-colors"
                 >
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0"></span>
+                    <span>{{ $pendingMutasi }} mutasi LAMPID diajukan</span>
+                </a>
+            @endif
+
+            @if ($pendingPengaduan > 0)
+                <a
+                    href="/admin/pengaduans"
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white text-gray-800 border border-gray-200 hover:border-gray-300 dark:bg-zinc-900 dark:text-zinc-200 dark:border-zinc-700 font-medium tabular-nums transition-colors"
+                >
                     <span>{{ $pendingPengaduan }} pengaduan perlu verifikasi</span>
                 </a>
-            @else
-                <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-900 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800 font-medium">
-                    Antrean pengaduan bersih
-                </span>
             @endif
 
             @if ($pendingUmkm > 0)
@@ -32,6 +37,17 @@
                     <span>{{ $pendingUmkm }} UMKM menunggu kurasi</span>
                 </a>
             @endif
+        @elseif ($user?->isKaderKesehatan())
+            <a
+                href="/admin/pemantauan-kesehatans"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md {{ $bumilResti > 0 ? 'bg-amber-50 text-amber-900 border-amber-200' : 'bg-emerald-50 text-emerald-900 border-emerald-200' }} border font-medium tabular-nums"
+            >
+                <span>{{ $bumilResti > 0 ? "{$bumilResti} Ibu Hamil Resti/KEK diprioritaskan" : 'Seluruh Ibu Hamil terpantau normal' }}</span>
+            </a>
+        @elseif ($user?->isKetuaRtRw())
+            <span class="text-[11px] text-gray-600 dark:text-zinc-400 tabular-nums font-medium">
+                {{ $pendingMutasi }} pengajuan mutasi menunggu pengesahan loket
+            </span>
         @elseif ($user?->isSuperAdmin() && $latestLog)
             <span class="text-[11px] text-gray-500 dark:text-zinc-400 tabular-nums">
                 Log terakhir: {{ $latestLog->entitas }} ({{ $latestLog->aksi }}) · {{ $latestLog->created_at?->diffForHumans() }}

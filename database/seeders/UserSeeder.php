@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();
+        $rw01 = Wilayah::where('kode', '32.73.01.1001.RW01')->first();
 
         // 1. Super Admin
         User::updateOrCreate(
@@ -57,6 +58,30 @@ class UserSeeder extends Seeder
                 'name' => 'Drs. H. Rahmat Hidayat, M.Si (Lurah)',
                 'password' => Hash::make('password'),
                 'peran' => PeranUser::Pimpinan,
+                'wilayah_id' => $sukawarna?->id,
+                'status_aktif' => true,
+            ]
+        );
+
+        // 5. Ketua RT/RW (Lingkup RW 01)
+        User::updateOrCreate(
+            ['email' => 'rt01@kelurahan.test'],
+            [
+                'name' => 'H. Asep Sunandar (Ketua RW 01)',
+                'password' => Hash::make('password'),
+                'peran' => PeranUser::KetuaRtRw,
+                'wilayah_id' => $rw01?->id,
+                'status_aktif' => true,
+            ]
+        );
+
+        // 6. Kader Kesehatan / Posyandu Kelurahan
+        User::updateOrCreate(
+            ['email' => 'kader@kelurahan.test'],
+            [
+                'name' => 'Siti Marwah, A.Md.Keb (Kader Posyandu)',
+                'password' => Hash::make('password'),
+                'peran' => PeranUser::KaderKesehatan,
                 'wilayah_id' => $sukawarna?->id,
                 'status_aktif' => true,
             ]

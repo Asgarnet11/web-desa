@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\KategoriFasilitas;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Facades\Auth;
 
 class FasilitasKategoriChartWidget extends ChartWidget
 {
@@ -21,6 +22,11 @@ class FasilitasKategoriChartWidget extends ChartWidget
     ];
 
     protected ?string $maxHeight = '290px';
+
+    public static function canView(): bool
+    {
+        return ! (Auth::user()?->isPetugasLapangan() ?? false);
+    }
 
     protected function getType(): string
     {

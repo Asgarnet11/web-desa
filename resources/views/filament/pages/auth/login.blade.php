@@ -26,7 +26,17 @@
                     [
                         'role' => 'Operator Loket',
                         'email' => 'operator@kelurahan.test',
-                        'scope' => 'Aduan, UMKM & Spasial',
+                        'scope' => 'Adminduk, Aduan & UMKM',
+                    ],
+                    [
+                        'role' => 'Ketua RT 01 / RW 01',
+                        'email' => 'rt01@kelurahan.test',
+                        'scope' => 'Pelaporan Mutasi LAMPID',
+                    ],
+                    [
+                        'role' => 'Kader Kesehatan',
+                        'email' => 'kader@kelurahan.test',
+                        'scope' => 'Pemantauan Bumil & Balita',
                     ],
                     [
                         'role' => 'Admin Wilayah',

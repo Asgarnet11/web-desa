@@ -79,61 +79,63 @@ class WilayahContohSeeder extends Seeder
             ]
         );
 
-        // 5. RW
-        $rw1 = Wilayah::firstOrCreate(
-            ['kode' => '32.73.01.1001.RW01'],
-            [
-                'parent_id' => $kelurahan->id,
-                'tipe' => TipeWilayah::RW,
-                'nama' => 'RW 01',
-                'lat' => -6.884500,
-                'lng' => 107.573000,
-            ]
-        );
+        // 5. 7 RW dengan polygon batas tematik agar peta choropleth terhubung riil
+        $rwDefinitions = [
+            ['num' => '01', 'lat' => -6.8830, 'lng' => 107.5720, 'box' => [107.5690, -6.8810, 107.5750, -6.8855]],
+            ['num' => '02', 'lat' => -6.8830, 'lng' => 107.5785, 'box' => [107.5750, -6.8810, 107.5820, -6.8855]],
+            ['num' => '03', 'lat' => -6.8875, 'lng' => 107.5720, 'box' => [107.5690, -6.8855, 107.5750, -6.8900]],
+            ['num' => '04', 'lat' => -6.8875, 'lng' => 107.5785, 'box' => [107.5750, -6.8855, 107.5820, -6.8900]],
+            ['num' => '05', 'lat' => -6.8920, 'lng' => 107.5725, 'box' => [107.5695, -6.8900, 107.5755, -6.8945]],
+            ['num' => '06', 'lat' => -6.8920, 'lng' => 107.5785, 'box' => [107.5755, -6.8900, 107.5825, -6.8945]],
+            ['num' => '07', 'lat' => -6.8875, 'lng' => 107.5840, 'box' => [107.5820, -6.8815, 107.5860, -6.8935]],
+        ];
 
-        $rw2 = Wilayah::firstOrCreate(
-            ['kode' => '32.73.01.1001.RW02'],
-            [
-                'parent_id' => $kelurahan->id,
-                'tipe' => TipeWilayah::RW,
-                'nama' => 'RW 02',
-                'lat' => -6.887000,
-                'lng' => 107.578000,
-            ]
-        );
+        foreach ($rwDefinitions as $def) {
+            [$minLng, $maxLat, $maxLng, $minLat] = $def['box'];
+            $rwPolygon = [
+                'type' => 'Feature',
+                'properties' => [
+                    'nama' => "RW {$def['num']}",
+                    'kode' => "32.73.01.1001.RW{$def['num']}",
+                ],
+                'geometry' => [
+                    'type' => 'Polygon',
+                    'coordinates' => [[
+                        [$minLng, $maxLat],
+                        [$maxLng, $maxLat],
+                        [$maxLng, $minLat],
+                        [$minLng, $minLat],
+                        [$minLng, $maxLat],
+                    ]],
+                ],
+            ];
 
-        $rw3 = Wilayah::firstOrCreate(
-            ['kode' => '32.73.01.1001.RW03'],
-            [
-                'parent_id' => $kelurahan->id,
-                'tipe' => TipeWilayah::RW,
-                'nama' => 'RW 03',
-                'lat' => -6.890000,
-                'lng' => 107.575000,
-            ]
-        );
+            $rw = Wilayah::updateOrCreate(
+                ['kode' => "32.73.01.1001.RW{$def['num']}"],
+                [
+                    'parent_id' => $kelurahan->id,
+                    'tipe' => TipeWilayah::RW,
+                    'nama' => "RW {$def['num']}",
+                    'luas' => 0.21,
+                    'lat' => $def['lat'],
+                    'lng' => $def['lng'],
+                    'batas' => $rwPolygon,
+                ]
+            );
 
-        // 6. RT
-        Wilayah::firstOrCreate(
-            ['kode' => '32.73.01.1001.RW01.RT01'],
-            [
-                'parent_id' => $rw1->id,
-                'tipe' => TipeWilayah::RT,
-                'nama' => 'RT 01',
-                'lat' => -6.884000,
-                'lng' => 107.572500,
-            ]
-        );
-
-        Wilayah::firstOrCreate(
-            ['kode' => '32.73.01.1001.RW01.RT02'],
-            [
-                'parent_id' => $rw1->id,
-                'tipe' => TipeWilayah::RT,
-                'nama' => 'RT 02',
-                'lat' => -6.884800,
-                'lng' => 107.573500,
-            ]
-        );
+            // 6. 2 RT per RW
+            foreach (['01' => -0.0004, '02' => 0.0004] as $rtNum => $offset) {
+                Wilayah::firstOrCreate(
+                    ['kode' => "32.73.01.1001.RW{$def['num']}.RT{$rtNum}"],
+                    [
+                        'parent_id' => $rw->id,
+                        'tipe' => TipeWilayah::RT,
+                        'nama' => "RT {$rtNum}",
+                        'lat' => $def['lat'] + $offset,
+                        'lng' => $def['lng'] + $offset,
+                    ]
+                );
+            }
+        }
     }
 }

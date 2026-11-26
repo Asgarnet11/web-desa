@@ -4,6 +4,9 @@ namespace App\Filament\Pages;
 
 use App\Enums\PeranUser;
 use App\Enums\StatusPengaduan;
+use App\Enums\StatusVerifikasi;
+use App\Models\MutasiPenduduk;
+use App\Models\PemantauanKesehatan;
 use App\Models\Pengaduan;
 use App\Models\Umkm;
 use Filament\Actions\Action;
@@ -26,6 +29,8 @@ class Dashboard extends BaseDashboard
         return match (Auth::user()?->peran) {
             PeranUser::Pimpinan => 'Ringkasan Eksekutif Wilayah',
             PeranUser::Operator => 'Meja Kerja Pelayanan Warga',
+            PeranUser::KetuaRtRw => 'Pelaporan Warga RT / RW',
+            PeranUser::KaderKesehatan => 'Pemantauan Posyandu & Keluarga',
             PeranUser::AdminWilayah => 'Supervisi Kecamatan Sukasari',
             PeranUser::SuperAdmin => 'Tata Kelola & Keamanan Sistem',
             default => 'Pusat Administrasi Sukawarna',
@@ -39,15 +44,19 @@ class Dashboard extends BaseDashboard
 
         $pendingAduan = Pengaduan::where('status', StatusPengaduan::Menunggu)->count();
         $pendingUmkm = Umkm::where('is_publik', false)->count();
+        $pendingMutasi = MutasiPenduduk::forCurrentUserWilayah()->where('status_verifikasi', StatusVerifikasi::Diajukan->value)->count();
+        $bumilAktif = PemantauanKesehatan::forCurrentUserWilayah()->sedangAktif()->where('kategori', 'ibu_hamil')->count();
         $totalAduan = Pengaduan::count();
         $selesaiAduan = Pengaduan::where('status', StatusPengaduan::Selesai)->count();
         $persenSelesai = $totalAduan > 0 ? (int) round(($selesaiAduan / $totalAduan) * 100) : 100;
 
         return match ($peran) {
-            PeranUser::Pimpinan => "{$user->name} — Tingkat penyelesaian aspirasi warga saat ini {$persenSelesai}% ({$selesaiAduan} dari {$totalAduan} laporan tuntas).",
-            PeranUser::Operator => "{$user->name} — {$pendingAduan} aduan warga menunggu verifikasi dan {$pendingUmkm} pengajuan UMKM menunggu kurasi.",
+            PeranUser::Pimpinan => "{$user->name} — Tingkat penyelesaian aspirasi warga {$persenSelesai}% ({$selesaiAduan}/{$totalAduan} tuntas) serta sinkronisasi Adminduk & Posyandu berjalan.",
+            PeranUser::Operator => "{$user->name} — {$pendingMutasi} mutasi LAMPID, {$pendingAduan} aduan warga, dan {$pendingUmkm} UMKM menunggu verifikasi.",
+            PeranUser::KetuaRtRw => "{$user->name} — Pelaporan peristiwa warga datang, pindah keluar, lahir, dan wafat di lingkup RT/RW Anda.",
+            PeranUser::KaderKesehatan => "{$user->name} — Tercatat {$bumilAktif} ibu hamil aktif dalam pemantauan berkala dan intervensi Posyandu wilayah.",
             PeranUser::AdminWilayah => "{$user->name} — Pengawasan lintas RW Kelurahan Sukawarna beserta kondisi infrastruktur dan sebaran fasilitas.",
-            PeranUser::SuperAdmin => "{$user->name} — Pemantauan hak akses aparatur, rekaman audit mutasi data, dan integritas layer GeoJSON.",
+            PeranUser::SuperAdmin => "{$user->name} — Pemantauan hak akses aparatur, redaksi audit UU PDP, dan integritas layer GeoJSON.",
             default => $user?->name ?? 'Portal Administrasi Kelurahan Sukawarna',
         };
     }
@@ -57,13 +66,21 @@ class Dashboard extends BaseDashboard
         $peran = Auth::user()?->peran;
 
         $primaryAction = match ($peran) {
-            PeranUser::Operator => Action::make('verifikasiAduan')
-                ->label('Proses Verifikasi Aduan')
-                ->url('/admin/pengaduans')
+            PeranUser::Operator => Action::make('verifikasiMutasi')
+                ->label('Verifikasi Mutasi LAMPID')
+                ->url('/admin/mutasi-penduduks')
                 ->color('primary'),
             PeranUser::Pimpinan => Action::make('tinjauAspirasi')
                 ->label('Tinjau Disposisi Aduan')
                 ->url('/admin/pengaduans')
+                ->color('primary'),
+            PeranUser::KetuaRtRw => Action::make('laporMutasi')
+                ->label('Laporkan Mutasi Warga')
+                ->url('/admin/mutasi-penduduks/create')
+                ->color('primary'),
+            PeranUser::KaderKesehatan => Action::make('catatKesehatan')
+                ->label('Catat Ibu Hamil / Balita')
+                ->url('/admin/pemantauan-kesehatans/create')
                 ->color('primary'),
             PeranUser::AdminWilayah => Action::make('bukaMasterWilayah')
                 ->label('Kelola Batas RW')
