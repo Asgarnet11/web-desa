@@ -2,9 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
+use App\Filament\Widgets\AuditTrailTerbaruWidget;
 use App\Filament\Widgets\FasilitasKategoriChartWidget;
 use App\Filament\Widgets\PengaduanTerbaruWidget;
 use App\Filament\Widgets\QuickActionsWidget;
+use App\Filament\Widgets\RoleHeaderWidget;
 use App\Filament\Widgets\StatistikRingkasanWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -16,7 +19,6 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Icons\Heroicon;
-use Filament\Widgets\AccountWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -32,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
             ->brandName('Kelurahan Sukawarna')
             ->colors([
                 'primary' => '#1B4332',
@@ -71,11 +73,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                RoleHeaderWidget::class,
                 StatistikRingkasanWidget::class,
                 QuickActionsWidget::class,
                 FasilitasKategoriChartWidget::class,
                 PengaduanTerbaruWidget::class,
-                AccountWidget::class,
+                AuditTrailTerbaruWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
