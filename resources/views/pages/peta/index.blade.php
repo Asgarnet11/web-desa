@@ -274,8 +274,17 @@
                         </button>
                     </div>
 
-                    <!-- Quick Tools Capsule (Boundary Toggle, GPS, Reset Fit Bounds, Fullscreen) -->
+                    <!-- Quick Tools Capsule (Boundary Toggle, GPS, Nearby Filter, Reset Fit Bounds, Fullscreen) -->
                     <div class="flex items-center gap-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-2xl border border-gray-200/90 shadow-lg">
+                        <!-- Nearby Radius Filter Button -->
+                        <button type="button" 
+                                id="nearby-filter-btn" 
+                                class="px-2.5 py-1.5 rounded-xl text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center gap-1.5 text-xs font-bold" 
+                                title="Cari Fasilitas Terdekat dari Posisi Saya">
+                            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+                            <span>🎯 Sekitar Saya</span>
+                        </button>
+
                         <!-- Toggle UMKM Layer -->
                         <button type="button" 
                                 id="toggle-umkm-btn" 
@@ -316,6 +325,15 @@
                                 title="Buka Peta Layar Penuh">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3H6a3 3 0 00-3 3v4m18 0V6a3 3 0 00-3-3h-4m0 18h4a3 3 0 003-3v-4M3 14v4a3 3 0 003 3h4"/></svg>
                         </button>
+                    </div>
+
+                    <!-- Nearby Radius Selector (Initially Hidden, appears when Nearby Filter is Active) -->
+                    <div id="nearby-radius-bar" class="hidden items-center gap-1.5 bg-emerald-950/90 text-white backdrop-blur-md px-3 py-1.5 rounded-2xl border border-emerald-500/30 shadow-lg text-[11px] font-bold">
+                        <span class="text-emerald-300">Radius:</span>
+                        <button type="button" data-radius="500" class="nearby-radius-option px-2 py-0.5 rounded-lg bg-emerald-800 text-white hover:bg-emerald-700">500 m</button>
+                        <button type="button" data-radius="1000" class="nearby-radius-option px-2 py-0.5 rounded-lg bg-emerald-500 text-white font-black shadow-xs">1 km</button>
+                        <button type="button" data-radius="2000" class="nearby-radius-option px-2 py-0.5 rounded-lg bg-emerald-800 text-white hover:bg-emerald-700">2 km</button>
+                        <button type="button" id="close-nearby-btn" class="ml-1 text-emerald-300 hover:text-white p-0.5 text-sm" title="Tutup Filter Jarak">&times;</button>
                     </div>
                 </div>
 

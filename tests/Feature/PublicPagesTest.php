@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Berita;
+use App\Models\DokumenPublik;
 use App\Models\Wilayah;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -150,5 +151,36 @@ class PublicPagesTest extends TestCase
         $showResponse = $this->get(route('verifikasi.show', 'FAST-SKW-2026-99999'));
         $showResponse->assertStatus(200);
         $showResponse->assertSee('DOKUMEN RESMI TERDAFTAR');
+    }
+
+    public function test_dokumen_publik_page_renders_successfully(): void
+    {
+        $response = $this->get(route('dokumen.index'));
+
+        $response->assertStatus(200);
+        $response->assertSee('Repositori Dokumen');
+        $response->assertSee('Keterbukaan Informasi Publik');
+    }
+
+    public function test_dokumen_publik_download_increments_counter(): void
+    {
+        $dokumen = DokumenPublik::first();
+        if (! $dokumen) {
+            $wilayah = Wilayah::first();
+            $dokumen = DokumenPublik::create([
+                'wilayah_id' => $wilayah->id,
+                'judul' => 'Surat Pengantar Uji Coba',
+                'kategori' => 'Formulir',
+                'file_path' => 'dokumen/uji-coba.pdf',
+                'download_count' => 0,
+            ]);
+        }
+
+        $initialDownloads = $dokumen->download_count;
+
+        $response = $this->get(route('dokumen.download', $dokumen));
+        $response->assertStatus(200);
+
+        $this->assertEquals($initialDownloads + 1, $dokumen->fresh()->download_count);
     }
 }

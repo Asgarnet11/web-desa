@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Public\BeritaController;
 use App\Http\Controllers\Public\DataController;
+use App\Http\Controllers\Public\DokumenPublikController;
 use App\Http\Controllers\Public\LandingController;
 use App\Http\Controllers\Public\LayananController;
 use App\Http\Controllers\Public\PengaduanController;
@@ -38,3 +39,9 @@ Route::prefix('verifikasi')->name('verifikasi.')->group(function () {
     Route::get('/{kode}', [VerifikasiController::class, 'show'])->name('show');
 });
 Route::get('/validasi/{kode}', [VerifikasiController::class, 'show'])->name('validasi.show');
+
+// Repositori Dokumen Publik & Keterbukaan Informasi (KIP)
+Route::prefix('dokumen')->name('dokumen.')->group(function () {
+    Route::get('/', [DokumenPublikController::class, 'index'])->name('index');
+    Route::get('/{dokumen}/unduh', [DokumenPublikController::class, 'download'])->name('download');
+});

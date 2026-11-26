@@ -46,6 +46,9 @@
             <button type="button" class="sapa-quick-chip px-2.5 py-1 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-[#1B4332] hover:text-[#1B4332] font-semibold whitespace-nowrap transition-colors" data-prompt="Syarat bikin KTP dan Kartu Keluarga">
                 📋 Syarat KTP/KK
             </button>
+            <button type="button" class="sapa-quick-chip px-2.5 py-1 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-[#1B4332] hover:text-[#1B4332] font-semibold whitespace-nowrap transition-colors" data-prompt="Unduh formulir dan blangko surat mandiri">
+                📂 Unduh Blangko Surat
+            </button>
             <button type="button" class="sapa-quick-chip px-2.5 py-1 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-[#1B4332] hover:text-[#1B4332] font-semibold whitespace-nowrap transition-colors" data-prompt="Jam berapa loket pelayanan buka?">
                 ⏰ Jam Pelayanan
             </button>
@@ -191,6 +194,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="mt-2 pt-2 border-t border-gray-100 flex items-center gap-2">
                     <a href="/layanan" class="text-xs font-bold text-[#0284C7] hover:underline">
                         Buka Katalog Layanan &rarr;
+                    </a>
+                </div>
+            `;
+        }
+
+        // 1b. Dokumen & Blangko Publik
+        if (q.includes('dokumen') || q.includes('blangko') || q.includes('formulir') || q.includes('download') || q.includes('unduh') || q.includes('format')) {
+            return `
+                <p><strong class="text-[#1B4332]">Repositori Dokumen Publik & Blangko Surat:</strong></p>
+                <p class="mt-1 text-gray-700">Pemerintah Kelurahan Sukawarna menyediakan blangko surat resmi (Surat Pengantar RT/RW, SKU, N1-N4 Nikah, SKTM) dan SOP pelayanan yang dapat Anda unduh dan cetak secara gratis.</p>
+                <div class="mt-2 pt-1 flex items-center gap-2">
+                    <a href="/dokumen" class="px-2.5 py-1 rounded-lg bg-[#1B4332] text-[#FFB703] font-bold text-[11px] hover:bg-[#2D6A4F]">
+                        Buka Repositori Dokumen &rarr;
                     </a>
                 </div>
             `;

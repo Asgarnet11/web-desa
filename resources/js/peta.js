@@ -141,6 +141,196 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // 5b. Nearby Radius Filtering & Distance Sorting
+    const nearbyFilterBtn = document.getElementById('nearby-filter-btn');
+    const nearbyRadiusBar = document.getElementById('nearby-radius-bar');
+    const closeNearbyBtn = document.getElementById('close-nearby-btn');
+    const radiusOptions = document.querySelectorAll('.nearby-radius-option');
+
+    let isNearbyActive = false;
+    let userCoords = null;
+    let selectedRadiusMeters = 1000;
+    let nearbyCircle = null;
+
+    function getDistanceMeters(lat1, lon1, lat2, lon2) {
+        const R = 6371e3;
+        const phi1 = (lat1 * Math.PI) / 180;
+        const phi2 = (lat2 * Math.PI) / 180;
+        const deltaPhi = ((lat2 - lat1) * Math.PI) / 180;
+        const deltaLambda = ((lon2 - lon1) * Math.PI) / 180;
+
+        const a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+                  Math.cos(phi1) * Math.cos(phi2) *
+                  Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return Math.round(R * c);
+    }
+
+    function formatDistance(meters) {
+        if (meters < 1000) {
+            return `${meters} m`;
+        }
+        return `${(meters / 1000).toFixed(1)} km`;
+    }
+
+    function updateNearbyView() {
+        if (!userCoords) return;
+
+        if (nearbyCircle) {
+            map.removeLayer(nearbyCircle);
+        }
+        nearbyCircle = L.circle([userCoords.latitude, userCoords.longitude], {
+            radius: selectedRadiusMeters,
+            color: '#10B981',
+            fillColor: '#10B981',
+            fillOpacity: 0.12,
+            weight: 2,
+            dashArray: '5, 5'
+        }).addTo(map);
+
+        map.fitBounds(nearbyCircle.getBounds(), { padding: [40, 40], maxZoom: 17 });
+
+        // Update facility cards with distances and radius filter
+        const facilityCardsArray = Array.from(facilityCards);
+        facilityCardsArray.forEach(card => {
+            const lat = parseFloat(card.dataset.lat);
+            const lng = parseFloat(card.dataset.lng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                const dist = getDistanceMeters(userCoords.latitude, userCoords.longitude, lat, lng);
+                card.dataset.distance = dist;
+
+                let badge = card.querySelector('.distance-badge');
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'distance-badge text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full inline-flex items-center gap-1 mt-1';
+                    const titleEl = card.querySelector('h3');
+                    if (titleEl && titleEl.parentNode) {
+                        titleEl.parentNode.insertBefore(badge, titleEl.nextSibling);
+                    }
+                }
+                badge.innerHTML = `📍 ${formatDistance(dist)}`;
+
+                if (dist <= selectedRadiusMeters) {
+                    card.classList.remove('hidden-by-radius');
+                } else {
+                    card.classList.add('hidden-by-radius');
+                }
+            }
+        });
+
+        if (facilityListContainer) {
+            facilityCardsArray
+                .sort((a, b) => (parseFloat(a.dataset.distance) || 999999) - (parseFloat(b.dataset.distance) || 999999))
+                .forEach(card => facilityListContainer.appendChild(card));
+        }
+
+        // Update UMKM cards with distances
+        const umkmCards = document.querySelectorAll('.umkm-card');
+        const umkmCardsArray = Array.from(umkmCards);
+        umkmCardsArray.forEach(card => {
+            const lat = parseFloat(card.dataset.lat);
+            const lng = parseFloat(card.dataset.lng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                const dist = getDistanceMeters(userCoords.latitude, userCoords.longitude, lat, lng);
+                card.dataset.distance = dist;
+
+                let badge = card.querySelector('.distance-badge');
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'distance-badge text-[10px] font-bold text-orange-800 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-full inline-flex items-center gap-1 mt-1';
+                    const titleEl = card.querySelector('h3');
+                    if (titleEl && titleEl.parentNode) {
+                        titleEl.parentNode.insertBefore(badge, titleEl.nextSibling);
+                    }
+                }
+                badge.innerHTML = `📍 ${formatDistance(dist)}`;
+
+                if (dist <= selectedRadiusMeters) {
+                    card.classList.remove('hidden-by-radius');
+                } else {
+                    card.classList.add('hidden-by-radius');
+                }
+            }
+        });
+
+        if (umkmListContainer) {
+            umkmCardsArray
+                .sort((a, b) => (parseFloat(a.dataset.distance) || 999999) - (parseFloat(b.dataset.distance) || 999999))
+                .forEach(card => umkmListContainer.appendChild(card));
+        }
+
+        applyFilters();
+    }
+
+    function disableNearbyView() {
+        isNearbyActive = false;
+        if (nearbyCircle) {
+            map.removeLayer(nearbyCircle);
+            nearbyCircle = null;
+        }
+        if (nearbyRadiusBar) {
+            nearbyRadiusBar.classList.add('hidden');
+            nearbyRadiusBar.classList.remove('flex');
+        }
+        if (nearbyFilterBtn) {
+            nearbyFilterBtn.classList.remove('bg-emerald-600', 'text-white');
+            nearbyFilterBtn.classList.add('bg-emerald-50', 'text-emerald-800');
+        }
+
+        facilityCards.forEach(card => card.classList.remove('hidden-by-radius'));
+        const umkmCards = document.querySelectorAll('.umkm-card');
+        umkmCards.forEach(card => card.classList.remove('hidden-by-radius'));
+
+        applyFilters();
+    }
+
+    if (nearbyFilterBtn) {
+        nearbyFilterBtn.addEventListener('click', () => {
+            if (isNearbyActive) {
+                disableNearbyView();
+                return;
+            }
+
+            nearbyFilterBtn.classList.add('animate-pulse');
+            locateUser(
+                map,
+                (coords) => {
+                    nearbyFilterBtn.classList.remove('animate-pulse');
+                    nearbyFilterBtn.classList.remove('bg-emerald-50', 'text-emerald-800');
+                    nearbyFilterBtn.classList.add('bg-emerald-600', 'text-white');
+                    userCoords = coords;
+                    isNearbyActive = true;
+                    if (nearbyRadiusBar) {
+                        nearbyRadiusBar.classList.remove('hidden');
+                        nearbyRadiusBar.classList.add('flex');
+                    }
+                    updateNearbyView();
+                },
+                (errMessage) => {
+                    nearbyFilterBtn.classList.remove('animate-pulse');
+                    alert(errMessage || 'Gagal mendeteksi lokasi GPS untuk filter sekitar');
+                }
+            );
+        });
+    }
+
+    if (closeNearbyBtn) {
+        closeNearbyBtn.addEventListener('click', disableNearbyView);
+    }
+
+    radiusOptions.forEach(opt => {
+        opt.addEventListener('click', () => {
+            selectedRadiusMeters = parseInt(opt.dataset.radius, 10);
+            radiusOptions.forEach(o => {
+                o.classList.remove('bg-emerald-500', 'font-black', 'shadow-xs');
+                o.classList.add('bg-emerald-800');
+            });
+            opt.classList.add('bg-emerald-500', 'font-black', 'shadow-xs');
+            opt.classList.remove('bg-emerald-800');
+            updateNearbyView();
+        });
+    });
+
     // 6. Fit Bounds / Re-center Button
     const fitBoundsBtn = document.getElementById('fit-bounds-btn');
     if (fitBoundsBtn) {
@@ -197,8 +387,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const matchesCategory = (currentSelectedCategory === 'all' || cardCatId === currentSelectedCategory);
             const matchesSearch = query === '' || cardName.includes(query) || cardAddr.includes(query);
+            const matchesRadius = !isNearbyActive || !card.classList.contains('hidden-by-radius');
 
-            if (matchesCategory && matchesSearch) {
+            if (matchesCategory && matchesSearch && matchesRadius) {
                 card.classList.remove('hidden');
                 visibleCount++;
                 if (marker) {

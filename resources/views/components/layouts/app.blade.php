@@ -184,6 +184,10 @@
                         Satu Data
                     </a>
 
+                    <a href="{{ route('dokumen.index') }}" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors {{ request()->routeIs('dokumen.*') ? 'text-[#2D6A4F] font-black' : '' }}">
+                        Dokumen
+                    </a>
+
                     <a href="{{ route('berita.index') }}" class="px-3 py-2 rounded-md hover:text-[#2D6A4F] hover:bg-gray-50 transition-colors {{ request()->routeIs('berita.*') ? 'text-[#2D6A4F] font-black' : '' }}">
                         Kabar
                     </a>
@@ -274,6 +278,10 @@
                     <span class="w-2 h-2 rounded-full bg-[#0284C7]"></span>
                     <span>Cek Dokumen</span>
                 </a>
+                <a href="{{ route('dokumen.index') }}" class="px-3.5 py-3 rounded-xl bg-purple-50/70 hover:bg-purple-100 hover:text-[#1B4332] flex items-center gap-2 border border-purple-200/60 col-span-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+                    <span>Repositori Dokumen Publik & Blangko KIP</span>
+                </a>
             </div>
             <div class="pt-2 border-t border-gray-100 flex flex-col gap-2.5">
                 <a href="{{ route('pengaduan.index') }}" class="w-full py-3 bg-[#FFB703] hover:bg-[#e5a502] text-[#1B4332] text-center font-bold text-xs uppercase tracking-wider rounded-xl shadow-sm transition-colors">
@@ -349,6 +357,8 @@
                         <li><a href="{{ route('pengaduan.index') }}" class="hover:text-white transition-colors">Layanan Pengaduan & Aspirasi</a></li>
                         <li><a href="{{ route('pengaduan.cek') }}" class="hover:text-white transition-colors">Cek Status Tiket Pengaduan</a></li>
                         <li><a href="{{ route('umkm.index') }}" class="hover:text-white transition-colors">Direktori UMKM & Ekonomi Kreatif</a></li>
+                        <li><a href="{{ route('dokumen.index') }}" class="hover:text-white transition-colors">Repositori Dokumen Publik & Blangko</a></li>
+                        <li><a href="{{ route('satu-data.index') }}" class="hover:text-white transition-colors">Portal Satu Data & Keterbukaan KIP</a></li>
                         <li><a href="{{ route('berita.index') }}" class="hover:text-white transition-colors">Warta & Kabar Terkini Sukawarna</a></li>
                     </ul>
                 </div>
