@@ -94,7 +94,7 @@ class QuickActionsWidget extends Widget
                 ],
                 [
                     'label' => 'Portal Publik Warga',
-                    'sub' => 'Tinjau situs resmi Sukawarna',
+                    'sub' => 'Tinjau situs resmi Konda',
                     'url' => '/',
                     'icon' => 'globe',
                     'badge' => null,
@@ -290,7 +290,7 @@ class QuickActionsWidget extends Widget
                 ],
                 [
                     'label' => 'Peta Spasial Wilayah',
-                    'sub' => 'Buka visualisasi GIS Sukasari',
+                    'sub' => 'Buka visualisasi GIS Konda',
                     'url' => '/peta',
                     'icon' => 'map-pin',
                     'badge' => null,

@@ -92,9 +92,9 @@ class GeoJsonApiTest extends TestCase
 
     public function test_api_returns_statistik_wilayah(): void
     {
-        $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();
+        $konda = Wilayah::where('kode', '74.05.07.1001')->first();
 
-        $response = $this->getJson(route('api.statistik.show', $sukawarna->id));
+        $response = $this->getJson(route('api.statistik.show', $konda->id));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -107,10 +107,10 @@ class GeoJsonApiTest extends TestCase
 
     public function test_api_choropleth_returns_deterministic_real_rw_aggregates(): void
     {
-        $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();
+        $konda = Wilayah::where('kode', '74.05.07.1001')->first();
 
-        $firstCall = $this->getJson(route('api.geojson.choropleth', ['wilayah' => $sukawarna->id, 'indikator' => 'penduduk']));
-        $secondCall = $this->getJson(route('api.geojson.choropleth', ['wilayah' => $sukawarna->id, 'indikator' => 'penduduk']));
+        $firstCall = $this->getJson(route('api.geojson.choropleth', ['wilayah' => $konda->id, 'indikator' => 'penduduk']));
+        $secondCall = $this->getJson(route('api.geojson.choropleth', ['wilayah' => $konda->id, 'indikator' => 'penduduk']));
 
         $firstCall->assertStatus(200);
         $this->assertCount(7, $firstCall->json('features'));

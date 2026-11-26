@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 2. Interactive Landing Map
     const miniMapElement = document.getElementById('landing-map');
     if (miniMapElement) {
-        const lat = parseFloat(miniMapElement.dataset.lat) || -6.8872;
-        const lng = parseFloat(miniMapElement.dataset.lng) || 107.5765;
+        const lat = parseFloat(miniMapElement.dataset.lat) || -4.124444;
+        const lng = parseFloat(miniMapElement.dataset.lng) || 122.440278;
 
         const map = initMap('landing-map', {
             center: [lat, lng],

@@ -86,7 +86,7 @@ class MutasiPendudukService
             'nik' => $payload['nik'] ?? $this->generateNikSementara('LHR'),
             'nama_lengkap' => $payload['nama_lengkap'] ?? 'Bayi Baru Lahir',
             'jenis_kelamin' => $payload['jenis_kelamin'] ?? 'L',
-            'tempat_lahir' => $payload['tempat_lahir'] ?? 'Kota Bandung',
+            'tempat_lahir' => $payload['tempat_lahir'] ?? 'Kabupaten Konawe Selatan',
             'tanggal_lahir' => $mutasi->tanggal_peristiwa,
             'golongan_darah' => $payload['golongan_darah'] ?? null,
             'agama' => $payload['agama'] ?? 'Islam',
@@ -144,7 +144,7 @@ class MutasiPendudukService
                     'wilayah_id' => $mutasi->wilayah_id,
                     'no_kk' => $payload['no_kk'],
                     'kepala_keluarga_nama' => $payload['kepala_keluarga_nama'] ?? ($payload['nama_lengkap'] ?? 'Kepala Keluarga'),
-                    'alamat_ringkas' => $payload['alamat_ringkas'] ?? ($mutasi->asal_atau_tujuan ?? 'Kelurahan Sukawarna'),
+                    'alamat_ringkas' => $payload['alamat_ringkas'] ?? ($mutasi->asal_atau_tujuan ?? 'Kelurahan Konda'),
                     'status_kk' => 'aktif',
                 ]);
             }
@@ -268,11 +268,11 @@ class MutasiPendudukService
         $prefix = $mutasi->jenis_mutasi->prefixSurat();
         $year = $mutasi->tanggal_peristiwa?->year ?? now()->year;
 
-        return sprintf('%s-SKW-%s-%s', $prefix, $year, strtoupper(Str::random(5)));
+        return sprintf('%s-KND-%s-%s', $prefix, $year, strtoupper(Str::random(5)));
     }
 
     protected function generateNikSementara(string $prefix): string
     {
-        return '327301'.now()->format('dmy').$prefix.random_int(100, 999);
+        return '740507'.now()->format('dmy').$prefix.random_int(100, 999);
     }
 }

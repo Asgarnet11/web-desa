@@ -18,7 +18,7 @@
                     Peta Fasilitas & Batas Wilayah
                 </h2>
                 <p class="text-xs sm:text-sm text-gray-600 max-w-xl mt-1 leading-relaxed">
-                    Jelajahi sebaran titik fasilitas publik, kesehatan, pendidikan, tempat ibadah, dan sarana umum di Kelurahan Sukawarna.
+                    Jelajahi sebaran titik fasilitas publik, kesehatan, pendidikan, tempat ibadah, dan sarana umum di Kelurahan Konda.
                 </p>
             </div>
 
@@ -52,8 +52,8 @@
             <!-- Leaflet Map Div -->
             <div id="landing-map" 
                  class="w-full h-full z-10" 
-                 data-lat="{{ $wilayah?->lat ?? -6.8872 }}" 
-                 data-lng="{{ $wilayah?->lng ?? 107.5765 }}">
+                 data-lat="{{ $wilayah?->lat ?? -4.124444 }}" 
+                 data-lng="{{ $wilayah?->lng ?? 122.440278 }}">
             </div>
             
             <!-- Floating Basemap & Re-center Tools (Top Right) -->
@@ -87,7 +87,7 @@
                 </div>
                 <div class="flex items-center gap-2 text-gray-600 text-[11px]">
                     <span class="w-3.5 h-1 border-t-2 border-dashed border-[#1B4332]"></span>
-                    <span>Batas Administrasi Kelurahan Sukawarna</span>
+                    <span>Batas Administrasi Kelurahan Konda</span>
                 </div>
                 <div class="flex items-center gap-2 text-gray-600 text-[11px]">
                     <span class="w-2.5 h-2.5 rounded-full bg-[#0284C7]"></span>

@@ -44,25 +44,25 @@ class AuthorizationAndRolesTest extends TestCase
     public function test_operator_can_only_manage_own_wilayah(): void
     {
         $operator = User::where('email', 'operator@kelurahan.test')->first();
-        $fasilitasSukawarna = Fasilitas::where('wilayah_id', $operator->wilayah_id)->first();
+        $fasilitasKonda = Fasilitas::where('wilayah_id', $operator->wilayah_id)->first();
 
         // Create another wilayah and facility
         $wilayahLain = Wilayah::create([
-            'kode' => '32.73.01.9999',
+            'kode' => '74.05.07.9999',
             'tipe' => 'kelurahan',
             'nama' => 'Kelurahan Lain',
         ]);
         $fasilitasLain = Fasilitas::create([
             'wilayah_id' => $wilayahLain->id,
-            'kategori_id' => $fasilitasSukawarna->kategori_id,
+            'kategori_id' => $fasilitasKonda->kategori_id,
             'nama' => 'Fasilitas Wilayah Lain',
-            'lat' => -6.9000,
-            'lng' => 107.6000,
+            'lat' => -4.1500,
+            'lng' => 122.4600,
             'kondisi' => 'baik',
             'status_verifikasi' => 'terverifikasi',
         ]);
 
-        $this->assertTrue(Gate::forUser($operator)->allows('update', $fasilitasSukawarna));
+        $this->assertTrue(Gate::forUser($operator)->allows('update', $fasilitasKonda));
         $this->assertFalse(Gate::forUser($operator)->allows('update', $fasilitasLain));
     }
 
@@ -115,8 +115,8 @@ class AuthorizationAndRolesTest extends TestCase
         $adminWilayah = User::where('email', 'admin@kelurahan.test')->first();
         $response = $this->actingAs($adminWilayah)->get('/admin');
         $response->assertSuccessful();
-        $response->assertSee('Supervisi Kecamatan Sukasari');
-        $response->assertSee('Admin Wilayah / Kecamatan Sukasari');
+        $response->assertSee('Supervisi Kecamatan Konda');
+        $response->assertSee('Admin Wilayah / Kecamatan Konda');
         $response->assertSee('Supervisi Kewilayahan');
         $response->assertSee('Supervisi Wilayah &amp; Koordinasi Kewilayahan', false);
     }

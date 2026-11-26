@@ -73,7 +73,7 @@ class RegulasiData
                 'ringkasan' => 'Mengatur pelindungan data pribadi umum maupun spesifik/sensitif (seperti NIK, nomor KK, alamat terperinci, dan riwayat kesehatan/kehamilan) beserta kewajiban pengendali data menjamin kerahasiaan dan integritasnya.',
                 'penerapan' => [
                     'Kolom NIK, No. KK, payload mutasi, dan catatan tindakan kesehatan disimpan dalam keadaan terenkripsi di database dan dicari menggunakan blind-index hash.',
-                    'Tampilan tabel internal menyamarkan NIK/KK (contoh: 327301••••••0001) dan log audit sistem otomatis menyensor nilai sensitif.',
+                    'Tampilan tabel internal menyamarkan NIK/KK (contoh: 740507••••••0001) dan log audit sistem otomatis menyensor nilai sensitif.',
                     'Pembatasan hak akses ketat (RBAC): catatan kesehatan individu tertutup bagi publik, RT/RW, dan Kecamatan; portal publik hanya menayangkan statistik agregat tanpa nama.',
                 ],
                 'kata_kunci_dokumen' => 'UU No. 27 Tahun 2022',

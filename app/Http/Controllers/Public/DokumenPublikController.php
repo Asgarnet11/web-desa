@@ -66,7 +66,7 @@ class DokumenPublikController extends Controller
 
         return response()->streamDownload(function () use ($dokumen) {
             echo "%PDF-1.4\n";
-            echo "1 0 obj << /Title ({$dokumen->judul}) /Author (Pemerintah Kelurahan Sukawarna) >> endobj\n";
+            echo "1 0 obj << /Title ({$dokumen->judul}) /Author (Pemerintah Kelurahan Konda) >> endobj\n";
             echo "2 0 obj << /Type /Catalog /Pages 3 0 R >> endobj\n";
             echo "3 0 obj << /Type /Pages /Kids [4 0 R] /Count 1 >> endobj\n";
             echo "4 0 obj << /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 5 0 R >> endobj\n";

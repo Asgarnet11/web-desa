@@ -35,7 +35,7 @@ class RoleHeaderWidget extends Widget
             PeranUser::Operator => 'Operator Pelayanan & Loket',
             PeranUser::KetuaRtRw => 'Ketua RT / RW · '.$user?->wilayah?->nama,
             PeranUser::KaderKesehatan => 'Kader Kesehatan / Posyandu',
-            PeranUser::AdminWilayah => 'Admin Wilayah / Kecamatan Sukasari',
+            PeranUser::AdminWilayah => 'Admin Wilayah / Kecamatan Konda',
             PeranUser::SuperAdmin => 'Super Administrator Sistem',
             default => 'Aparatur Kelurahan',
         };
@@ -47,7 +47,7 @@ class RoleHeaderWidget extends Widget
             PeranUser::KaderKesehatan => 'Akses Terbatas UU PDP · Pemantauan aktif Ibu Hamil (KEK/Resti), Balita Posyandu, dan Lansia Rentan.',
             PeranUser::AdminWilayah => 'Supervisi Kewilayahan · Memantau agregat kependudukan per kelurahan & RW tanpa membuka data NIK individu.',
             PeranUser::SuperAdmin => 'Pusat Tata Kelola & Keamanan · Pengendalian hak akses, audit log ter-redaksi UU PDP, dan master batas GeoJSON.',
-            default => 'Sistem Administrasi & Geospasial Kelurahan Sukawarna.',
+            default => 'Sistem Administrasi & Geospasial Kelurahan Konda.',
         };
 
         $pendingPengaduan = Pengaduan::where('status', StatusPengaduan::Menunggu)->count();

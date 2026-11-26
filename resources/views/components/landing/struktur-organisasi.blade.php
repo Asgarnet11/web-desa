@@ -88,11 +88,11 @@
         ],
         [
             'header' => 'Lingkungan Hidup',
-            'deskripsi' => 'Program Buruan Sae, ketahanan pangan pekarangan, dan tata kelola bank sampah.',
+            'deskripsi' => 'Program Pekarangan Pangan Lestari, ketahanan pangan rumah tangga, dan tata kelola bank sampah.',
             'kasi' => [
                 'role' => 'Koordinator LH',
-                'nama' => 'Hj. Enok Wartini',
-                'sub' => 'Buruan Sae & Asri',
+                'nama' => 'Hj. Wa Ode Hasnah',
+                'sub' => 'Lingkungan & Pangan Lestari',
                 'foto' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
             ],
             'anggota' => [
@@ -129,7 +129,7 @@
                 STRUKTUR PEMERINTAHAN WILAYAH
             </span>
             <h2 class="font-serif font-black text-3xl sm:text-4xl text-[#1B4332] tracking-tight">
-                Bagan Kepengurusan Kelurahan Sukawarna
+                Bagan Kepengurusan Kelurahan Konda
             </h2>
             <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 Struktur organisasi, pembagian seksi pelayanan, serta tata kerja aparatur sipil negara dan staf kelurahan periode 2025/2026.
@@ -183,8 +183,8 @@
                                     PEMBINA WILAYAH (CAMAT)
                                 </div>
                                 <div class="py-2 px-3 text-center bg-amber-50/40">
-                                    <div class="font-bold text-xs text-[#0F172A]">Drs. H. Mamat Rachmat, M.Si</div>
-                                    <span class="text-[9px] text-gray-500 block">Camat Sukasari &bull; Kota Bandung</span>
+                                    <div class="font-bold text-xs text-[#0F172A]">Drs. H. Abdul Hakim, M.Si</div>
+                                    <span class="text-[9px] text-gray-500 block">Camat Konda &bull; Kab. Konawe Selatan</span>
                                 </div>
                             </div>
 
@@ -193,8 +193,8 @@
                                     LEMBAGA PEMBERDAYAAN (LPM)
                                 </div>
                                 <div class="py-2 px-3 text-center bg-amber-50/40">
-                                    <div class="font-bold text-xs text-[#0F172A]">H. Dadang Koswara, S.Pd</div>
-                                    <span class="text-[9px] text-gray-500 block">Ketua LPM Kelurahan Sukawarna</span>
+                                    <div class="font-bold text-xs text-[#0F172A]">H. La Ode Bakri</div>
+                                    <span class="text-[9px] text-gray-500 block">Ketua LPM Kelurahan Konda</span>
                                 </div>
                             </div>
                         </div>
@@ -203,10 +203,10 @@
                         <div class="flex-1 max-w-2xl text-center">
                             <div class="inline-block w-full py-3.5 px-8 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-md border border-amber-300">
                                 <h3 class="font-serif font-black text-lg sm:text-xl lg:text-2xl tracking-wider uppercase drop-shadow-sm">
-                                    STRUKTUR KEPENGURUSAN KELURAHAN SUKAWARNA
+                                    STRUKTUR KEPENGURUSAN KELURAHAN KONDA
                                 </h3>
                                 <p class="text-xs font-bold text-amber-100 tracking-widest mt-0.5">
-                                    KECAMATAN SUKASARI &bull; KOTA BANDUNG &bull; TAHUN 2025/2026
+                                    KECAMATAN KONDA &bull; KAB. KONAWE SELATAN &bull; TAHUN 2025/2026
                                 </p>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                             <div class="flex items-center gap-2.5">
                                 <div>
                                     <span class="font-black text-xs text-[#1B4332] block leading-none">KELURAHAN</span>
-                                    <span class="font-serif font-black text-sm text-[#FFB703] leading-none">SUKAWARNA</span>
+                                    <span class="font-serif font-black text-sm text-[#FFB703] leading-none">KONDA</span>
                                 </div>
                                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1B4332] to-[#2D6A4F] flex items-center justify-center text-[#FFB703] shadow-md border border-[#FFB703]/40">
                                     <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 text-[10px] text-gray-600 font-semibold border border-gray-200">
-                                <span>@kelurahansukawarna</span>
+                                <span>@kelurahankonda</span>
                             </span>
                         </div>
                     </div>
@@ -238,12 +238,12 @@
                         <div class="absolute left-32 top-6 w-[260px] h-0.5 border-t-2 border-dashed border-gray-400"></div>
                     </div>
 
-                    <!-- TIER 1: Leadership (Lurah Sukawarna & Sekretaris Kelurahan) -->
+                    <!-- TIER 1: Leadership (Lurah Konda & Sekretaris Kelurahan) -->
                     <div class="relative flex items-center justify-center gap-32">
                         <!-- Connecting Solid Horizontal Tree Bar between Lurah & Seklur -->
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-1 bg-gray-700 -z-0"></div>
 
-                        <!-- 1. Lurah Sukawarna (Pimpinan Utama) -->
+                        <!-- 1. Lurah Konda (Pimpinan Utama) -->
                         <div class="relative z-10 flex flex-col items-center">
                             <div class="px-3.5 py-0.5 rounded-full bg-orange-500 text-white font-bold text-[10px] uppercase tracking-wider mb-2 shadow-sm">
                                 Lurah
@@ -252,17 +252,17 @@
                             <div class="relative">
                                 <div class="w-24 h-24 rounded-full border-4 border-amber-400 p-1 bg-white shadow-lg overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
-                                         alt="Drs. H. Rahmat Hidayat, M.Si" 
+                                         alt="H. La Ode Muhammad Nasir, S.Sos, M.Si" 
                                          class="w-full h-full object-cover rounded-full">
                                 </div>
                                 <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white font-serif font-bold text-[11px] uppercase tracking-wide px-3.5 py-0.5 rounded-full shadow-md border-2 border-white whitespace-nowrap">
-                                    Lurah Sukawarna
+                                    Lurah Konda
                                 </div>
                             </div>
 
                             <div class="mt-4 text-center bg-white rounded-xl border border-sky-200 p-2 shadow-sm min-w-[200px]">
                                 <h4 class="font-serif font-black text-xs text-[#0F172A] leading-tight">
-                                    Drs. H. Rahmat Hidayat, M.Si
+                                    H. La Ode Muhammad Nasir, S.Sos, M.Si
                                 </h4>
                                 <span class="text-[10px] text-gray-500 font-mono block mt-0.5">NIP: 19750812 200003 1 004</span>
                             </div>
@@ -434,13 +434,13 @@
                         <div class="relative flex-shrink-0">
                             <div class="w-16 h-16 rounded-full border-2 border-amber-400 p-0.5 bg-white shadow-sm overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
-                                     alt="Drs. H. Rahmat Hidayat, M.Si" 
+                                     alt="H. La Ode Muhammad Nasir, S.Sos, M.Si" 
                                      class="w-full h-full object-cover rounded-full">
                             </div>
                             <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-[#0284C7] text-white text-[8px] font-bold uppercase px-2 py-0.5 rounded-full shadow-xs whitespace-nowrap">Lurah</span>
                         </div>
                         <div>
-                            <h4 class="font-serif font-black text-sm text-[#0F172A]">Drs. H. Rahmat Hidayat, M.Si</h4>
+                            <h4 class="font-serif font-black text-sm text-[#0F172A]">H. La Ode Muhammad Nasir, S.Sos, M.Si</h4>
                             <p class="text-[10px] text-gray-500 font-mono mt-0.5">NIP: 19750812 200003 1 004</p>
                             <span class="inline-block mt-1 text-[10px] font-semibold text-[#1B4332] bg-emerald-100/80 px-2 py-0.5 rounded">Kepala Wilayah Kelurahan</span>
                         </div>

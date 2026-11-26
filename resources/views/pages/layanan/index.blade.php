@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Layanan Administrasi - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Layanan Administrasi - Kelurahan Konda'">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12">
         <!-- Page Header -->
         <div class="space-y-2">
@@ -7,7 +7,7 @@
                 Layanan Administrasi & Perizinan Warga
             </h1>
             <p class="text-xs sm:text-sm text-gray-600 max-w-2xl leading-relaxed">
-                Panduan lengkap alur tahapan, persyaratan berkas, dan estimasi waktu penyelesaian layanan kependudukan di Kelurahan Sukawarna. Bebas biaya dan transparan.
+                Panduan lengkap alur tahapan, persyaratan berkas, dan estimasi waktu penyelesaian layanan kependudukan di Kelurahan Konda. Bebas biaya dan transparan.
             </p>
             <p class="text-[11px] text-gray-500">
                 Pencatatan mutasi datang, pindah, lahir, dan wafat berpedoman pada <strong>UU No. 24/2013</strong>, <strong>Permendagri No. 47/2016</strong>, dan <strong>UU No. 27/2022 (UU PDP)</strong>. <a href="{{ route('regulasi.index') }}" class="font-bold text-[#1B4332] underline">Baca Ketentuan Regulasi &rarr;</a>
@@ -71,7 +71,7 @@
                                         <span>Cek Kelengkapan Mandiri</span>
                                     </button>
 
-                                    <a href="https://wa.me/628122012345?text={{ urlencode('Halo Petugas Pelayanan Kelurahan Sukawarna, saya ingin konsultasi mengenai persyaratan untuk: ' . $lay->nama_layanan) }}" 
+                                    <a href="https://wa.me/628114051938?text={{ urlencode('Halo Petugas Pelayanan Kelurahan Konda, saya ingin konsultasi mengenai persyaratan untuk: ' . $lay->nama_layanan) }}" 
                                        target="_blank" 
                                        rel="noopener noreferrer" 
                                        class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-gray-200 hover:border-emerald-500 hover:text-emerald-700 text-gray-600 text-xs font-semibold transition-colors">
@@ -130,7 +130,7 @@
                     <span>Berkas Anda 100% Lengkap & Siap!</span>
                 </div>
                 <p class="leading-relaxed text-[11px] text-emerald-700">
-                    Anda berhak mengakses <strong>Antrean Jalur Cepat (Fast Track)</strong> di loket pelayanan Kelurahan Sukawarna.
+                    Anda berhak mengakses <strong>Antrean Jalur Cepat (Fast Track)</strong> di loket pelayanan Kelurahan Konda.
                 </p>
             </div>
 
@@ -154,8 +154,8 @@
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border-2 border-emerald-500/40 print:m-0 print:p-0 print:border-none print:shadow-none">
             <!-- Official Header -->
             <div class="text-center border-b-2 border-[#1B4332] pb-4 space-y-1">
-                <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase block">PEMERINTAH KOTA BANDUNG &bull; KECAMATAN SUKASARI</span>
-                <h2 class="font-serif font-black text-xl text-[#1B4332] tracking-tight">KELURAHAN SUKAWARNA</h2>
+                <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase block">PEMERINTAH KAB. KONAWE SELATAN &bull; KECAMATAN KONDA</span>
+                <h2 class="font-serif font-black text-xl text-[#1B4332] tracking-tight">KELURAHAN KONDA</h2>
                 <span class="text-[11px] font-bold text-[#FFB703] uppercase tracking-wider block">LEMBAR BUKTI PRA-VALIDASI DOKUMEN (FAST TRACK)</span>
             </div>
 
@@ -164,7 +164,7 @@
                 <div class="flex items-center justify-between bg-emerald-50 p-3.5 rounded-2xl border border-emerald-200">
                     <div>
                         <span class="text-[10px] text-gray-500 block">KODE VALIDASI:</span>
-                        <strong id="proof-code" class="font-mono text-sm text-[#1B4332]">FAST-SKW-2026-98213</strong>
+                        <strong id="proof-code" class="font-mono text-sm text-[#1B4332]">FAST-KND-2026-98213</strong>
                     </div>
                     <span class="px-2.5 py-1 rounded-full bg-emerald-600 text-white font-black text-[10px] uppercase">
                         ✓ Siap Loket
@@ -308,14 +308,14 @@
         generateQrBtn.addEventListener('click', () => {
             checklistModal.classList.add('hidden');
 
-            const randomCode = 'FAST-SKW-' + Math.floor(10000 + Math.random() * 90000);
+            const randomCode = 'FAST-KND-' + Math.floor(10000 + Math.random() * 90000);
             document.getElementById('proof-code').textContent = randomCode;
             document.getElementById('proof-service-name').textContent = currentServiceName;
             
             const now = new Date();
             document.getElementById('proof-timestamp').textContent = now.toLocaleDateString('id-ID', {
                 day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
-            }) + ' WIB';
+            }) + ' WITA';
 
             const proofList = document.getElementById('proof-checklist-items');
             proofList.innerHTML = '';
@@ -325,7 +325,7 @@
                 proofList.appendChild(li);
             });
 
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent('https://sukawarna.bandung.go.id/validasi/' + randomCode)}`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent('https://konda.konaselkab.go.id/validasi/' + randomCode)}`;
             document.getElementById('proof-qr-img').src = qrUrl;
 
             proofModal.classList.remove('hidden');

@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Peta Fasilitas & Batas Wilayah - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Peta Fasilitas & Batas Wilayah - Kelurahan Konda'">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 space-y-5">
         <!-- Breadcrumb & Top Bar -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-xs">
@@ -11,7 +11,7 @@
                     Peta Fasilitas Publik & Batas Wilayah
                 </h1>
                 <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl leading-relaxed">
-                    Eksplorasi persebaran titik sarana pendidikan, kesehatan, peribadatan, posko darurat, dan fasilitas publik di Kelurahan Sukawarna, Kecamatan Sukasari, Kota Bandung.
+                    Eksplorasi persebaran titik sarana pendidikan, kesehatan, peribadatan, posko darurat, dan fasilitas publik di Kelurahan Konda, Kecamatan Konda, Kabupaten Konawe Selatan.
                 </p>
             </div>
 
@@ -217,7 +217,7 @@
 
                                     <p class="text-[11px] text-gray-500 truncate flex items-center gap-1 mt-0.5">
                                         <svg class="w-3 h-3 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                                        <span>{{ $u->alamat ?? 'Kelurahan Sukawarna' }}</span>
+                                        <span>{{ $u->alamat ?? 'Kelurahan Konda' }}</span>
                                     </p>
 
                                     <!-- Quick Card Action Links -->
@@ -264,8 +264,8 @@
                 <!-- Map Div Element -->
                 <div id="map" 
                      class="w-full h-full z-10" 
-                     data-lat="{{ $wilayah?->lat ?? -6.8872 }}" 
-                     data-lng="{{ $wilayah?->lng ?? 107.5765 }}">
+                     data-lat="{{ $wilayah?->lat ?? -4.124444 }}" 
+                     data-lng="{{ $wilayah?->lng ?? 122.440278 }}">
                 </div>
 
                 <!-- FLOATING CONTROL BAR (Top Right Overlay) -->
@@ -320,11 +320,11 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </button>
 
-                        <!-- Fit Bounds / Re-center Sukawarna -->
+                        <!-- Fit Bounds / Re-center Konda -->
                         <button type="button" 
                                 id="fit-bounds-btn" 
                                 class="p-2 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors" 
-                                title="Fokuskan ke Wilayah Sukawarna">
+                                title="Fokuskan ke Wilayah Konda">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
                         </button>
 

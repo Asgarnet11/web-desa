@@ -67,7 +67,7 @@
                             Inovasi Lingkungan Hijau
                         </h3>
                         <p class="text-xs text-gray-500 leading-relaxed">
-                            Urban farming Buruan Sae di tiap RW, pengelolaan bank sampah terpadu, dan penjagaan drainase bebas sumbatan.
+                            Pekarangan Pangan Lestari di tiap RW, pengelolaan bank sampah terpadu, dan penjagaan drainase bebas sumbatan.
                         </p>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             </svg>
                         </div>
                         <h3 class="font-serif font-bold text-base text-[#1B4332]">
-                            Pemberdayaan UMKM Juara
+                            Pemberdayaan UMKM Lokal
                         </h3>
                         <p class="text-xs text-gray-500 leading-relaxed">
                             Dukungan legalitas NIB, pelatihan pemasaran online, kemasan produk higienis, dan bazar ekonomi kreatif warga.
@@ -96,7 +96,7 @@
                     <!-- Photo Container with Organic Curved Frame -->
                     <div class="rounded-3xl overflow-hidden border-4 border-white shadow-xl aspect-square bg-gray-100">
                         <img src="{{ $communityPhoto }}" 
-                             alt="Kebersamaan dan Harmoni Warga Sukawarna" 
+                             alt="Kebersamaan dan Harmoni Warga Konda" 
                              class="w-full h-full object-cover">
                     </div>
 

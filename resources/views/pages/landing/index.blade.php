@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Profil Kelurahan Sukawarna & Peta Digital'">
+<x-layouts.app :title="'Profil Kelurahan Konda & Peta Digital'">
     @php
         $pengaturan = $data['pengaturan'] ?? [];
     @endphp

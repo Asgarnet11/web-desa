@@ -1,4 +1,4 @@
-<x-layouts.app :title="$berita->judul . ' - Kelurahan Sukawarna'">
+<x-layouts.app :title="$berita->judul . ' - Kelurahan Konda'">
     <div class="max-w-4xl mx-auto px-6 py-10 space-y-8">
         <div>
             <a href="{{ route('berita.index') }}" class="text-xs font-bold text-[#17708A] hover:underline inline-flex items-center gap-1 mb-4">
@@ -6,7 +6,7 @@
             </a>
             <div class="flex items-center gap-2 mb-3">
                 <span class="px-3 py-1 rounded-full bg-[#52B788]/20 text-[#1B4332] text-xs font-bold">{{ $berita->kategori }}</span>
-                <span class="text-xs text-gray-500">{{ $berita->published_at?->translatedFormat('d F Y, H:i') }} WIB</span>
+                <span class="text-xs text-gray-500">{{ $berita->published_at?->translatedFormat('d F Y, H:i') }} WITA</span>
             </div>
             <h1 class="font-display font-bold text-3xl sm:text-4xl text-[#1B4332] leading-tight">
                 {{ $berita->judul }}

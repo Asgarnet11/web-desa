@@ -9,9 +9,9 @@
     $slides = [
         [
             'bg' => 'https://images.unsplash.com/photo-1541888946425-d0fbb186f5f8?auto=format&fit=crop&w=2000&q=80',
-            'badge' => 'Portal Resmi Kelurahan Sukawarna &bull; Kota Bandung',
-            'title' => 'Mewujudkan Sukawarna Asri, <br class="hidden sm:inline">Membangun <span class="whitespace-nowrap text-[#FFB703]">Masa Depan</span>',
-            'desc' => $profil?->slogan ?? 'Di Kelurahan Sukawarna, kami menumbuhkan semangat kebersamaan warga melalui tata kelola digital terpadu, lingkungan lestari, dan pelayanan publik yang prima.',
+            'badge' => 'Portal Resmi Kelurahan Konda &bull; Kab. Konawe Selatan',
+            'title' => 'Mewujudkan Konda Maju, <br class="hidden sm:inline">Membangun <span class="whitespace-nowrap text-[#FFB703]">Masa Depan</span>',
+            'desc' => $profil?->slogan ?? 'Di Kelurahan Konda, kami menumbuhkan semangat kebersamaan warga melalui tata kelola digital terpadu, ketahanan pangan lokal, dan pelayanan publik yang prima.',
             'primary_btn_text' => 'LAYANAN WARGA',
             'primary_btn_url' => route('layanan.index'),
             'secondary_btn_text' => 'JELAJAHI PETA WILAYAH',
@@ -19,9 +19,9 @@
         ],
         [
             'bg' => 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=2000&q=80',
-            'badge' => 'Inisiatif Lingkungan Lestari &bull; Buruan Sae Juara',
-            'title' => 'Sukawarna Hijau Asri, <br class="hidden sm:inline">Mandiri <span class="whitespace-nowrap text-[#FFB703]">Berkelanjutan</span>',
-            'desc' => 'Pemberdayaan lorong berkebun Buruan Sae, ketahanan pangan keluarga, pengelolaan bank sampah tematik, serta pemukiman ramah iklim berbasis gotong royong.',
+            'badge' => 'Inisiatif Lingkungan Lestari &bull; Pekarangan Pangan Lestari',
+            'title' => 'Konda Hijau Mandiri, <br class="hidden sm:inline">Lestari <span class="whitespace-nowrap text-[#FFB703]">Berkelanjutan</span>',
+            'desc' => 'Pemberdayaan kebun pekarangan warga, ketahanan pangan keluarga, pengelolaan bank sampah tematik, serta pemukiman ramah iklim berbasis gotong royong.',
             'primary_btn_text' => 'DIREKTORI FASILITAS',
             'primary_btn_url' => route('peta.index'),
             'secondary_btn_text' => 'UNDUH DOKUMEN & FORMULIR',
@@ -47,7 +47,7 @@
         @foreach($slides as $index => $slide)
             <div class="hero-bg-slide absolute inset-0 z-0 transition-opacity duration-1000 ease-in-out {{ $index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}" data-slide="{{ $index }}">
                 <img src="{{ $slide['bg'] }}" 
-                     alt="Kelurahan Sukawarna Slide {{ $index + 1 }}" 
+                     alt="Kelurahan Konda Slide {{ $index + 1 }}" 
                      class="w-full h-full object-cover object-center filter brightness-[0.75] contrast-105">
                 <!-- Deep Forest Green Gradient Overlay (Left to Right) -->
                 <div class="absolute inset-0 bg-gradient-to-r from-[#143527]/95 via-[#1B4332]/85 to-transparent"></div>
@@ -169,7 +169,7 @@
                     </div>
                 </div>
 
-                <!-- Item 4: Lingkungan Hijau (Buruan Sae) -->
+                <!-- Item 4: Lingkungan Hijau (Pekarangan Pangan Lestari) -->
                 <div class="flex items-center gap-3.5 lg:px-4 py-2 sm:py-3 rounded-xl bg-gray-50/70 sm:bg-transparent">
                     <div class="w-11 h-11 rounded-xl bg-[#2D6A4F]/10 text-[#2D6A4F] flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,7 +178,7 @@
                     </div>
                     <div>
                         <h4 class="font-bold text-xs sm:text-sm text-[#1B4332] leading-tight">Lingkungan Hijau</h4>
-                        <p class="text-[11px] text-gray-500 mt-0.5">Buruan Sae & bank sampah</p>
+                        <p class="text-[11px] text-gray-500 mt-0.5">Pekarangan lestari &amp; bank sampah</p>
                     </div>
                 </div>
 

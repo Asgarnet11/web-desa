@@ -18,7 +18,7 @@ class Login extends BaseLogin
 
     public function getSubheading(): string|Htmlable|null
     {
-        return 'Administrasi Pelayanan, Aspirasi & Data Spasial Sukawarna';
+        return 'Administrasi Pelayanan, Aspirasi & Data Spasial Konda';
     }
 
     public function selectRole(string $email): void

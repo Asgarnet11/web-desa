@@ -36,9 +36,9 @@ class KependudukanRealtimeTest extends TestCase
 
     public function test_wilayah_scope_handles_three_level_hierarchy_kelurahan_rw_rt(): void
     {
-        $kelurahan = Wilayah::where('kode', '32.73.01.1001')->first();
-        $rw01 = Wilayah::where('kode', '32.73.01.1001.RW01')->first();
-        $rw02 = Wilayah::where('kode', '32.73.01.1001.RW02')->first();
+        $kelurahan = Wilayah::where('kode', '74.05.07.1001')->first();
+        $rw01 = Wilayah::where('kode', '74.05.07.1001.RW01')->first();
+        $rw02 = Wilayah::where('kode', '74.05.07.1001.RW02')->first();
 
         $descendants = $kelurahan->getDescendantIds(true);
         $this->assertGreaterThanOrEqual(22, count($descendants)); // 1 kel + 7 rw + 14 rt
@@ -59,17 +59,17 @@ class KependudukanRealtimeTest extends TestCase
     public function test_uu_pdp_encryption_masking_and_audit_log_redaction(): void
     {
         $operator = User::where('email', 'operator@kelurahan.test')->first();
-        $rt01 = Wilayah::where('kode', '32.73.01.1001.RW01.RT01')->first();
+        $rt01 = Wilayah::where('kode', '74.05.07.1001.RW01.RT01')->first();
         $this->actingAs($operator);
 
-        $rawNik = '3273012202920077';
-        $rawKk = '3273011001200077';
+        $rawNik = '7405072202920077';
+        $rawKk = '7405071001200077';
 
         $kk = KartuKeluarga::create([
             'wilayah_id' => $rt01->id,
             'no_kk' => $rawKk,
             'kepala_keluarga_nama' => 'Budi Santoso',
-            'alamat_ringkas' => 'Jl. Sukawarna Test No. 77',
+            'alamat_ringkas' => 'Jl. Poros Konda Test No. 77',
             'status_kk' => 'aktif',
         ]);
 
@@ -84,7 +84,7 @@ class KependudukanRealtimeTest extends TestCase
             'status_kependudukan' => StatusKependudukan::Tetap,
         ]);
 
-        $this->assertSame('327301••••••0077', $penduduk->nik_tersamar);
+        $this->assertSame('740507••••••0077', $penduduk->nik_tersamar);
         $this->assertSame(KependudukanSecurity::hashIdentifier($rawNik), $penduduk->nik_hash);
 
         $logPenduduk = LogAktivitas::where('entitas', 'Penduduk')
@@ -124,7 +124,7 @@ class KependudukanRealtimeTest extends TestCase
     public function test_kelahiran_mutation_adds_newborn_closes_pregnancy_and_syncs_demography_realtime(): void
     {
         $operator = User::where('email', 'operator@kelurahan.test')->first();
-        $kelurahan = Wilayah::where('kode', '32.73.01.1001')->first();
+        $kelurahan = Wilayah::where('kode', '74.05.07.1001')->first();
 
         $bumilRecord = PemantauanKesehatan::where('kategori', KategoriPemantauan::IbuHamil->value)
             ->where('aktif', true)
@@ -144,10 +144,10 @@ class KependudukanRealtimeTest extends TestCase
             'kartu_keluarga_id' => $bumilRecord->penduduk->kartu_keluarga_id,
             'jenis_mutasi' => JenisMutasi::Kelahiran,
             'tanggal_peristiwa' => now()->toDateString(),
-            'asal_atau_tujuan' => 'RSUD Kota Bandung',
+            'asal_atau_tujuan' => 'RSUD Kabupaten Konawe Selatan',
             'payload_data' => [
                 'ibu_penduduk_id' => $bumilRecord->penduduk_id,
-                'nama_lengkap' => 'Bayi Sehat Sukawarna',
+                'nama_lengkap' => 'Bayi Sehat Konda',
                 'jenis_kelamin' => JenisKelamin::Perempuan->value,
                 'daftarkan_balita' => true,
             ],
@@ -171,7 +171,7 @@ class KependudukanRealtimeTest extends TestCase
         $this->assertSame($popSebelum + 1, $sesudah->jumlah_penduduk);
         $this->assertSame($bumilSebelum - 1, $sesudah->rincian['kesehatan_keluarga']['ibu_hamil']);
 
-        // 3. Official QR verification page recognizes the issued SKL-SKW code from database
+        // 3. Official QR verification page recognizes the issued SKL-KND code from database
         $qrResp = $this->get(route('verifikasi.show', $verified->nomor_surat_pengantar));
         $qrResp->assertSuccessful();
         $qrResp->assertSee('DOKUMEN RESMI TERDAFTAR');
@@ -181,7 +181,7 @@ class KependudukanRealtimeTest extends TestCase
     public function test_kematian_and_pindah_keluar_decrement_active_population_and_close_health_tracking(): void
     {
         $operator = User::where('email', 'operator@kelurahan.test')->first();
-        $kelurahan = Wilayah::where('kode', '32.73.01.1001')->first();
+        $kelurahan = Wilayah::where('kode', '74.05.07.1001')->first();
 
         $lansia = PemantauanKesehatan::where('kategori', KategoriPemantauan::LansiaRentan->value)
             ->where('aktif', true)
@@ -210,11 +210,11 @@ class KependudukanRealtimeTest extends TestCase
 
     public function test_csv_import_adds_citizens_and_syncs_demography(): void
     {
-        $kelurahan = Wilayah::where('kode', '32.73.01.1001')->first();
+        $kelurahan = Wilayah::where('kode', '74.05.07.1001')->first();
         $popAwal = Demografi::where('wilayah_id', $kelurahan->id)->where('periode', (string) now()->year)->first()->jumlah_penduduk;
 
         $csv = "no_kk,nik,nama_lengkap,jenis_kelamin,tanggal_lahir,kode_rt,pekerjaan,pendidikan,hubungan_keluarga,status_kependudukan\n".
-               "3273018808800001,3273018808800002,Dian Permata Import,P,1994-06-12,32.73.01.1001.RW07.RT01,Wirausaha/UMKM,Diploma/Sarjana,kepala_keluarga,tetap\n";
+               "7405078808800001,7405078808800002,Dian Permata Import,P,1994-06-12,74.05.07.1001.RW07.RT01,Wirausaha/UMKM,Diploma/Sarjana,kepala_keluarga,tetap\n";
 
         $result = app(PendudukImportService::class)->importFromCsvString($csv);
 

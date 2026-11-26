@@ -146,7 +146,7 @@ class StatistikRingkasanWidget extends BaseWidget
 
             return [
                 Stat::make('Ibu Hamil Aktif', "{$bumilTotal} jiwa")
-                    ->description('Sasaran pemantauan KIA wilayah Sukawarna')
+                    ->description('Sasaran pemantauan KIA wilayah Konda')
                     ->color('gray'),
 
                 Stat::make('Ibu Hamil Resti / KEK', "{$bumilResti} jiwa")
@@ -163,10 +163,10 @@ class StatistikRingkasanWidget extends BaseWidget
             ];
         }
 
-        // 5. Admin Wilayah - Supervisi Kecamatan Sukasari (Agregat Non-PII)
+        // 5. Admin Wilayah - Supervisi Kecamatan Konda (Agregat Non-PII)
         if ($user?->isAdminWilayah()) {
             return [
-                Stat::make('Agregat Jiwa Sukasari', number_format($totalPenduduk, 0, ',', '.').' jiwa')
+                Stat::make('Agregat Jiwa Konda', number_format($totalPenduduk, 0, ',', '.').' jiwa')
                     ->description(number_format($totalKk, 0, ',', '.').' kepala keluarga · agregat kelurahan')
                     ->color('gray'),
 

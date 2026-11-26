@@ -15,7 +15,7 @@
                     Sentra UMKM & Potensi Lokal
                 </h2>
                 <p class="text-sm text-[#1F2D26]/75 max-w-xl">
-                    Dukung produk unggulan hasil karya warga Sukawarna mulai dari kuliner organik, kerajinan tangan ramah lingkungan, hingga pertanian perkotaan.
+                    Dukung produk unggulan hasil karya warga Konda mulai dari kopi lokal, kerajinan rotan dan bambu ramah lingkungan, hingga pertanian hortikultura.
                 </p>
             </div>
 
@@ -46,7 +46,7 @@
                         <!-- Content -->
                         <div class="p-6 space-y-2">
                             <h3 class="font-display font-bold text-lg text-[#1B4332]">{{ $u->nama_usaha }}</h3>
-                            <p class="text-xs text-[#17708A] font-semibold">Pemilik: {{ $u->nama_pemilik ?? 'Warga Sukawarna' }}</p>
+                            <p class="text-xs text-[#17708A] font-semibold">Pemilik: {{ $u->nama_pemilik ?? 'Warga Konda' }}</p>
                             <p class="text-xs text-[#1F2D26]/80 line-clamp-3 leading-relaxed">
                                 {{ $u->deskripsi }}
                             </p>

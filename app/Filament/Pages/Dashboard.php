@@ -31,9 +31,9 @@ class Dashboard extends BaseDashboard
             PeranUser::Operator => 'Meja Kerja Pelayanan Warga',
             PeranUser::KetuaRtRw => 'Pelaporan Warga RT / RW',
             PeranUser::KaderKesehatan => 'Pemantauan Posyandu & Keluarga',
-            PeranUser::AdminWilayah => 'Supervisi Kecamatan Sukasari',
+            PeranUser::AdminWilayah => 'Supervisi Kecamatan Konda',
             PeranUser::SuperAdmin => 'Tata Kelola & Keamanan Sistem',
-            default => 'Pusat Administrasi Sukawarna',
+            default => 'Pusat Administrasi Konda',
         };
     }
 
@@ -55,9 +55,9 @@ class Dashboard extends BaseDashboard
             PeranUser::Operator => "{$user->name} — {$pendingMutasi} mutasi LAMPID, {$pendingAduan} aduan warga, dan {$pendingUmkm} UMKM menunggu verifikasi.",
             PeranUser::KetuaRtRw => "{$user->name} — Pelaporan peristiwa warga datang, pindah keluar, lahir, dan wafat di lingkup RT/RW Anda.",
             PeranUser::KaderKesehatan => "{$user->name} — Tercatat {$bumilAktif} ibu hamil aktif dalam pemantauan berkala dan intervensi Posyandu wilayah.",
-            PeranUser::AdminWilayah => "{$user->name} — Pengawasan lintas RW Kelurahan Sukawarna beserta kondisi infrastruktur dan sebaran fasilitas.",
+            PeranUser::AdminWilayah => "{$user->name} — Pengawasan lintas RW Kelurahan Konda beserta kondisi infrastruktur dan sebaran fasilitas.",
             PeranUser::SuperAdmin => "{$user->name} — Pemantauan hak akses aparatur, redaksi audit UU PDP, dan integritas layer GeoJSON.",
-            default => $user?->name ?? 'Portal Administrasi Kelurahan Sukawarna',
+            default => $user?->name ?? 'Portal Administrasi Kelurahan Konda',
         };
     }
 

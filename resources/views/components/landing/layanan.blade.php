@@ -15,7 +15,7 @@
                     Layanan Publik Tanpa Biaya
                 </h2>
                 <p class="text-sm text-[#1F2D26]/75 max-w-xl">
-                    Seluruh permohonan surat keterangan dan rekomendasi di Kelurahan Sukawarna diproses cepat, transparan, dan 100% gratis.
+                    Seluruh permohonan surat keterangan dan rekomendasi di Kelurahan Konda diproses cepat, transparan, dan 100% gratis.
                 </p>
             </div>
 

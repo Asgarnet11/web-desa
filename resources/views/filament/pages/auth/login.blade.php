@@ -41,7 +41,7 @@
                     [
                         'role' => 'Admin Wilayah',
                         'email' => 'admin@kelurahan.test',
-                        'scope' => 'Supervisi Kec. Sukasari',
+                        'scope' => 'Supervisi Kec. Konda',
                     ],
                     [
                         'role' => 'Super Admin',

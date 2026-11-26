@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Sistem Informasi & Profil Kelurahan Sukawarna' }}</title>
-    <meta name="description" content="{{ $description ?? 'Portal Pemetaan dan Pusat Informasi Publik Kelurahan Sukawarna, Kota Bandung' }}">
+    <title>{{ $title ?? 'Sistem Informasi & Profil Kelurahan Konda' }}</title>
+    <meta name="description" content="{{ $description ?? 'Portal Pemetaan dan Pusat Informasi Publik Kelurahan Konda, Kecamatan Konda, Kabupaten Konawe Selatan' }}">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="{{ $title ?? 'Sistem Informasi & Profil Kelurahan Sukawarna' }}">
-    <meta property="og:description" content="{{ $description ?? 'Portal Pemetaan dan Pusat Informasi Publik Kelurahan Sukawarna' }}">
+    <meta property="og:title" content="{{ $title ?? 'Sistem Informasi & Profil Kelurahan Konda' }}">
+    <meta property="og:description" content="{{ $description ?? 'Portal Pemetaan dan Pusat Informasi Publik Kelurahan Konda, Kabupaten Konawe Selatan' }}">
     <meta property="og:type" content="website">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -22,19 +22,19 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-10 flex items-center justify-between gap-3">
             <!-- Left Info (Phone, Email, Address - Responsive with whitespace-nowrap) -->
             <div class="flex items-center gap-3 sm:gap-5 text-white/90 overflow-hidden">
-                <a href="tel:0222012345" class="inline-flex items-center gap-1.5 hover:text-[#FFB703] transition-colors whitespace-nowrap flex-shrink-0">
+                <a href="tel:04013124567" class="inline-flex items-center gap-1.5 hover:text-[#FFB703] transition-colors whitespace-nowrap flex-shrink-0">
                     <svg class="w-3.5 h-3.5 text-[#FFB703] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                     </svg>
-                    <span>+62 (022) 2012345</span>
+                    <span>+62 (0401) 3124567</span>
                 </a>
 
                 <span class="hidden md:inline text-white/30">&bull;</span>
-                <a href="mailto:kelurahan.sukawarna@bandung.go.id" class="hidden md:inline-flex items-center gap-1.5 hover:text-[#FFB703] transition-colors whitespace-nowrap flex-shrink-0">
+                <a href="mailto:kelurahan.konda@konaselkab.go.id" class="hidden md:inline-flex items-center gap-1.5 hover:text-[#FFB703] transition-colors whitespace-nowrap flex-shrink-0">
                     <svg class="w-3.5 h-3.5 text-[#FFB703] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
-                    <span>kelurahan.sukawarna@bandung.go.id</span>
+                    <span>kelurahan.konda@konaselkab.go.id</span>
                 </a>
 
                 <span class="hidden xl:inline text-white/30">&bull;</span>
@@ -43,7 +43,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
-                    <span>Jl. Sukawarna No. 12, Kec. Sukasari, Kota Bandung</span>
+                    <span>Jl. Poros Kendari–Konda No. 12, Kec. Konda, Kab. Konawe Selatan</span>
                 </span>
             </div>
 
@@ -87,8 +87,8 @@
                     </div>
                     <div class="flex flex-col">
                         <span class="font-serif font-black text-xs sm:text-sm tracking-[0.2em] text-[#1B4332] uppercase leading-tight">KELURAHAN</span>
-                        <span class="font-display font-extrabold text-lg sm:text-xl text-[#1B4332] tracking-wider leading-none">SUKAWARNA</span>
-                        <span class="text-[9px] text-[#2D6A4F] font-bold tracking-widest uppercase mt-0.5">KOTA BANDUNG</span>
+                        <span class="font-display font-extrabold text-lg sm:text-xl text-[#1B4332] tracking-wider leading-none">KONDA</span>
+                        <span class="text-[9px] text-[#2D6A4F] font-bold tracking-widest uppercase mt-0.5">KAB. KONAWE SELATAN</span>
                     </div>
                 </a>
 
@@ -267,21 +267,21 @@
                         </div>
                         <div>
                             <h4 class="font-serif font-black text-sm tracking-wider uppercase text-white">KELURAHAN</h4>
-                            <p class="font-display font-extrabold text-base text-[#FFB703] leading-none">SUKAWARNA</p>
+                            <p class="font-display font-extrabold text-base text-[#FFB703] leading-none">KONDA</p>
                         </div>
                     </div>
                     <p class="text-white/70 leading-relaxed">
-                        Sistem Informasi Profil Wilayah, Pemetaan Spasial Interaktif, dan Pusat Pelayanan Administrasi Publik Kelurahan Sukawarna, Kecamatan Sukasari, Kota Bandung.
+                        Sistem Informasi Profil Wilayah, Pemetaan Spasial Interaktif, dan Pusat Pelayanan Administrasi Publik Kelurahan Konda, Kecamatan Konda, Kabupaten Konawe Selatan, Sulawesi Tenggara.
                     </p>
                     <!-- Social Media Links -->
                     <div class="flex items-center gap-3 pt-1 text-white/80">
-                        <a href="https://facebook.com/KelurahanSukawarnaResmi" target="_blank" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FFB703] hover:text-[#1B4332] flex items-center justify-center transition-colors">
+                        <a href="https://facebook.com/KelurahanKondaResmi" target="_blank" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FFB703] hover:text-[#1B4332] flex items-center justify-center transition-colors">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.597 0 9 1.582 9 4.615V8z"/></svg>
                         </a>
-                        <a href="https://instagram.com/kelurahansukawarna" target="_blank" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FFB703] hover:text-[#1B4332] flex items-center justify-center transition-colors">
+                        <a href="https://instagram.com/kelurahankonda" target="_blank" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FFB703] hover:text-[#1B4332] flex items-center justify-center transition-colors">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         </a>
-                        <a href="https://youtube.com/@kelurahansukawarna" target="_blank" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FFB703] hover:text-[#1B4332] flex items-center justify-center transition-colors">
+                        <a href="https://youtube.com/@kelurahankonda" target="_blank" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FFB703] hover:text-[#1B4332] flex items-center justify-center transition-colors">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                         </a>
                     </div>
@@ -309,7 +309,7 @@
                         <li><a href="{{ route('pengaduan.index') }}" class="hover:text-white transition-colors">Layanan Pengaduan & Aspirasi</a></li>
                         <li><a href="{{ route('pengaduan.cek') }}" class="hover:text-white transition-colors">Cek Status Tiket Pengaduan</a></li>
                         <li><a href="{{ route('umkm.index') }}" class="hover:text-white transition-colors">Direktori UMKM & Ekonomi Kreatif</a></li>
-                        <li><a href="{{ route('berita.index') }}" class="hover:text-white transition-colors">Warta & Kabar Terkini Sukawarna</a></li>
+                        <li><a href="{{ route('berita.index') }}" class="hover:text-white transition-colors">Warta & Kabar Terkini Konda</a></li>
                         <li><a href="{{ route('dokumen.index') }}" class="hover:text-white transition-colors">Repositori Dokumen & Perdes (KIP)</a></li>
                         <li><a href="{{ route('regulasi.index') }}" class="hover:text-white transition-colors">Regulasi & Privasi Data Warga</a></li>
                     </ul>
@@ -321,20 +321,20 @@
                     <div class="space-y-2.5 text-white/80">
                         <p class="flex items-start gap-2">
                             <svg class="w-4 h-4 text-[#FFB703] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            <span>Jl. Sukawarna No. 12, Kec. Sukasari, Kota Bandung, Jawa Barat 40164</span>
+                            <span>Jl. Poros Kendari–Konda No. 12, Kec. Konda, Kab. Konawe Selatan, Sulawesi Tenggara 93874</span>
                         </p>
                         <p class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-[#FFB703] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                            <span>(022) 2012345</span>
+                            <span>(0401) 3124567</span>
                         </p>
                         <p class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-[#FFB703] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            <span>kelurahan.sukawarna@bandung.go.id</span>
+                            <span>kelurahan.konda@konaselkab.go.id</span>
                         </p>
                         <div class="pt-2 text-[11px] text-white/70">
                             <p class="font-bold text-white">Jam Operasional:</p>
-                            <p>Senin &ndash; Kamis: 08.00 &ndash; 15.30 WIB</p>
-                            <p>Jumat: 08.00 &ndash; 14.30 WIB</p>
+                            <p>Senin &ndash; Kamis: 08.00 &ndash; 15.30 WITA</p>
+                            <p>Jumat: 08.00 &ndash; 14.30 WITA</p>
                         </div>
                     </div>
                 </div>
@@ -345,7 +345,7 @@
                     <p class="text-white/70 leading-relaxed text-xs">
                         Dapatkan informasi pengumuman program bantuan, jadwal pelayanan keliling, dan kegiatan warga langsung ke email Anda.
                     </p>
-                    <form onsubmit="event.preventDefault(); alert('Terima kasih, Anda telah terdaftar dalam warta berkala Kelurahan Sukawarna!');" class="space-y-2">
+                    <form onsubmit="event.preventDefault(); alert('Terima kasih, Anda telah terdaftar dalam warta berkala Kelurahan Konda!');" class="space-y-2">
                         <div class="flex items-center rounded-lg overflow-hidden bg-white/10 border border-white/20 focus-within:border-[#FFB703]">
                             <input type="email" placeholder="Masukkan alamat email" required 
                                    class="w-full px-3 py-2 text-xs text-white placeholder-white/50 bg-transparent outline-none">
@@ -362,7 +362,7 @@
 
             <!-- Bottom Copyright Bar -->
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
-                <p>&copy; {{ date('Y') }} Kelurahan Sukawarna, Kota Bandung. Seluruh Hak Cipta Dilindungi.</p>
+                <p>&copy; {{ date('Y') }} Kelurahan Konda, Kab. Konawe Selatan. Seluruh Hak Cipta Dilindungi.</p>
                 <div class="flex items-center gap-4 text-xs">
                     <a href="{{ route('regulasi.index') }}" class="hover:text-white transition-colors">Kebijakan Privasi (UU PDP)</a>
                     <span>&bull;</span>

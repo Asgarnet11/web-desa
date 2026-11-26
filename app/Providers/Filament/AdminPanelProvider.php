@@ -38,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->defaultThemeMode(ThemeMode::Light)
             ->login(Login::class)
-            ->brandName('Kelurahan Sukawarna')
+            ->brandName('Kelurahan Konda')
             ->brandLogo(fn () => view('filament.components.brand-logo'))
             ->brandLogoHeight('2.25rem')
             ->colors([

@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Lacak Tiket Pengaduan - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Lacak Tiket Pengaduan - Kelurahan Konda'">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-8">
         <div class="text-center space-y-2">
             <span class="text-xs font-bold text-[#FFB703] uppercase tracking-wider block">Tracking Resmi</span>
@@ -93,7 +93,7 @@
                     <div class="space-y-3 text-xs">
                         <div>
                             <span class="text-gray-400 block">Kategori & Lokasi:</span>
-                            <span class="font-semibold text-[#1B4332]">{{ $pengaduan->kategori }} &bull; {{ $pengaduan->lokasi ?? 'Kelurahan Sukawarna' }}</span>
+                            <span class="font-semibold text-[#1B4332]">{{ $pengaduan->kategori }} &bull; {{ $pengaduan->lokasi ?? 'Kelurahan Konda' }}</span>
                         </div>
                         <div>
                             <span class="text-gray-400 block">Judul Laporan:</span>
@@ -110,7 +110,7 @@
                                 <p class="text-xs leading-relaxed">{{ $pengaduan->tanggapan }}</p>
                                 @if($pengaduan->ditanggapi_pada)
                                     <span class="text-[10px] text-emerald-700 block pt-1">
-                                        Ditanggapi pada: {{ $pengaduan->ditanggapi_pada->translatedFormat('d F Y, H:i') }} WIB
+                                        Ditanggapi pada: {{ $pengaduan->ditanggapi_pada->translatedFormat('d F Y, H:i') }} WITA
                                     </span>
                                 @endif
                             </div>

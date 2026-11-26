@@ -12,8 +12,8 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();
-        $rw01 = Wilayah::where('kode', '32.73.01.1001.RW01')->first();
+        $konda = Wilayah::where('kode', '74.05.07.1001')->first();
+        $rw01 = Wilayah::where('kode', '74.05.07.1001.RW01')->first();
 
         // 1. Super Admin
         User::updateOrCreate(
@@ -26,39 +26,39 @@ class UserSeeder extends Seeder
             ]
         );
 
-        // 2. Admin Wilayah (Kecamatan Sukasari)
-        $sukasari = Wilayah::where('kode', '32.73.01')->first();
+        // 2. Admin Wilayah (Kecamatan Konda)
+        $kecKonda = Wilayah::where('kode', '74.05.07')->first();
         User::updateOrCreate(
             ['email' => 'admin@kelurahan.test'],
             [
-                'name' => 'Admin Wilayah Sukasari',
+                'name' => 'Admin Wilayah Konda',
                 'password' => Hash::make('password'),
                 'peran' => PeranUser::AdminWilayah,
-                'wilayah_id' => $sukasari?->id,
+                'wilayah_id' => $kecKonda?->id,
                 'status_aktif' => true,
             ]
         );
 
-        // 3. Operator Kelurahan Sukawarna
+        // 3. Operator Kelurahan Konda
         User::updateOrCreate(
             ['email' => 'operator@kelurahan.test'],
             [
-                'name' => 'Operator Sukawarna',
+                'name' => 'Operator Kelurahan Konda',
                 'password' => Hash::make('password'),
                 'peran' => PeranUser::Operator,
-                'wilayah_id' => $sukawarna?->id,
+                'wilayah_id' => $konda?->id,
                 'status_aktif' => true,
             ]
         );
 
-        // 4. Pimpinan (Lurah Sukawarna)
+        // 4. Pimpinan (Lurah Konda)
         User::updateOrCreate(
             ['email' => 'lurah@kelurahan.test'],
             [
-                'name' => 'Drs. H. Rahmat Hidayat, M.Si (Lurah)',
+                'name' => 'H. La Ode Muhammad Nasir, S.Sos, M.Si (Lurah)',
                 'password' => Hash::make('password'),
                 'peran' => PeranUser::Pimpinan,
-                'wilayah_id' => $sukawarna?->id,
+                'wilayah_id' => $konda?->id,
                 'status_aktif' => true,
             ]
         );
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'rt01@kelurahan.test'],
             [
-                'name' => 'H. Asep Sunandar (Ketua RW 01)',
+                'name' => 'H. Muhammad Yusuf, S.Sos (Ketua RW 01)',
                 'password' => Hash::make('password'),
                 'peran' => PeranUser::KetuaRtRw,
                 'wilayah_id' => $rw01?->id,
@@ -79,10 +79,10 @@ class UserSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'kader@kelurahan.test'],
             [
-                'name' => 'Siti Marwah, A.Md.Keb (Kader Posyandu)',
+                'name' => 'Wa Ode Siti Marwah, A.Md.Keb (Kader Posyandu)',
                 'password' => Hash::make('password'),
                 'peran' => PeranUser::KaderKesehatan,
-                'wilayah_id' => $sukawarna?->id,
+                'wilayah_id' => $konda?->id,
                 'status_aktif' => true,
             ]
         );

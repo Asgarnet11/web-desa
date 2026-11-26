@@ -5,7 +5,7 @@
     // Default facilities if fewer than 4 exist
     $defaultFasilitas = [
         [
-            'nama' => 'Puskesmas Pembantu Sukawarna',
+            'nama' => 'Puskesmas Konda',
             'kategori' => 'Kesehatan',
             'foto' => 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80',
             'deskripsi' => 'Pusat pelayanan kesehatan dasar, posyandu terintegrasi, dan pemeriksaan berkala gratis bagi warga.',
@@ -19,7 +19,7 @@
             'kondisi' => 'Sangat Baik',
         ],
         [
-            'nama' => 'SD Negeri Sukawarna 1 & 2',
+            'nama' => 'SD Negeri 1 Konda & SMPN 1 Konasel',
             'kategori' => 'Pendidikan',
             'foto' => 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80',
             'deskripsi' => 'Sarana pendidikan dasar berakreditasi baik dengan fasilitas ruang kelas nyaman dan perpustakaan warga.',
@@ -93,7 +93,7 @@
                                 {{ $item->nama }}
                             </h3>
                             <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">
-                                {{ $item->alamat ?? 'Fasilitas publik yang senantiasa dirawat untuk kenyamanan dan kebutuhan warga Kelurahan Sukawarna.' }}
+                                {{ $item->alamat ?? 'Fasilitas publik yang senantiasa dirawat untuk kenyamanan dan kebutuhan warga Kelurahan Konda.' }}
                             </p>
                         </div>
                     </div>

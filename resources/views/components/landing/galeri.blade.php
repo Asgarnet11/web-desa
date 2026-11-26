@@ -19,12 +19,12 @@
             'file_url' => 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80',
         ],
         [
-            'judul' => 'Panen Sayur Hidroponik Kebun Buruan Sae',
+            'judul' => 'Panen Sayur Hidroponik Pekarangan Lestari',
             'keterangan' => 'Ketahanan pangan keluarga hasil gotong royong pemanfaatan pekarangan rumah.',
             'file_url' => 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=600&q=80',
         ],
         [
-            'judul' => 'Musrenbang Kelurahan Sukawarna 2026',
+            'judul' => 'Musrenbang Kelurahan Konda 2026',
             'keterangan' => 'Musyawarah perencanaan pembangunan wilayah bersama tokoh masyarakat dan RT/RW.',
             'file_url' => 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=600&q=80',
         ],
@@ -40,7 +40,7 @@
                     DINAMIKA & KEGIATAN WARGA
                 </span>
                 <h2 class="font-serif font-black text-3xl sm:text-4xl text-[#1B4332] tracking-tight">
-                    Potret Kebersamaan Sukawarna
+                    Potret Kebersamaan Konda
                 </h2>
             </div>
             <a href="{{ route('berita.index') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded border border-gray-300 hover:border-[#1B4332] text-[#1B4332] hover:bg-gray-50 text-xs font-bold uppercase tracking-wider transition-colors self-start sm:self-auto">

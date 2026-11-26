@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Direktori UMKM & Potensi - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Direktori UMKM & Potensi - Kelurahan Konda'">
     <div class="max-w-7xl mx-auto px-6 py-10 space-y-8">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -7,7 +7,7 @@
                     Direktori UMKM & Produk Unggulan
                 </h1>
                 <p class="text-xs sm:text-sm text-[#1F2D26]/75 mt-1">
-                    Temukan dan dukung produk usaha mikro, kecil, dan menengah binaan warga Sukawarna.
+                    Temukan dan dukung produk usaha mikro, kecil, dan menengah binaan warga Kelurahan Konda.
                 </p>
             </div>
 
@@ -59,7 +59,7 @@
                         </div>
                         <div class="p-6 space-y-2">
                             <h3 class="font-display font-bold text-lg text-[#1B4332]">{{ $u->nama_usaha }}</h3>
-                            <p class="text-xs text-[#17708A] font-medium">Pemilik: {{ $u->nama_pemilik ?? 'Warga Sukawarna' }}</p>
+                            <p class="text-xs text-[#17708A] font-medium">Pemilik: {{ $u->nama_pemilik ?? 'Warga Konda' }}</p>
                             <p class="text-xs text-[#1F2D26]/75 line-clamp-3">{{ $u->deskripsi }}</p>
                             @if($u->alamat)
                                 <p class="text-[11px] text-gray-400 pt-1">{{ $u->alamat }}</p>
@@ -94,7 +94,7 @@
                 <div>
                     <span class="text-[10px] font-bold uppercase tracking-wider text-[#FFB703] block">Pemberdayaan Ekonomi Warga</span>
                     <h3 class="font-serif font-black text-xl text-[#1B4332]">Formulir Pendaftaran UMKM</h3>
-                    <p class="text-xs text-gray-500 mt-0.5">Daftarkan usaha Anda agar terpetakan di direktori & peta spasial Sukawarna.</p>
+                    <p class="text-xs text-gray-500 mt-0.5">Daftarkan usaha Anda agar terpetakan di direktori & peta spasial Kelurahan Konda.</p>
                 </div>
                 <button type="button" onclick="document.getElementById('daftar-umkm-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 p-1 rounded-full text-xl leading-none">
                     &times;
@@ -105,7 +105,7 @@
                 @csrf
                 <div class="space-y-1">
                     <label class="block text-xs font-bold text-[#1B4332]">Nama Usaha / Toko *</label>
-                    <input type="text" name="nama_usaha" required placeholder="Contoh: Kopi Kebun Sukawarna" 
+                    <input type="text" name="nama_usaha" required placeholder="Contoh: Kopi Tolaki Konda" 
                            class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
                 </div>
 
@@ -135,7 +135,7 @@
                     </div>
                     <div class="space-y-1">
                         <label class="block text-xs font-bold text-[#1B4332]">Alamat Lengkap (RT/RW) *</label>
-                        <input type="text" name="alamat" required placeholder="Jl. Sukagalih RW 02" 
+                        <input type="text" name="alamat" required placeholder="Jl. Poros Kendari–Konda RW 02" 
                                class="w-full px-4 py-2 text-xs rounded-xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none">
                     </div>
                 </div>

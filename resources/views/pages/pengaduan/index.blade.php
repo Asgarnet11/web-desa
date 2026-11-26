@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Layanan Pengaduan Warga - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Layanan Pengaduan Warga - Kelurahan Konda'">
     <div class="max-w-4xl mx-auto px-6 py-10 space-y-8">
         <div>
             <span class="text-xs font-bold text-[#B3361A] uppercase tracking-wider">Kanal Aspirasi Publik</span>
@@ -49,7 +49,7 @@
                         <label class="block text-xs font-bold text-[#1B4332]">Lokasi Kejadian / RT / RW</label>
                         <input type="text" name="lokasi" value="{{ old('lokasi') }}" 
                                class="w-full px-4 py-2.5 rounded-2xl bg-[#FFF8E7]/50 border border-[#52B788]/40 focus:ring-2 focus:ring-[#52B788] text-xs outline-none"
-                               placeholder="Contoh: Jl. Sukagalih RW 02 RT 01">
+                               placeholder="Contoh: Jl. Poros Kendari–Konda RW 02 RT 01">
                     </div>
                 </div>
 
@@ -109,8 +109,8 @@
     @push('scripts')
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const defaultLat = -6.8872;
-        const defaultLng = 107.5765;
+        const defaultLat = -4.124444;
+        const defaultLng = 122.440278;
         
         function loadLeafletAndInit() {
             if (typeof L === 'undefined') {

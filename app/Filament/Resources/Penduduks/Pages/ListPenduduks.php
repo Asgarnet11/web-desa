@@ -27,7 +27,7 @@ class ListPenduduks extends ListRecords
                     Textarea::make('csv_content')
                         ->label('Data CSV Format BIP / SIAK')
                         ->helperText('Header wajib: no_kk,nik,nama_lengkap,jenis_kelamin,tanggal_lahir,kode_rt,pekerjaan,pendidikan,hubungan_keluarga,status_kependudukan')
-                        ->placeholder("no_kk,nik,nama_lengkap,jenis_kelamin,tanggal_lahir,kode_rt,pekerjaan,pendidikan,hubungan_keluarga,status_kependudukan\n3273011001900001,3273011505900002,Siti Aminah,P,1990-05-15,32.73.01.1001.RW01.RT01,Wirausaha/UMKM,SMA/SMK,istri,tetap")
+                        ->placeholder("no_kk,nik,nama_lengkap,jenis_kelamin,tanggal_lahir,kode_rt,pekerjaan,pendidikan,hubungan_keluarga,status_kependudukan\n7405071001900001,7405071505900002,Siti Aminah,P,1990-05-15,74.05.07.1001.RW01.RT01,Wirausaha/UMKM,SMA/SMK,istri,tetap")
                         ->rows(8)
                         ->required(),
                 ])

@@ -37,7 +37,7 @@ class DataController extends Controller
 
         $headers = [
             'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="satu-data-sukawarna-'.date('Ymd').'.csv"',
+            'Content-Disposition' => 'attachment; filename="satu-data-konda-'.date('Ymd').'.csv"',
         ];
 
         $output = fopen('php://temp', 'r+');
@@ -47,8 +47,8 @@ class DataController extends Controller
         $kesehatan = $rincian['kesehatan_keluarga'] ?? [];
         $mutasi = $rincian['mutasi_tahun_ini'] ?? [];
 
-        fputcsv($output, ['Nama Kelurahan', $wilayah?->nama ?? 'Sukawarna', '-', 'Pemerintah Kota Bandung']);
-        fputcsv($output, ['Luas Wilayah', $wilayah?->luas ?? 0, 'km²', 'Kecamatan Sukasari']);
+        fputcsv($output, ['Nama Kelurahan', $wilayah?->nama ?? 'Konda', '-', 'Pemerintah Kabupaten Konawe Selatan']);
+        fputcsv($output, ['Luas Wilayah', $wilayah?->luas ?? 0, 'km²', 'Kecamatan Konda']);
         fputcsv($output, ['Jumlah RW', $statistik['wilayah']['rw_count'] ?? 0, 'Rukun Warga', 'Wilayah Administratif']);
         fputcsv($output, ['Jumlah Penduduk', $statistik['demografi']['total_penduduk'] ?? 0, 'Jiwa', 'Agregat Real-Time Buku Induk']);
         fputcsv($output, ['Jumlah Kepala Keluarga', $statistik['demografi']['total_kk'] ?? 0, 'KK', 'Agregat Real-Time Buku Induk']);

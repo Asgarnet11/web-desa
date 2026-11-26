@@ -59,7 +59,7 @@
                             <label class="block text-xs font-bold text-[#1B4332]">Lokasi Kejadian (RT / RW)</label>
                             <input type="text" name="lokasi" value="{{ old('lokasi') }}" 
                                    class="w-full px-4 py-2.5 rounded-2xl bg-white border border-[#52B788]/40 focus:ring-2 focus:ring-[#52B788] text-xs outline-none"
-                                   placeholder="Contoh: Jl. Sukagalih RW 02">
+                                   placeholder="Contoh: Jl. Poros Kendari–Konda RW 02">
                         </div>
                     </div>
 
@@ -102,27 +102,27 @@
                             <div class="w-8 h-8 rounded-full bg-[#52B788]/20 text-[#2D6A4F] flex-shrink-0 flex items-center justify-center font-bold">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             </div>
-                            <p class="pt-1">{{ $profil?->alamat_kantor ?? 'Jl. Sukawarna No. 12, Kec. Sukasari, Kota Bandung, Jawa Barat 40164' }}</p>
+                            <p class="pt-1">{{ $profil?->alamat_kantor ?? 'Jl. Poros Kendari–Konda No. 12, Kec. Konda, Kab. Konawe Selatan, Sulawesi Tenggara 93874' }}</p>
                         </div>
 
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-[#52B788]/20 text-[#2D6A4F] flex-shrink-0 flex items-center justify-center font-bold">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                             </div>
-                            <p class="font-semibold">{{ $profil?->kontak_whatsapp ?? '0812-3456-7890' }} (WhatsApp Resmi)</p>
+                            <p class="font-semibold">{{ $profil?->kontak_whatsapp ?? '08114051938' }} (WhatsApp Resmi)</p>
                         </div>
 
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-[#52B788]/20 text-[#2D6A4F] flex-shrink-0 flex items-center justify-center font-bold">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             </div>
-                            <p>{{ $profil?->kontak_email ?? 'kelurahan.sukawarna@bandung.go.id' }}</p>
+                            <p>{{ $profil?->kontak_email ?? 'kelurahan.konda@konaselkab.go.id' }}</p>
                         </div>
                     </div>
 
                     <!-- Direct Quick Connect Buttons -->
                     <div class="pt-2 flex flex-wrap gap-3">
-                        <a href="https://wa.me/62{{ ltrim($profil?->kontak_whatsapp ?? '081234567890', '0') }}" 
+                        <a href="https://wa.me/62{{ ltrim($profil?->kontak_whatsapp ?? '08114051938', '0') }}" 
                            target="_blank" 
                            class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#2D6A4F] text-[#FFF8E7] text-xs font-bold hover:bg-[#1B4332] transition-colors">
                             <span>Hubungi via WhatsApp</span>

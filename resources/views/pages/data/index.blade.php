@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Satu Data & Transparansi Publik - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Satu Data & Transparansi Publik - Kelurahan Konda'">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12">
         <!-- Page Header -->
         <div class="space-y-2">
@@ -10,7 +10,7 @@
                 Statistik Kewilayahan & Ekosistem Data Terbuka
             </h1>
             <p class="text-xs sm:text-sm text-gray-600 max-w-3xl leading-relaxed">
-                Akses terbuka data agregat kependudukan, capaian pembangunan, sebaran infrastruktur publik, dan direktori ekonomi Kelurahan Sukawarna. Terbuka bagi masyarakat, perencana kota, dan akademisi.
+                Akses terbuka data agregat kependudukan, capaian pembangunan, sebaran infrastruktur publik, dan direktori ekonomi Kelurahan Konda. Terbuka bagi masyarakat, perencana daerah, dan akademisi.
             </p>
             <div class="pt-1 flex flex-wrap items-center gap-2 text-[11px] text-gray-600">
                 <span class="font-semibold text-[#1B4332]">Acuan Regulasi:</span>
@@ -220,7 +220,7 @@
                         </div>
                         <h4 class="font-serif font-bold text-base text-[#1B4332]">Batas Poligon Kelurahan</h4>
                         <p class="text-xs text-gray-500 leading-relaxed">
-                            Geometri batas administratif batas wilayah Kelurahan Sukawarna format GeoJSON.
+                            Geometri batas administratif batas wilayah Kelurahan Konda format GeoJSON.
                         </p>
                     </div>
                     <a href="{{ route('api.geojson.batas') }}" target="_blank" 

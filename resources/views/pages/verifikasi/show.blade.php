@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Verifikasi Keaslian Dokumen - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Verifikasi Keaslian Dokumen - Kelurahan Konda'">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 py-12 space-y-8">
         <div class="text-center space-y-1.5">
             <span class="text-xs font-bold text-[#FFB703] uppercase tracking-wider block">Sistem Validasi Resmi</span>
@@ -22,7 +22,7 @@
                     </div>
                     <div>
                         <strong class="text-sm font-bold block text-emerald-950">DOKUMEN RESMI TERDAFTAR & SAH</strong>
-                        <span class="text-xs text-emerald-700 block">Tercatat secara sah dalam sistem administrasi Kelurahan Sukawarna.</span>
+                        <span class="text-xs text-emerald-700 block">Tercatat secara sah dalam sistem administrasi Kelurahan Konda.</span>
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                 <!-- Footer Assurance Note -->
                 <div class="pt-4 border-t border-gray-100 text-center">
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        Dokumen ini diterbitkan secara sah dan dilindungi oleh Undang-Undang ITE serta regulasi keterbukaan informasi Pemerintah Kota Bandung.
+                        Dokumen ini diterbitkan secara sah dan dilindungi oleh Undang-Undang ITE serta regulasi keterbukaan informasi Pemerintah Kabupaten Konawe Selatan.
                     </p>
                 </div>
             </div>

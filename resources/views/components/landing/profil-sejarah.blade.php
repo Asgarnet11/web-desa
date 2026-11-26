@@ -19,7 +19,7 @@
                     
                     <div class="relative rounded-2xl overflow-hidden border border-gray-200/80 shadow-lg bg-gray-100 aspect-[4/3]">
                         <img src="{{ $officePhoto }}" 
-                             alt="Kantor Kelurahan Sukawarna dan Kebersamaan Warga" 
+                             alt="Kantor Kelurahan Konda dan Kebersamaan Warga" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
 
@@ -40,12 +40,12 @@
 
                 <!-- Section Heading -->
                 <h2 class="font-serif font-black text-3xl sm:text-4xl text-[#1B4332] leading-tight tracking-tight">
-                    Kelurahan Sukawarna
+                    Kelurahan Konda
                 </h2>
 
                 <!-- Descriptive Lead Paragraphs -->
                 <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    {{ $profil?->sejarah ?? 'Kelurahan Sukawarna merupakan wilayah berdaya di Kecamatan Sukasari, Kota Bandung, yang berdedikasi membangun masyarakat berkarakter, rukun, dan mandiri. Kami memadukan keterbukaan data spasial dengan semangat gotong royong warga demi mewujudkan kemajuan masa depan yang berkelanjutan.' }}
+                    {{ $profil?->sejarah ?? 'Kelurahan Konda merupakan pusat pemerintahan Kecamatan Konda di Kabupaten Konawe Selatan, Sulawesi Tenggara, yang berdedikasi membangun masyarakat rukun dan mandiri. Kami memadukan keterbukaan data spasial dengan semangat gotong royong warga demi kemajuan wilayah yang berkelanjutan.' }}
                 </p>
 
                 <p class="text-xs sm:text-sm text-gray-500 leading-relaxed">
@@ -61,7 +61,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
                         </div>
-                        <div class="font-serif font-black text-lg text-[#1B4332]">32.73.01</div>
+                        <div class="font-serif font-black text-lg text-[#1B4332]">74.05.07</div>
                         <div class="text-[11px] text-gray-500 leading-tight">Kode Wilayah</div>
                     </div>
 
@@ -72,7 +72,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                             </svg>
                         </div>
-                        <div class="font-serif font-black text-lg text-[#1B4332]">18 RT / 3 RW</div>
+                        <div class="font-serif font-black text-lg text-[#1B4332]">14 RT / 7 RW</div>
                         <div class="text-[11px] text-gray-500 leading-tight">Rasio Pamong Wilayah</div>
                     </div>
 

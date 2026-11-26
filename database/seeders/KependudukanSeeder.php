@@ -48,7 +48,7 @@ class KependudukanSeeder extends Seeder
             // Seed 2 Kartu Keluarga per RT -> 14 KK total across 7 RW (4-5 warga per KK)
             for ($k = 1; $k <= 2; $k++) {
                 $seq = ($idx * 10) + $k;
-                $noKk = sprintf('327301140120%04d', $seq);
+                $noKk = sprintf('740507140120%04d', $seq);
                 $kkHash = KependudukanSecurity::hashIdentifier($noKk);
                 $kepalaNama = $namaLaki[$seq % count($namaLaki)].' '.chr(65 + ($seq % 26));
 
@@ -58,13 +58,13 @@ class KependudukanSeeder extends Seeder
                         'wilayah_id' => $rt->id,
                         'no_kk' => $noKk,
                         'kepala_keluarga_nama' => $kepalaNama,
-                        'alamat_ringkas' => "Jl. Sukawarna No. {$seq}, {$rt->breadcrumb_nama}",
+                        'alamat_ringkas' => "Jl. Poros Kendari–Konda No. {$seq}, {$rt->breadcrumb_nama}",
                         'status_kk' => 'aktif',
                     ]
                 );
 
                 // Kepala Keluarga (Usia 30-55)
-                $nikKk = sprintf('327301010180%04d', $seq);
+                $nikKk = sprintf('740507010180%04d', $seq);
                 Penduduk::firstOrCreate(
                     ['nik_hash' => KependudukanSecurity::hashIdentifier($nikKk)],
                     [
@@ -73,7 +73,7 @@ class KependudukanSeeder extends Seeder
                         'nik' => $nikKk,
                         'nama_lengkap' => $kepalaNama,
                         'jenis_kelamin' => JenisKelamin::LakiLaki,
-                        'tempat_lahir' => 'Bandung',
+                        'tempat_lahir' => 'Konawe Selatan',
                         'tanggal_lahir' => now()->subYears(32 + ($seq % 24))->subMonths($k),
                         'hubungan_keluarga' => HubunganKeluarga::KepalaKeluarga,
                         'pekerjaan' => $pekerjaanPool[$seq % count($pekerjaanPool)],
@@ -85,7 +85,7 @@ class KependudukanSeeder extends Seeder
                 );
 
                 // Istri (Usia 25-48)
-                $nikIstri = sprintf('327301450485%04d', $seq);
+                $nikIstri = sprintf('740507450485%04d', $seq);
                 $istriNama = $namaPerempuan[$seq % count($namaPerempuan)].' '.chr(65 + ($seq % 26));
                 $istri = Penduduk::firstOrCreate(
                     ['nik_hash' => KependudukanSecurity::hashIdentifier($nikIstri)],
@@ -95,7 +95,7 @@ class KependudukanSeeder extends Seeder
                         'nik' => $nikIstri,
                         'nama_lengkap' => $istriNama,
                         'jenis_kelamin' => JenisKelamin::Perempuan,
-                        'tempat_lahir' => 'Bandung',
+                        'tempat_lahir' => 'Kendari',
                         'tanggal_lahir' => now()->subYears(26 + ($seq % 15))->subDays($seq),
                         'hubungan_keluarga' => HubunganKeluarga::Istri,
                         'pekerjaan' => $pekerjaanPool[($seq + 1) % count($pekerjaanPool)],
@@ -126,7 +126,7 @@ class KependudukanSeeder extends Seeder
                 }
 
                 // Anak / Balita (Usia 2-18)
-                $nikAnak = sprintf('327301120815%04d', $seq);
+                $nikAnak = sprintf('740507120815%04d', $seq);
                 $usiaAnak = ($idx + $k) % 2 === 0 ? 3 : 14;
                 $anak = Penduduk::firstOrCreate(
                     ['nik_hash' => KependudukanSecurity::hashIdentifier($nikAnak)],
@@ -136,7 +136,7 @@ class KependudukanSeeder extends Seeder
                         'nik' => $nikAnak,
                         'nama_lengkap' => ($k === 1 ? 'Rayyan ' : 'Nadia ').$kepalaNama,
                         'jenis_kelamin' => $k === 1 ? JenisKelamin::LakiLaki : JenisKelamin::Perempuan,
-                        'tempat_lahir' => 'Bandung',
+                        'tempat_lahir' => 'Kendari',
                         'tanggal_lahir' => now()->subYears($usiaAnak),
                         'hubungan_keluarga' => HubunganKeluarga::Anak,
                         'pekerjaan' => 'Pelajar/Mahasiswa',
@@ -164,16 +164,16 @@ class KependudukanSeeder extends Seeder
 
                 // Add elderly member in first KK of odd RTs (age 66+)
                 if ($k === 1 && ($idx % 2 === 1)) {
-                    $nikLansia = sprintf('327301040258%04d', $seq);
+                    $nikLansia = sprintf('740507040258%04d', $seq);
                     $lansia = Penduduk::firstOrCreate(
                         ['nik_hash' => KependudukanSecurity::hashIdentifier($nikLansia)],
                         [
                             'wilayah_id' => $rt->id,
                             'kartu_keluarga_id' => $kk->id,
                             'nik' => $nikLansia,
-                            'nama_lengkap' => 'H. Sutisna '.$kepalaNama,
+                            'nama_lengkap' => 'H. La Ode '.$kepalaNama,
                             'jenis_kelamin' => JenisKelamin::LakiLaki,
-                            'tempat_lahir' => 'Garut',
+                            'tempat_lahir' => 'Unaaha',
                             'tanggal_lahir' => now()->subYears(68),
                             'hubungan_keluarga' => HubunganKeluarga::OrangTua,
                             'pekerjaan' => 'Pensiunan',
@@ -204,14 +204,14 @@ class KependudukanSeeder extends Seeder
         $firstKk = KartuKeluarga::where('wilayah_id', $firstRt->id)->first();
 
         MutasiPenduduk::firstOrCreate(
-            ['nomor_surat_pengantar' => 'SKD-SKW-'.now()->year.'-00101'],
+            ['nomor_surat_pengantar' => 'SKD-KND-'.now()->year.'-00101'],
             [
                 'wilayah_id' => $firstRt->id,
                 'penduduk_id' => $firstPenduduk?->id,
                 'kartu_keluarga_id' => $firstKk?->id,
                 'jenis_mutasi' => JenisMutasi::Datang,
                 'tanggal_peristiwa' => now()->subDays(12)->toDateString(),
-                'asal_atau_tujuan' => 'Kecamatan Coblong, Kota Bandung',
+                'asal_atau_tujuan' => 'Kecamatan Ranomeeto, Kabupaten Konawe Selatan',
                 'status_verifikasi' => StatusVerifikasi::Terverifikasi,
                 'diajukan_oleh' => $rtUser?->id,
                 'diverifikasi_oleh' => $operator?->id,
@@ -222,14 +222,14 @@ class KependudukanSeeder extends Seeder
         );
 
         MutasiPenduduk::firstOrCreate(
-            ['nomor_surat_pengantar' => 'SKL-SKW-'.now()->year.'-00102'],
+            ['nomor_surat_pengantar' => 'SKL-KND-'.now()->year.'-00102'],
             [
                 'wilayah_id' => $firstRt->id,
                 'penduduk_id' => $firstPenduduk?->id,
                 'kartu_keluarga_id' => $firstKk?->id,
                 'jenis_mutasi' => JenisMutasi::Kelahiran,
                 'tanggal_peristiwa' => now()->subDays(6)->toDateString(),
-                'asal_atau_tujuan' => 'RSIA Limijati Bandung',
+                'asal_atau_tujuan' => 'RSUD Kabupaten Konawe Selatan',
                 'status_verifikasi' => StatusVerifikasi::Terverifikasi,
                 'diajukan_oleh' => $kader?->id,
                 'diverifikasi_oleh' => $operator?->id,
@@ -245,11 +245,11 @@ class KependudukanSeeder extends Seeder
                 'wilayah_id' => $firstRt->id,
                 'jenis_mutasi' => JenisMutasi::Datang,
                 'tanggal_peristiwa' => now()->subDay()->toDateString(),
-                'asal_atau_tujuan' => 'Kabupaten Sumedang (Pendatang Sementara)',
+                'asal_atau_tujuan' => 'Kabupaten Konawe (Pendatang Sementara)',
                 'payload_data' => [
-                    'no_kk' => '3211021205950099',
+                    'no_kk' => '7402011205950099',
                     'kepala_keluarga_nama' => 'Fajar Maulana',
-                    'nik' => '3211021205950098',
+                    'nik' => '7402011205950098',
                     'nama_lengkap' => 'Fajar Maulana',
                     'jenis_kelamin' => JenisKelamin::LakiLaki->value,
                     'tanggal_lahir' => '1995-05-12',
@@ -263,7 +263,7 @@ class KependudukanSeeder extends Seeder
         }
 
         // Sync real-time demographic aggregates bottom-up once per node (RT -> RW -> Kelurahan)
-        $kelurahan = Wilayah::where('kode', '32.73.01.1001')->first();
+        $kelurahan = Wilayah::where('kode', '74.05.07.1001')->first();
         if ($kelurahan) {
             app(DemografiSyncService::class)->syncTree($kelurahan->id);
         }

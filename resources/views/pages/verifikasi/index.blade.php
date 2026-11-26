@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Pencarian Verifikasi Dokumen - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Pencarian Verifikasi Dokumen - Kelurahan Konda'">
     <div class="max-w-xl mx-auto px-4 sm:px-6 py-16 space-y-8">
         <div class="text-center space-y-2">
             <span class="text-xs font-bold text-[#FFB703] uppercase tracking-wider block">Validasi Dokumen Digital</span>
@@ -17,7 +17,7 @@
                     <input type="text" 
                            name="kode" 
                            required 
-                           placeholder="Contoh: FAST-SKW-2026-98213 atau SK-SKW-2026-..." 
+                           placeholder="Contoh: FAST-KND-2026-98213 atau SK-KND-2026-..." 
                            class="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-[#2D6A4F] focus:ring-2 focus:ring-emerald-100 text-xs font-mono uppercase outline-none">
                 </div>
 

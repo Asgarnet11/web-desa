@@ -1,4 +1,4 @@
-<x-layouts.app title="Repositori Dokumen & Formulir Publik - Kelurahan Sukawarna">
+<x-layouts.app title="Repositori Dokumen & Formulir Publik - Kelurahan Konda">
     <!-- Hero Section -->
     <section class="bg-gradient-to-b from-[#1B4332] to-[#143527] text-white pt-12 pb-20 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#FFB703_1px,transparent_1px)] [background-size:16px_16px]"></div>
@@ -13,7 +13,7 @@
                     Repositori Dokumen & <span class="text-[#FFB703]">Blangko Mandiri</span>
                 </h1>
                 <p class="text-white/80 text-sm sm:text-base leading-relaxed">
-                    Akses transparan seluruh dokumen resmi Pemerintah Kelurahan Sukawarna, mencakup formulir blangko permohonan surat warga, Standar Operasional Prosedur (SOP), laporan akuntabilitas kinerja, serta regulasi kelurahan.
+                    Akses transparan seluruh dokumen resmi Pemerintah Kelurahan Konda, mencakup formulir blangko permohonan surat warga, Standar Operasional Prosedur (SOP), laporan akuntabilitas kinerja, serta regulasi kelurahan.
                 </p>
             </div>
 

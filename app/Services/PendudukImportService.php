@@ -89,7 +89,7 @@ class PendudukImportService
                         'wilayah_id' => $wilayah->id,
                         'kartu_keluarga_id' => $kk->id,
                         'nik' => $nik,
-                        'nama_lengkap' => $row['nama_lengkap'] ?: 'Warga Sukawarna',
+                        'nama_lengkap' => $row['nama_lengkap'] ?: 'Warga Konda',
                         'jenis_kelamin' => in_array(strtoupper($row['jenis_kelamin'] ?? 'L'), ['L', 'P'], true) ? strtoupper($row['jenis_kelamin']) : 'L',
                         'tanggal_lahir' => $row['tanggal_lahir'] ?: '1990-01-01',
                         'pekerjaan' => $row['pekerjaan'] ?? 'Karyawan Swasta',

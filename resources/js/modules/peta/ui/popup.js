@@ -43,7 +43,7 @@ export function renderFacilityPopup(properties, coordinates = null) {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
-                        <span>${properties.alamat || 'Kelurahan Sukawarna, Sukasari, Kota Bandung'}</span>
+                        <span>${properties.alamat || 'Kelurahan Konda, Kec. Konda, Kab. Konawe Selatan'}</span>
                     </p>
                 </div>
 
@@ -93,7 +93,7 @@ export function renderUmkmPopup(properties, coordinates = null) {
            </div>`
         : `<div class="p-3 pb-0 flex items-center justify-between">
              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold rounded-full bg-orange-50 text-orange-600">
-                 🛍️ UMKM Sukawarna &bull; ${properties.kategori || 'Produk'}
+                 🛍️ UMKM Konda &bull; ${properties.kategori || 'Produk'}
              </span>
              ${properties.is_unggulan ? `
                  <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">
@@ -118,7 +118,7 @@ export function renderUmkmPopup(properties, coordinates = null) {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
-                        <span>${properties.alamat || 'Kelurahan Sukawarna, Kota Bandung'}</span>
+                        <span>${properties.alamat || 'Kelurahan Konda, Kab. Konawe Selatan'}</span>
                     </p>
                 </div>
 

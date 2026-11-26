@@ -24,7 +24,7 @@ class PublicPagesTest extends TestCase
         $response = $this->get(route('landing'));
 
         $response->assertStatus(200);
-        $response->assertSee('Kelurahan Sukawarna');
+        $response->assertSee('Kelurahan Konda');
         $response->assertSee('Harmoni Warga');
     }
 
@@ -70,15 +70,15 @@ class PublicPagesTest extends TestCase
 
     public function test_pengaduan_can_be_submitted_and_tracked(): void
     {
-        $sukawarna = Wilayah::where('kode', '32.73.01.1001')->first();
+        $konda = Wilayah::where('kode', '74.05.07.1001')->first();
 
         $response = $this->post(route('pengaduan.store'), [
-            'wilayah_id' => $sukawarna->id,
+            'wilayah_id' => $konda->id,
             'nama_pelapor' => 'Warga Pengadu',
             'telepon_pelapor' => '081299988877',
             'kategori' => 'Infrastruktur',
             'judul' => 'Lampu PJU Padam di RW 01',
-            'isi' => 'Lampu jalan penerangan utama di gang 2 padam sejak dua hari lalu.',
+            'isi' => 'Lampu jalan penerangan utama di lorong 2 padam sejak dua hari lalu.',
             'lokasi' => 'RW 01 RT 02',
         ]);
 
@@ -92,21 +92,21 @@ class PublicPagesTest extends TestCase
     public function test_citizen_can_submit_complaint_with_coordinates(): void
     {
         $response = $this->post(route('pengaduan.store'), [
-            'nama_pelapor' => 'Budi Warga Sukawarna',
-            'telepon_pelapor' => '081234567890',
+            'nama_pelapor' => 'Budi Warga Konda',
+            'telepon_pelapor' => '08114051938',
             'kategori' => 'Infrastruktur',
-            'lokasi' => 'Jl. Sukagalih RW 02',
-            'lat' => -6.8872,
-            'lng' => 107.5765,
+            'lokasi' => 'Jl. Poros Kendari–Konda RW 02',
+            'lat' => -4.124444,
+            'lng' => 122.440278,
             'judul' => 'Lampu PJU Padam',
             'isi' => 'Lampu jalan mati sejak kemarin malam dan gelap gulita.',
         ]);
 
         $response->assertRedirect(route('pengaduan.index'));
         $this->assertDatabaseHas('pengaduan', [
-            'nama_pelapor' => 'Budi Warga Sukawarna',
-            'lat' => -6.8872,
-            'lng' => 107.5765,
+            'nama_pelapor' => 'Budi Warga Konda',
+            'lat' => -4.124444,
+            'lng' => 122.440278,
         ]);
     }
 
@@ -116,9 +116,9 @@ class PublicPagesTest extends TestCase
             'nama_usaha' => 'Warung Nasi Barokah',
             'nama_pemilik' => 'Bu Barokah',
             'kategori' => 'Kuliner',
-            'alamat' => 'Jl. Sukasari Gang 2 RW 01',
+            'alamat' => 'Jl. Konda Raya Lorong 2 RW 01',
             'kontak_wa' => '081299887766',
-            'deskripsi' => 'Nasi uduk dan masakan sunda gurih.',
+            'deskripsi' => 'Nasi kuning dan kuliner khas Sulawesi Tenggara gurih.',
         ]);
 
         $response->assertRedirect(route('umkm.index'));
@@ -143,7 +143,7 @@ class PublicPagesTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
-        $response->assertSee('Sukawarna');
+        $response->assertSee('Konda');
     }
 
     public function test_verifikasi_page_renders_and_validates_code(): void
@@ -151,7 +151,7 @@ class PublicPagesTest extends TestCase
         $indexResponse = $this->get(route('verifikasi.index'));
         $indexResponse->assertStatus(200);
 
-        $showResponse = $this->get(route('verifikasi.show', 'FAST-SKW-2026-99999'));
+        $showResponse = $this->get(route('verifikasi.show', 'FAST-KND-2026-99999'));
         $showResponse->assertStatus(200);
         $showResponse->assertSee('DOKUMEN RESMI TERDAFTAR');
     }

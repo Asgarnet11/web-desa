@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
 
-    const initialLat = parseFloat(mapElement.dataset.lat) || -6.8872;
-    const initialLng = parseFloat(mapElement.dataset.lng) || 107.5765;
+    const initialLat = parseFloat(mapElement.dataset.lat) || -4.124444;
+    const initialLng = parseFloat(mapElement.dataset.lng) || 122.440278;
 
     const map = initMap('map', {
         center: [initialLat, initialLng],

@@ -481,7 +481,7 @@
                 Judul Tahapan
             </h3>
             <p id="modal-desc" class="text-xs text-gray-600 mt-2 leading-relaxed">
-                Tahapan ini merupakan proses resmi dari jadwal pengadaan sarana dan alur pelayanan masyarakat di Kelurahan Sukawarna. Seluruh berkas dan hasil telaah dapat diakses secara transparan oleh warga.
+                Tahapan ini merupakan proses resmi dari jadwal pengadaan sarana dan alur pelayanan masyarakat di Kelurahan Konda. Seluruh berkas dan hasil telaah dapat diakses secara transparan oleh warga.
             </p>
         </div>
 

@@ -158,7 +158,7 @@ class Wilayah extends Model
     }
 
     /**
-     * Format human-readable hierarchical label such as "RT 01 · RW 01 · Sukawarna".
+     * Format human-readable hierarchical label such as "RT 01 · RW 01 · Konda".
      */
     public function getBreadcrumbNamaAttribute(): string
     {

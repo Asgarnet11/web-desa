@@ -8,10 +8,10 @@
     </span>
     <span class="flex flex-col leading-none">
         <span class="font-display font-bold text-[14px] tracking-tight text-gray-950 dark:text-white">
-            Kelurahan Sukawarna
+            Kelurahan Konda
         </span>
         <span class="text-[11px] font-medium text-gray-500 dark:text-zinc-400 mt-0.5">
-            Kec. Sukasari · Kota Bandung
+            Kec. Konda · Kab. Konawe Selatan
         </span>
     </span>
 </div>

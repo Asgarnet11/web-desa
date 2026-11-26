@@ -26,7 +26,7 @@ export const baseTileConfigs = {
 };
 
 export function initMap(containerId = 'map', options = {}) {
-    const defaultCenter = options.center || [-6.8872, 107.5765];
+    const defaultCenter = options.center || [-4.124444, 122.440278];
     const defaultZoom = options.zoom || 15;
 
     const map = L.map(containerId, {

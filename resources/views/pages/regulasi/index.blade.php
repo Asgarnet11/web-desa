@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Dasar Hukum & Tata Kelola Data Warga - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Dasar Hukum & Tata Kelola Data Warga - Kelurahan Konda'">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-10">
         <!-- Header -->
         <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200/90 shadow-xs space-y-4">
@@ -9,7 +9,7 @@
                 Regulasi Acuan Pengambilan, Penyimpanan & Pemrosesan Data Warga
             </h1>
             <p class="text-sm text-gray-600 max-w-4xl leading-relaxed">
-                Pemerintah Kelurahan Sukawarna menyelenggarakan pendataan kependudukan (datang, pindah, lahir, wafat), pemantauan kesehatan keluarga Posyandu, serta keterbukaan informasi publik berdasarkan lima regulasi resmi pemerintah Indonesia berikut agar tercipta kepastian hukum dan kejelasan perlindungan privasi bagi seluruh warga.
+                Pemerintah Kelurahan Konda menyelenggarakan pendataan kependudukan (datang, pindah, lahir, wafat), pemantauan kesehatan keluarga Posyandu, serta keterbukaan informasi publik berdasarkan lima regulasi resmi pemerintah Indonesia berikut agar tercipta kepastian hukum dan kejelasan perlindungan privasi bagi seluruh warga.
             </p>
             <div class="pt-2 flex flex-wrap gap-3">
                 <a href="{{ route('dokumen.index', ['kategori' => 'Peraturan']) }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1B4332] text-white text-xs font-bold hover:bg-[#2D6A4F] transition-colors">
@@ -57,7 +57,7 @@
 
                             <div class="space-y-1.5 pt-1">
                                 <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-                                    Implementasi Nyata di Kelurahan Sukawarna:
+                                    Implementasi Nyata di Kelurahan Konda:
                                 </span>
                                 <ul class="space-y-1.5 text-xs text-gray-700 list-disc list-inside">
                                     @foreach ($reg['penerapan'] as $poin)
@@ -127,7 +127,7 @@
                     Hak Warga Atas Data Pribadi (UU No. 27 Tahun 2022)
                 </h2>
                 <p class="text-xs text-gray-700 leading-relaxed">
-                    Warga Kelurahan Sukawarna berhak memperoleh kejelasan tujuan pencatatan data, meminta pembaruan atau perbaikan ketidakakuratan data kependudukan (seperti perubahan anggota keluarga, domisili, atau status pekerjaan/pendidikan), serta melaporkan dugaan penyalahgunaan data kepada Petugas Pengelola Data Kelurahan melalui loket resmi atau kanal pengaduan.
+                    Warga Kelurahan Konda berhak memperoleh kejelasan tujuan pencatatan data, meminta pembaruan atau perbaikan ketidakakuratan data kependudukan (seperti perubahan anggota keluarga, domisili, atau status pekerjaan/pendidikan), serta melaporkan dugaan penyalahgunaan data kepada Petugas Pengelola Data Kelurahan melalui loket resmi atau kanal pengaduan.
                 </p>
             </div>
             <div class="flex flex-col justify-center gap-2.5">

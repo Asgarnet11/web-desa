@@ -12,82 +12,82 @@ class WilayahContohSeeder extends Seeder
     {
         // 1. Provinsi
         $provinsi = Wilayah::firstOrCreate(
-            ['kode' => '32'],
+            ['kode' => '74'],
             [
                 'tipe' => TipeWilayah::Provinsi,
-                'nama' => 'Jawa Barat',
-                'lat' => -6.914744,
-                'lng' => 107.609810,
+                'nama' => 'Sulawesi Tenggara',
+                'lat' => -3.998500,
+                'lng' => 122.512900,
             ]
         );
 
-        // 2. Kota
-        $kota = Wilayah::firstOrCreate(
-            ['kode' => '32.73'],
+        // 2. Kabupaten Konawe Selatan
+        $kabupaten = Wilayah::firstOrCreate(
+            ['kode' => '74.05'],
             [
                 'parent_id' => $provinsi->id,
                 'tipe' => TipeWilayah::KabupatenKota,
-                'nama' => 'Kota Bandung',
-                'lat' => -6.917464,
-                'lng' => 107.619123,
-                'luas' => 167.31,
+                'nama' => 'Kabupaten Konawe Selatan',
+                'lat' => -4.242000,
+                'lng' => 122.460000,
+                'luas' => 4237.74,
             ]
         );
 
-        // 3. Kecamatan
+        // 3. Kecamatan Konda
         $kecamatan = Wilayah::firstOrCreate(
-            ['kode' => '32.73.01'],
+            ['kode' => '74.05.07'],
             [
-                'parent_id' => $kota->id,
+                'parent_id' => $kabupaten->id,
                 'tipe' => TipeWilayah::Kecamatan,
-                'nama' => 'Sukasari',
-                'lat' => -6.871234,
-                'lng' => 107.584321,
-                'luas' => 6.27,
+                'nama' => 'Konda',
+                'lat' => -4.124400,
+                'lng' => 122.440300,
+                'luas' => 132.50,
             ]
         );
 
-        // 4. Kelurahan Sukawarna
+        // 4. Kelurahan Konda (4°07′28″S 122°26′25″E)
         $geojsonBatas = [
             'type' => 'Feature',
             'properties' => [
-                'nama' => 'Kelurahan Sukawarna',
-                'kode' => '32.73.01.1001',
+                'nama' => 'Kelurahan Konda',
+                'kode' => '74.05.07.1001',
             ],
             'geometry' => [
                 'type' => 'Polygon',
                 'coordinates' => [[
-                    [107.5680, -6.8800],
-                    [107.5850, -6.8800],
-                    [107.5870, -6.8950],
-                    [107.5700, -6.8960],
-                    [107.5680, -6.8800],
+                    [122.4300, -4.1150],
+                    [122.4510, -4.1150],
+                    [122.4510, -4.1340],
+                    [122.4300, -4.1340],
+                    [122.4300, -4.1150],
                 ]],
             ],
         ];
 
         $kelurahan = Wilayah::firstOrCreate(
-            ['kode' => '32.73.01.1001'],
+            ['kode' => '74.05.07.1001'],
             [
                 'parent_id' => $kecamatan->id,
                 'tipe' => TipeWilayah::Kelurahan,
-                'nama' => 'Sukawarna',
-                'luas' => 1.48,
-                'lat' => -6.887200,
-                'lng' => 107.576500,
+                'nama' => 'Konda',
+                'luas' => 4.65,
+                'lat' => -4.124444,
+                'lng' => 122.440278,
                 'batas' => $geojsonBatas,
             ]
         );
 
         // 5. 7 RW dengan polygon batas tematik agar peta choropleth terhubung riil
         $rwDefinitions = [
-            ['num' => '01', 'lat' => -6.8830, 'lng' => 107.5720, 'box' => [107.5690, -6.8810, 107.5750, -6.8855]],
-            ['num' => '02', 'lat' => -6.8830, 'lng' => 107.5785, 'box' => [107.5750, -6.8810, 107.5820, -6.8855]],
-            ['num' => '03', 'lat' => -6.8875, 'lng' => 107.5720, 'box' => [107.5690, -6.8855, 107.5750, -6.8900]],
-            ['num' => '04', 'lat' => -6.8875, 'lng' => 107.5785, 'box' => [107.5750, -6.8855, 107.5820, -6.8900]],
-            ['num' => '05', 'lat' => -6.8920, 'lng' => 107.5725, 'box' => [107.5695, -6.8900, 107.5755, -6.8945]],
-            ['num' => '06', 'lat' => -6.8920, 'lng' => 107.5785, 'box' => [107.5755, -6.8900, 107.5825, -6.8945]],
-            ['num' => '07', 'lat' => -6.8875, 'lng' => 107.5840, 'box' => [107.5820, -6.8815, 107.5860, -6.8935]],
+            ['num' => '01', 'lat' => -4.1190, 'lng' => 122.4355, 'box' => [122.4315, -4.1165, 122.4395, -4.1215]],
+            ['num' => '02', 'lat' => -4.1190, 'lng' => 122.4435, 'box' => [122.4395, -4.1165, 122.4475, -4.1215]],
+            ['num' => '03', 'lat' => -4.1242, 'lng' => 122.4355, 'box' => [122.4315, -4.1215, 122.4395, -4.1270]],
+            ['num' => '04', 'lat' => -4.1242, 'lng' => 122.4435, 'box' => [122.4395, -4.1215, 122.4475, -4.1270]],
+            ['num' => '05', 'lat' => -4.1295, 'lng' => 122.4355, 'box' => [122.4315, -4.1270, 122.4395, -4.1325]],
+            ['num' => '06', 'lat' => -4.1295, 'lng' => 122.4435, 'box' => [122.4395, -4.1270, 122.4475, -4.1325]],
+            ['num' => '07', 'lat' => -4.1242, 'lng' => 122.4488, 'box' => [122.4475, -4.1170, 122.4502, -4.1320]],
         ];
 
         foreach ($rwDefinitions as $def) {
@@ -96,7 +96,7 @@ class WilayahContohSeeder extends Seeder
                 'type' => 'Feature',
                 'properties' => [
                     'nama' => "RW {$def['num']}",
-                    'kode' => "32.73.01.1001.RW{$def['num']}",
+                    'kode' => "74.05.07.1001.RW{$def['num']}",
                 ],
                 'geometry' => [
                     'type' => 'Polygon',
@@ -111,12 +111,12 @@ class WilayahContohSeeder extends Seeder
             ];
 
             $rw = Wilayah::updateOrCreate(
-                ['kode' => "32.73.01.1001.RW{$def['num']}"],
+                ['kode' => "74.05.07.1001.RW{$def['num']}"],
                 [
                     'parent_id' => $kelurahan->id,
                     'tipe' => TipeWilayah::RW,
                     'nama' => "RW {$def['num']}",
-                    'luas' => 0.21,
+                    'luas' => 0.66,
                     'lat' => $def['lat'],
                     'lng' => $def['lng'],
                     'batas' => $rwPolygon,
@@ -126,7 +126,7 @@ class WilayahContohSeeder extends Seeder
             // 6. 2 RT per RW
             foreach (['01' => -0.0004, '02' => 0.0004] as $rtNum => $offset) {
                 Wilayah::firstOrCreate(
-                    ['kode' => "32.73.01.1001.RW{$def['num']}.RT{$rtNum}"],
+                    ['kode' => "74.05.07.1001.RW{$def['num']}.RT{$rtNum}"],
                     [
                         'parent_id' => $rw->id,
                         'tipe' => TipeWilayah::RT,

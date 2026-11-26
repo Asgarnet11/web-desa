@@ -14,7 +14,7 @@ export function createBoundaryLayer(geojsonData) {
         },
         onEachFeature: (feature, layer) => {
             const props = feature.properties || {};
-            const nama = props.nama || 'Wilayah Kelurahan Sukawarna';
+            const nama = props.nama || 'Wilayah Kelurahan Konda';
             const luas = props.luas ? `${props.luas} km²` : null;
 
             layer.bindTooltip(`

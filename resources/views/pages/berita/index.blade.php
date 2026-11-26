@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Kabar & Berita - Kelurahan Sukawarna'">
+<x-layouts.app :title="'Kabar & Berita - Kelurahan Konda'">
     <div class="max-w-7xl mx-auto px-6 py-10 space-y-8">
         <div>
             <span class="text-xs font-bold text-[#17708A] uppercase tracking-wider">Kabar Kelurahan</span>
@@ -6,7 +6,7 @@
                 Warta, Pengumuman & Agenda Wilayah
             </h1>
             <p class="text-xs sm:text-sm text-[#1F2D26]/75 mt-1">
-                Informasi resmi seputar pembangunan, surat edaran penting, dan kalender kegiatan masyarakat Sukawarna.
+                Informasi resmi seputar pembangunan, surat edaran penting, dan kalender kegiatan masyarakat Kelurahan Konda.
             </p>
         </div>
 

@@ -1,5 +1,5 @@
-<!-- Floating Virtual Civic Assistant Widget: Sapa Sukawarna -->
-<div id="sapa-sukawarna-root" class="fixed bottom-6 right-6 z-40 select-none print:hidden">
+<!-- Floating Virtual Civic Assistant Widget: Sapa Konda -->
+<div id="sapa-konda-root" class="fixed bottom-6 right-6 z-40 select-none print:hidden">
     <!-- Trigger Floating Bubble Button -->
     <button type="button" 
             id="sapa-trigger-btn"
@@ -10,7 +10,7 @@
         </div>
         <div class="text-left hidden sm:block">
             <span class="block text-[10px] text-[#FFB703] font-bold uppercase tracking-wider leading-none">Asisten Digital</span>
-            <span class="block text-xs font-black tracking-tight leading-tight">Sapa Sukawarna</span>
+            <span class="block text-xs font-black tracking-tight leading-tight">Sapa Konda</span>
         </div>
         <span class="sm:hidden text-xs font-bold text-[#FFB703]">Tanya AI</span>
     </button>
@@ -27,7 +27,7 @@
                 </div>
                 <div>
                     <div class="flex items-center gap-1.5">
-                        <h4 class="font-serif font-black text-sm text-white">Sapa Sukawarna</h4>
+                        <h4 class="font-serif font-black text-sm text-white">Sapa Konda</h4>
                         <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[9px] font-bold">Online</span>
                     </div>
                     <p class="text-[10px] text-white/80">Panduan Resmi Layanan Warga 24/7</p>
@@ -68,8 +68,8 @@
                     🤖
                 </div>
                 <div class="bg-white rounded-2xl rounded-tl-xs p-3.5 shadow-xs border border-gray-100 text-gray-800 leading-relaxed max-w-[85%] space-y-1.5">
-                    <p><strong class="text-[#1B4332]">Sampurasun! Halo Wargi Sukawarna! 🙏</strong></p>
-                    <p>Saya <strong>Sapa Sukawarna</strong>, asisten pintar layanan kelurahan. Ada yang bisa saya bantu seputar pengurusan surat, cek tiket pengaduan, atau fasilitas wilayah?</p>
+                    <p><strong class="text-[#1B4332]">Tabea! Halo Warga Kelurahan Konda! 🙏</strong></p>
+                    <p>Saya <strong>Sapa Konda</strong>, asisten pintar layanan Kelurahan Konda, Kab. Konawe Selatan. Ada yang bisa saya bantu seputar pengurusan surat, cek tiket pengaduan, atau fasilitas wilayah?</p>
                     <div class="pt-1 text-[10px] text-gray-400">Silakan ketik pertanyaan Anda di bawah atau pilih topik cepat di atas.</div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
         <!-- Typing Indicator (Hidden by default) -->
         <div id="sapa-typing" class="hidden px-4 py-2 bg-[#FFF8E7]/20 text-[11px] text-gray-500 italic flex items-center gap-2">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-600 animate-bounce"></span>
-            <span>Sapa Sukawarna sedang mengetik...</span>
+            <span>Sapa Konda sedang mengetik...</span>
         </div>
 
         <!-- Input Bar -->
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (q.includes('dokumen') || q.includes('blangko') || q.includes('formulir') || q.includes('download') || q.includes('unduh') || q.includes('format')) {
             return `
                 <p><strong class="text-[#1B4332]">Repositori Dokumen Publik & Blangko Surat:</strong></p>
-                <p class="mt-1 text-gray-700">Pemerintah Kelurahan Sukawarna menyediakan blangko surat resmi (Surat Pengantar RT/RW, SKU, N1-N4 Nikah, SKTM) dan SOP pelayanan yang dapat Anda unduh dan cetak secara gratis.</p>
+                <p class="mt-1 text-gray-700">Pemerintah Kelurahan Konda menyediakan blangko surat resmi (Surat Pengantar RT/RW, SKU, N1-N4 Nikah, SKTM) dan SOP pelayanan yang dapat Anda unduh dan cetak secara gratis.</p>
                 <div class="mt-2 pt-1 flex items-center gap-2">
                     <a href="/dokumen" class="px-2.5 py-1 rounded-lg bg-[#1B4332] text-[#FFB703] font-bold text-[11px] hover:bg-[#2D6A4F]">
                         Buka Repositori Dokumen &rarr;
@@ -215,21 +215,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Jam Layanan / Operasional Kantor
         if (q.includes('jam') || q.includes('buka') || q.includes('operasional') || q.includes('waktu pelayanan') || q.includes('tutup')) {
             return `
-                <p><strong class="text-[#1B4332]">Jadwal Pelayanan Kantor Kelurahan Sukawarna:</strong></p>
+                <p><strong class="text-[#1B4332]">Jadwal Pelayanan Kantor Kelurahan Konda:</strong></p>
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-[11px] space-y-0.5 mt-1 text-gray-700">
-                    <p>📅 <strong>Senin &ndash; Kamis:</strong> 08.00 &ndash; 15.30 WIB (Istirahat 12.00-13.00)</p>
-                    <p>📅 <strong>Jumat:</strong> 08.00 &ndash; 14.30 WIB (Istirahat 11.30-13.00)</p>
+                    <p>📅 <strong>Senin &ndash; Kamis:</strong> 08.00 &ndash; 15.30 WITA (Istirahat 12.00-13.00)</p>
+                    <p>📅 <strong>Jumat:</strong> 08.00 &ndash; 14.30 WITA (Istirahat 11.30-13.00)</p>
                     <p class="text-rose-600 font-semibold">Sabtu, Minggu & Hari Libur Nasional: Tutup</p>
                 </div>
-                <p class="text-[11px] text-gray-500 mt-1">Alamat kantor: Jl. Sukawarna No. 12, Kec. Sukasari, Kota Bandung.</p>
+                <p class="text-[11px] text-gray-500 mt-1">Alamat kantor: Jl. Poros Kendari–Konda No. 12, Kec. Konda, Kab. Konawe Selatan 93874.</p>
             `;
         }
 
         // 3. Pengaduan / Jalan Rusak / Sampah
         if (q.includes('lapor') || q.includes('aduan') || q.includes('pengaduan') || q.includes('rusak') || q.includes('sampah') || q.includes('pju')) {
             return `
-                <p><strong class="text-[#1B4332]">Kanal Pengaduan Warga Sukawarna:</strong></p>
-                <p class="mt-1 text-gray-700">Wargi dapat menyampaikan keluhan infrastruktur, kebersihan, atau pelayanan langsung melalui form online dengan fitur <strong>Deteksi Lokasi GPS</strong>.</p>
+                <p><strong class="text-[#1B4332]">Kanal Pengaduan Warga Konda:</strong></p>
+                <p class="mt-1 text-gray-700">Warga dapat menyampaikan keluhan infrastruktur, kebersihan, atau pelayanan langsung melalui form online dengan fitur <strong>Deteksi Lokasi GPS</strong>.</p>
                 <div class="mt-2 flex items-center gap-2">
                     <a href="/pengaduan" class="px-2.5 py-1 rounded-lg bg-[#FFB703] text-[#1B4332] font-bold text-[11px] hover:bg-amber-400">
                         Isi Form Laporan
@@ -246,10 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return `
                 <p><strong class="text-rose-700">🚨 Kontak Tanggap Darurat 24 Jam:</strong></p>
                 <ul class="space-y-1 text-gray-700 mt-1 text-[11px]">
-                    <li>• <strong>Call Center 112</strong> (Bebas Pulsa - Darurat Bandung)</li>
-                    <li>• <strong>Bhabinkamtibmas:</strong> 0812-3456-7891</li>
-                    <li>• <strong>Babinsa Sukawarna:</strong> 0812-3456-7892</li>
-                    <li>• <strong>Puskesmas Sukasari:</strong> (022) 2013456</li>
+                    <li>• <strong>Call Center 112</strong> (Bebas Pulsa - Darurat Konawe Selatan)</li>
+                    <li>• <strong>Bhabinkamtibmas Polsek Konda:</strong> 0811-4051-110</li>
+                    <li>• <strong>Babinsa Koramil Konda:</strong> 0811-4051-112</li>
+                    <li>• <strong>Puskesmas Konda:</strong> (0401) 3124568</li>
                 </ul>
                 <div class="mt-2">
                     <button type="button" onclick="document.getElementById('sos-modal').classList.remove('hidden')" class="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-bold text-[11px] hover:bg-rose-700">
@@ -263,10 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (q.includes('peta') || q.includes('fasilitas') || q.includes('lokasi') || q.includes('sekolah') || q.includes('masjid') || q.includes('puskesmas')) {
             return `
                 <p><strong class="text-[#1B4332]">Sistem Informasi Geografis (Peta Digital):</strong></p>
-                <p class="mt-1 text-gray-700">Kelurahan Sukawarna memiliki peta interaktif yang memetakan seluruh fasilitas pendidikan, kesehatan, peribadatan, dan batas wilayah RW secara akurat.</p>
+                <p class="mt-1 text-gray-700">Kelurahan Konda memiliki peta interaktif yang memetakan seluruh fasilitas pendidikan, kesehatan, peribadatan, dan batas wilayah RW secara akurat.</p>
                 <div class="mt-2">
                     <a href="/peta" class="inline-flex items-center gap-1 text-xs font-bold text-[#0284C7] hover:underline">
-                        Buka Peta Spasial Sukawarna &rarr;
+                        Buka Peta Spasial Konda &rarr;
                     </a>
                 </div>
             `;
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (q.includes('umkm') || q.includes('usaha') || q.includes('jual') || q.includes('kuliner') || q.includes('produk')) {
             return `
                 <p><strong class="text-[#1B4332]">Direktori UMKM Binaan Warga:</strong></p>
-                <p class="mt-1 text-gray-700">Wargi dapat menjelajahi aneka produk lokal binaan seperti Kopi Kebun, Anyaman Bambu, dan Hidroponik. Anda juga bisa mendaftarkan usaha Anda secara mandiri!</p>
+                <p class="mt-1 text-gray-700">Warga dapat menjelajahi aneka produk lokal binaan seperti Kopi Tolaki, Anyaman Rotan & Bambu, dan Hidroponik. Anda juga bisa mendaftarkan usaha Anda secara mandiri!</p>
                 <div class="mt-2 flex items-center gap-2">
                     <a href="/umkm" class="text-xs font-bold text-orange-600 hover:underline">
                         Lihat Direktori UMKM &rarr;
@@ -285,21 +285,21 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
-        // 7. Salam Sunda / Sapaan Ramah
-        if (q.includes('sampurasun') || q.includes('kumaha') || q.includes('nuhun') || q.includes('pagi') || q.includes('halo') || q.includes('siang')) {
+        // 7. Sapaan Ramah
+        if (q.includes('tabea') || q.includes('halo') || q.includes('pagi') || q.includes('siang') || q.includes('terima kasih')) {
             return `
-                <p><strong>Rampes! 🙏 Wilujeng sumping wargi Sukawarna!</strong></p>
-                <p class="mt-1 text-gray-700">Aya anu tiasa dibantos perkawis palayanan, fasilitas, atanapi program kelurahan dinten ieu?</p>
+                <p><strong>Tabea! 🙏 Selamat datang di Layanan Digital Kelurahan Konda!</strong></p>
+                <p class="mt-1 text-gray-700">Ada yang bisa dibantu terkait layanan kependudukan, peta fasilitas, atau program Kelurahan Konda hari ini?</p>
             `;
         }
 
         // Fallback default
         return `
-            <p>Terima kasih atas pertanyaannya wargi. Pertanyaan Anda mengenai <em>"${escapeHtml(input)}"</em> dapat langsung dikonsultasikan dengan petugas kami melalui WhatsApp atau menu terkait:</p>
+            <p>Terima kasih atas pertanyaannya Bapak/Ibu. Pertanyaan Anda mengenai <em>"${escapeHtml(input)}"</em> dapat langsung dikonsultasikan dengan petugas kami melalui WhatsApp atau menu terkait:</p>
             <div class="mt-2 pt-2 border-t border-gray-100 flex flex-wrap gap-2 text-[11px]">
                 <a href="/layanan" class="px-2 py-1 rounded bg-sky-50 text-sky-700 font-bold hover:bg-sky-100">Layanan Warga</a>
                 <a href="/pengaduan" class="px-2 py-1 rounded bg-amber-50 text-amber-700 font-bold hover:bg-amber-100">Kanal Lapor</a>
-                <a href="https://wa.me/628122012345" target="_blank" class="px-2 py-1 rounded bg-emerald-50 text-emerald-700 font-bold hover:bg-emerald-100">Chat WhatsApp Loket</a>
+                <a href="https://wa.me/628114051938" target="_blank" class="px-2 py-1 rounded bg-emerald-50 text-emerald-700 font-bold hover:bg-emerald-100">Chat WhatsApp Loket</a>
             </div>
         `;
     }
