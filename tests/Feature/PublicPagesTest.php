@@ -62,6 +62,9 @@ class PublicPagesTest extends TestCase
             $showResponse = $this->get(route('berita.show', $berita->slug));
             $showResponse->assertStatus(200);
             $showResponse->assertSee($berita->judul);
+
+            $searchResponse = $this->get(route('berita.index', ['q' => substr($berita->judul, 0, 5)]));
+            $searchResponse->assertStatus(200);
         }
     }
 

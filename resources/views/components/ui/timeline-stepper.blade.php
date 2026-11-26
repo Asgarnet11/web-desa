@@ -485,8 +485,11 @@
             </p>
         </div>
 
-        <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
-            <span class="text-[11px] text-gray-400">Kelurahan Sukawarna &bull; Kota Bandung</span>
+        <div class="pt-4 border-t border-gray-100 flex items-center justify-between gap-2">
+            <a href="{{ route('dokumen.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#0284C7] text-[#0284C7] hover:bg-sky-50 text-[11px] font-bold transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Unduh Dokumen KIP</span>
+            </a>
             <button type="button" onclick="closeTimelineModal()" class="px-4 py-2 bg-[#0284C7] text-white text-xs font-bold rounded-lg hover:bg-[#0369A1] transition-colors">
                 Tutup
             </button>
@@ -549,4 +552,17 @@
         const modal = document.getElementById('timeline-detail-modal');
         if (modal) modal.classList.add('hidden');
     }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeTimelineModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('timeline-detail-modal');
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeTimelineModal();
+            });
+        }
+    });
 </script>

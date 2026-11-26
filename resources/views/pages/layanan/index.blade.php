@@ -111,7 +111,12 @@
 
             <!-- Checkbox List -->
             <div class="space-y-2.5 pt-2">
-                <span class="text-xs font-bold text-[#1B4332] block">Centang dokumen yang sudah Anda siapkan:</span>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-[#1B4332] block">Centang dokumen yang sudah Anda siapkan:</span>
+                    <a href="{{ route('dokumen.index') }}" target="_blank" class="text-[11px] font-bold text-[#0284C7] hover:underline flex items-center gap-1">
+                        <span>Unduh Blangko Surat &rarr;</span>
+                    </a>
+                </div>
                 <div id="checklist-items-container" class="space-y-2"></div>
             </div>
 

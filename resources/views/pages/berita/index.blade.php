@@ -10,6 +10,35 @@
             </p>
         </div>
 
+        <!-- Search Bar -->
+        <div class="bg-white rounded-2xl p-4 border border-gray-200/80 shadow-xs">
+            <form action="{{ route('berita.index') }}" method="GET" class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+                @if(request('kategori'))
+                    <input type="hidden" name="kategori" value="{{ request('kategori') }}">
+                @endif
+                <div class="relative w-full sm:max-w-md">
+                    <input type="text" 
+                           name="q" 
+                           value="{{ request('q') }}" 
+                           placeholder="Cari berita, agenda kegiatan, atau pengumuman..." 
+                           class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2D6A4F] focus:border-transparent">
+                    <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button type="submit" class="px-5 py-2.5 bg-[#1B4332] hover:bg-[#2D6A4F] text-[#FFB703] font-bold text-xs uppercase tracking-wider rounded-xl shadow-xs transition-colors flex-1 sm:flex-none text-center">
+                        Cari Informasi
+                    </button>
+                    @if(request('q') || request('kategori'))
+                        <a href="{{ route('berita.index') }}" class="px-4 py-2.5 border border-gray-200 text-gray-600 hover:text-gray-900 text-xs font-semibold rounded-xl hover:bg-gray-50 transition-colors">
+                            Reset
+                        </a>
+                    @endif
+                </div>
+            </form>
+        </div>
+
         <!-- Section Tabs: Berita vs Pengumuman vs Agenda -->
         <div class="flex items-center gap-2 border-b border-gray-200 pb-3">
             <button type="button" id="tab-berita-btn" onclick="switchWartaTab('berita')" class="warta-tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#1B4332] text-[#FFB703] shadow-xs flex items-center gap-2">
