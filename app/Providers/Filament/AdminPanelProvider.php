@@ -41,7 +41,7 @@ class AdminPanelProvider extends PanelProvider
                 'info' => '#0284C7',
                 'danger' => '#DC2626',
             ])
-            ->font('Nunito')
+            ->font('Plus Jakarta Sans')
             ->sidebarCollapsibleOnDesktop()
             ->collapsibleNavigationGroups()
             ->navigationGroups([

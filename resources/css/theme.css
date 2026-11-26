@@ -1,7 +1,12 @@
-@import '@fontsource/comfortaa/700.css';
-@import '@fontsource/nunito/400.css';
-@import '@fontsource/nunito/600.css';
-@import '@fontsource/nunito/700.css';
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/500.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/800.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
 @import 'leaflet/dist/leaflet.css';
 
 @theme {
@@ -17,12 +22,12 @@
   --color-sky: #8ECFEA;
   --color-danger: #B3361A;
 
-  --font-display: "Comfortaa", system-ui, sans-serif;
-  --font-sans: "Nunito", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  --radius-sm: 16px;
-  --radius-md: 24px;
-  --radius-lg: 40px;
-  --radius-organic: 36px 28px 40px 24px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-organic: 20px 16px 20px 16px;
 }
-
