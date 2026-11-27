@@ -336,16 +336,21 @@
 
             <div id="timeline-panel-{{ $key }}" class="timeline-panel {{ $loop->first ? 'block' : 'hidden' }}">
                 
-                <!-- 1. DESKTOP VIEW: The Exact 5-Column Serpentine S-Curve Stepper (Reference Fidelity) -->
-                <div class="hidden lg:block space-y-16">
+                <!-- 1. DESKTOP VIEW: Continuous Animated Serpentine Stepper -->
+                <div class="hidden lg:block space-y-20 relative lg:px-6" data-tl-canvas="{{ $key }}">
+                    <svg class="tl-tree-svg absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" aria-hidden="true">
+                        <g class="tl-tree-paths"></g>
+                    </svg>
                     @foreach($tl['rows'] as $rowIndex => $nodes)
-                        <div class="relative">
+                        <div class="relative z-10" data-tl-row="{{ $rowIndex }}">
                             <!-- Horizontal Nodes Row (5-col grid) -->
                             <div class="grid grid-cols-5 gap-x-4 items-start relative z-10">
                                 @foreach($nodes as $nodeIndex => $node)
-                                    <div class="flex flex-col items-center text-center relative group">
+                                    <div class="flex flex-col items-center text-center relative group" data-tl-col="{{ $nodeIndex }}">
                                         <!-- Node Icon Box Container -->
-                                        <div class="w-20 h-20 rounded-2xl border-2 {{ $node['status'] === 'completed' ? 'border-sky-300 bg-sky-50/60' : ($node['status'] === 'active' ? 'border-[#0284C7] bg-sky-100/70 ring-4 ring-sky-200/50' : 'border-slate-200 bg-slate-50/70') }} flex items-center justify-center relative shadow-sm group-hover:scale-105 transition-all duration-300">
+                                        <div data-tl-node="{{ $node['id'] }}"
+                                             data-tl-status="{{ $node['status'] }}"
+                                             class="w-20 h-20 rounded-2xl border-2 {{ $node['status'] === 'completed' ? 'border-sky-300 bg-sky-50/60' : ($node['status'] === 'active' ? 'border-[#0284C7] bg-sky-100/70 ring-4 ring-sky-200/50' : 'border-slate-200 bg-slate-50/70') }} flex items-center justify-center relative shadow-sm group-hover:scale-105 transition-all duration-300">
                                             <!-- Floating Status Badge on Top Right -->
                                             <div class="absolute -top-2.5 -right-2.5 w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-md z-20 
                                                 {{ $node['status'] === 'completed' ? 'bg-emerald-500 text-white' : ($node['status'] === 'active' ? 'bg-[#0284C7] text-white animate-pulse' : 'bg-slate-300 text-white') }}">
@@ -386,27 +391,9 @@
                                             </button>
                                         @endif
 
-                                        <!-- Chevron Arrow between nodes -->
-                                        @if(!$loop->last)
-                                            <div class="absolute top-7 -right-4 translate-x-1/2 text-sky-300 z-0 pointer-events-none">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                                                </svg>
-                                            </div>
-                                        @endif
                                     </div>
                                 @endforeach
                             </div>
-
-                            <!-- Serpentine Looping Connector Line from Right of Row to Left of Next Row -->
-                            @if(!$loop->last)
-                                <div class="absolute -bottom-10 right-10 w-24 h-16 pointer-events-none z-0">
-                                    <svg class="w-full h-full text-sky-200" viewBox="0 0 100 60" fill="none" stroke="currentColor" stroke-width="2.5">
-                                        <path d="M 0 0 C 80 0, 80 60, 0 60" stroke-linecap="round"/>
-                                        <polyline points="10,55 0,60 10,65" stroke-width="2.5"/>
-                                    </svg>
-                                </div>
-                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -497,6 +484,78 @@
     </div>
 </div>
 
+<style id="timeline-stepper-connector-styles">
+    @keyframes tlFlowForward {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -36; }
+    }
+    @keyframes tlFlowSlow {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -40; }
+    }
+    @keyframes tlPulseNode {
+        0%, 100% { transform: scale(1); opacity: 0.95; }
+        50% { transform: scale(1.45); opacity: 0.35; }
+    }
+    .tl-rail-done {
+        stroke: #bae6fd;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .tl-flow-done {
+        stroke: #0ea5e9;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 8 10;
+        animation: tlFlowForward 1.15s linear infinite;
+    }
+    .tl-rail-active {
+        stroke: #7dd3fc;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .tl-flow-active {
+        stroke: #0284c7;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 10 8;
+        animation: tlFlowForward 0.85s linear infinite;
+    }
+    .tl-rail-upcoming {
+        stroke: #e2e8f0;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 5 5;
+    }
+    .tl-flow-upcoming {
+        stroke: #94a3b8;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 6 14;
+        opacity: 0.72;
+        animation: tlFlowSlow 2.4s linear infinite;
+    }
+    .tl-pulse-ring {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: tlPulseNode 1.8s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .tl-flow-done,
+        .tl-flow-active,
+        .tl-flow-upcoming,
+        .tl-pulse-ring {
+            animation: none !important;
+        }
+    }
+</style>
+
 <script>
     function switchTimelineTab(tabKey) {
         document.querySelectorAll('.timeline-tab-btn').forEach(btn => {
@@ -523,6 +582,8 @@
             else if (tabKey === 'layanan') subBadge.textContent = 'Layanan Kependudukan & Perizinan';
             else if (tabKey === 'bantuan') subBadge.textContent = 'Pemberdayaan Ekonomi Lokal';
         }
+
+        requestAnimationFrame(drawTimelineConnectors);
     }
 
     function openTimelineModal(title, date, status) {
@@ -553,6 +614,189 @@
         if (modal) modal.classList.add('hidden');
     }
 
+    function buildRoundedOrthogonalPath(points, radius) {
+        if (points.length < 2) return '';
+        let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
+        for (let i = 1; i < points.length - 1; i++) {
+            const [px, py] = points[i - 1];
+            const [cx, cy] = points[i];
+            const [nx, ny] = points[i + 1];
+            const dx1 = cx - px;
+            const dy1 = cy - py;
+            const dx2 = nx - cx;
+            const dy2 = ny - cy;
+            const len1 = Math.hypot(dx1, dy1);
+            const len2 = Math.hypot(dx2, dy2);
+            if (len1 === 0 || len2 === 0) continue;
+            const r = Math.min(radius, len1 / 2, len2 / 2);
+            const inX = cx - (dx1 / len1) * r;
+            const inY = cy - (dy1 / len1) * r;
+            const outX = cx + (dx2 / len2) * r;
+            const outY = cy + (dy2 / len2) * r;
+            d += ` L ${inX.toFixed(1)} ${inY.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${outX.toFixed(1)} ${outY.toFixed(1)}`;
+        }
+        const last = points[points.length - 1];
+        d += ` L ${last[0].toFixed(1)} ${last[1].toFixed(1)}`;
+        return d;
+    }
+
+    function resolveTimelineSegmentVariant(srcStatus, dstStatus) {
+        if (dstStatus === 'active' || (srcStatus === 'active' && dstStatus === 'completed')) {
+            return 'active';
+        }
+        if (srcStatus === 'completed' && dstStatus === 'completed') {
+            return 'done';
+        }
+        return 'upcoming';
+    }
+
+    function drawTimelineConnectors() {
+        const SVG_NS = 'http://www.w3.org/2000/svg';
+        const palette = {
+            done: { accent: '#0ea5e9', arrow: '#0284c7' },
+            active: { accent: '#0284c7', arrow: '#0369a1' },
+            upcoming: { accent: '#94a3b8', arrow: '#94a3b8' },
+        };
+
+        const createSvgEl = (tag, attrs) => {
+            const el = document.createElementNS(SVG_NS, tag);
+            Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, String(v)));
+            return el;
+        };
+
+        const appendConnector = (group, d, startPt, arrowPt, variant, bridgeMid) => {
+            const colors = palette[variant];
+            group.appendChild(createSvgEl('path', {
+                d,
+                fill: 'none',
+                class: `tl-rail-${variant}`,
+            }));
+            group.appendChild(createSvgEl('path', {
+                d,
+                fill: 'none',
+                class: `tl-flow-${variant}`,
+            }));
+
+            group.appendChild(createSvgEl('circle', {
+                cx: startPt[0].toFixed(1),
+                cy: startPt[1].toFixed(1),
+                r: variant === 'upcoming' ? 2.5 : 3,
+                fill: colors.accent,
+            }));
+
+            if (bridgeMid) {
+                const [bx, by] = bridgeMid;
+                group.appendChild(createSvgEl('circle', {
+                    cx: bx.toFixed(1),
+                    cy: by.toFixed(1),
+                    r: 8,
+                    fill: '#ffffff',
+                }));
+                group.appendChild(createSvgEl('path', {
+                    d: `M ${(bx + 3).toFixed(1)} ${(by - 4).toFixed(1)} L ${(bx - 3).toFixed(1)} ${by.toFixed(1)} L ${(bx + 3).toFixed(1)} ${(by + 4).toFixed(1)}`,
+                    fill: 'none',
+                    stroke: colors.arrow,
+                    'stroke-width': 2.2,
+                    'stroke-linecap': 'round',
+                    'stroke-linejoin': 'round',
+                }));
+            }
+
+            const [ax, ay] = arrowPt;
+            group.appendChild(createSvgEl('path', {
+                d: `M ${(ax - 7).toFixed(1)} ${(ay - 4.5).toFixed(1)} L ${ax.toFixed(1)} ${ay.toFixed(1)} L ${(ax - 7).toFixed(1)} ${(ay + 4.5).toFixed(1)} Z`,
+                fill: colors.arrow,
+            }));
+
+            if (variant === 'active') {
+                group.appendChild(createSvgEl('circle', {
+                    cx: ax.toFixed(1),
+                    cy: ay.toFixed(1),
+                    r: 4,
+                    fill: '#0284c7',
+                    class: 'tl-pulse-ring',
+                }));
+            }
+        };
+
+        document.querySelectorAll('[data-tl-canvas]').forEach((canvas) => {
+            const cRect = canvas.getBoundingClientRect();
+            const svg = canvas.querySelector('.tl-tree-svg');
+            const group = canvas.querySelector('.tl-tree-paths');
+            if (!svg || !group || cRect.width === 0 || cRect.height === 0) {
+                return;
+            }
+
+            svg.setAttribute('viewBox', `0 0 ${cRect.width.toFixed(1)} ${cRect.height.toFixed(1)}`);
+            group.innerHTML = '';
+
+            const rows = Array.from(canvas.querySelectorAll('[data-tl-row]')).map((rowEl) => {
+                const nodes = Array.from(rowEl.querySelectorAll('[data-tl-col]')).map((colEl) => {
+                    const boxEl = colEl.querySelector('[data-tl-node]');
+                    if (!boxEl) return null;
+                    const bRect = boxEl.getBoundingClientRect();
+                    const colRect = colEl.getBoundingClientRect();
+                    return {
+                        status: boxEl.dataset.tlStatus || 'upcoming',
+                        left: bRect.left - cRect.left,
+                        right: bRect.right - cRect.left,
+                        top: bRect.top - cRect.top,
+                        cy: bRect.top - cRect.top + bRect.height / 2,
+                        colLeft: colRect.left - cRect.left,
+                        colRight: colRect.right - cRect.left,
+                        colBottom: colRect.bottom - cRect.top,
+                    };
+                }).filter(Boolean);
+                return { nodes };
+            }).filter((r) => r.nodes.length > 0);
+
+            rows.forEach((row, rIdx) => {
+                for (let i = 0; i < row.nodes.length - 1; i++) {
+                    const src = row.nodes[i];
+                    const dst = row.nodes[i + 1];
+                    const y = (src.cy + dst.cy) / 2;
+                    const startX = src.right;
+                    const arrowTipX = dst.left - 1.5;
+                    const lineEndX = Math.max(startX + 4, arrowTipX - 4);
+                    const variant = resolveTimelineSegmentVariant(src.status, dst.status);
+                    const d = `M ${startX.toFixed(1)} ${y.toFixed(1)} L ${lineEndX.toFixed(1)} ${y.toFixed(1)}`;
+                    appendConnector(group, d, [startX, y], [arrowTipX, y], variant, null);
+                }
+
+                if (rIdx < rows.length - 1) {
+                    const nextRow = rows[rIdx + 1];
+                    const src = row.nodes[row.nodes.length - 1];
+                    const dst = nextRow.nodes[0];
+                    const variant = resolveTimelineSegmentVariant(src.status, dst.status);
+
+                    const startX = src.right;
+                    const startY = src.cy;
+                    const arrowTipX = dst.left - 1.5;
+                    const lineEndX = arrowTipX - 4;
+                    const endY = dst.cy;
+
+                    const outX = Math.min(cRect.width - 8, Math.max(startX + 36, src.colRight + 10));
+                    const inX = Math.max(8, Math.min(arrowTipX - 36, dst.colLeft - 10));
+
+                    const rowBottom = Math.max(...row.nodes.map((n) => n.colBottom));
+                    const nextBadgeTop = dst.top - 14;
+                    const laneY = Math.round((rowBottom + nextBadgeTop) / 2);
+
+                    const d = buildRoundedOrthogonalPath([
+                        [startX, startY],
+                        [outX, startY],
+                        [outX, laneY],
+                        [inX, laneY],
+                        [inX, endY],
+                        [lineEndX, endY],
+                    ], 16);
+
+                    appendConnector(group, d, [startX, startY], [arrowTipX, endY], variant, [(outX + inX) / 2, laneY]);
+                }
+            });
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeTimelineModal();
     });
@@ -563,6 +807,23 @@
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) closeTimelineModal();
             });
+        }
+
+        drawTimelineConnectors();
+        requestAnimationFrame(drawTimelineConnectors);
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(drawTimelineConnectors);
+        }
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(drawTimelineConnectors, 80);
+        });
+
+        if (typeof ResizeObserver !== 'undefined') {
+            const ro = new ResizeObserver(() => requestAnimationFrame(drawTimelineConnectors));
+            document.querySelectorAll('[data-tl-canvas]').forEach((el) => ro.observe(el));
         }
     });
 </script>
