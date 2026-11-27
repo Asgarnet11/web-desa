@@ -173,11 +173,112 @@
                 <div class="absolute bottom-0 right-0 w-36 h-36 bg-gradient-to-tl from-amber-400/20 via-orange-400/10 to-transparent pointer-events-none"></div>
                 <div class="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-emerald-500/10 via-teal-400/5 to-transparent pointer-events-none"></div>
 
-                <div class="relative z-10 space-y-12">
+                <style>
+                    @keyframes orgFlowStream {
+                        from {
+                            stroke-dashoffset: 68;
+                        }
+                        to {
+                            stroke-dashoffset: 0;
+                        }
+                    }
+
+                    @keyframes orgFlowAdvisory {
+                        from {
+                            stroke-dashoffset: 36;
+                        }
+                        to {
+                            stroke-dashoffset: 0;
+                        }
+                    }
+
+                    @keyframes orgNodePulse {
+                        0%, 100% {
+                            transform: scale(1);
+                            opacity: 0.85;
+                        }
+                        50% {
+                            transform: scale(1.35);
+                            opacity: 0.35;
+                        }
+                    }
+
+                    .org-rail-solid {
+                        fill: none;
+                        stroke: #cbd5e1;
+                        stroke-width: 2.5;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                    }
+
+                    .org-flow-stream {
+                        fill: none;
+                        stroke: url(#orgStreamGrad);
+                        stroke-width: 2.5;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                        stroke-dasharray: 14 20;
+                        animation: orgFlowStream 2s linear infinite;
+                    }
+
+                    .org-rail-advisory {
+                        fill: none;
+                        stroke: #fbbf24;
+                        stroke-opacity: 0.45;
+                        stroke-width: 2;
+                        stroke-dasharray: 6 6;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                    }
+
+                    .org-flow-advisory {
+                        fill: none;
+                        stroke: #f59e0b;
+                        stroke-width: 2;
+                        stroke-dasharray: 6 12;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                        animation: orgFlowAdvisory 2.2s linear infinite;
+                    }
+
+                    .org-flow-branch.is-highlighted {
+                        stroke: #0284c7;
+                        stroke-width: 3.25;
+                        filter: drop-shadow(0 0 4px rgba(2, 132, 199, 0.45));
+                    }
+
+                    .org-junction-halo {
+                        transform-box: fill-box;
+                        transform-origin: center;
+                        animation: orgNodePulse 2.4s ease-in-out infinite;
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        .org-flow-stream,
+                        .org-flow-advisory,
+                        .org-junction-halo {
+                            animation: none !important;
+                        }
+                    }
+                </style>
+
+                <div id="org-tree-canvas" class="relative z-10">
+                    <!-- Continuous Animated SVG Connector Layer -->
+                    <svg id="org-tree-svg" class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="orgStreamGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="900">
+                                <stop offset="0%" stop-color="#0284C7" />
+                                <stop offset="55%" stop-color="#059669" />
+                                <stop offset="100%" stop-color="#D97706" />
+                            </linearGradient>
+                        </defs>
+                        <g id="org-tree-paths"></g>
+                    </svg>
+
                     <!-- Top Bar: Banner Header + Advisory Board Boxes + Crest Logo -->
-                    <div class="flex items-start justify-between gap-6">
+                    <div class="relative z-10 flex items-start justify-between gap-6">
                         <!-- Top Left: Advisory / Pembina & Pengawas Boxes -->
-                        <div class="w-64 space-y-2.5">
+                        <div data-org-anchor="advisory" class="w-64 space-y-2.5">
                             <div class="rounded-xl overflow-hidden border border-amber-300 shadow-sm bg-white">
                                 <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-[10px] uppercase tracking-wider py-1 px-3 text-center">
                                     PEMBINA WILAYAH (CAMAT)
@@ -232,24 +333,15 @@
                         </div>
                     </div>
 
-                    <!-- Connective Dotted Line from Advisory Boxes to Leadership Line -->
-                    <div class="relative h-6">
-                        <div class="absolute left-32 top-0 w-0.5 h-6 border-l-2 border-dashed border-gray-400"></div>
-                        <div class="absolute left-32 top-6 w-[260px] h-0.5 border-t-2 border-dashed border-gray-400"></div>
-                    </div>
-
                     <!-- TIER 1: Leadership (Lurah Konda & Sekretaris Kelurahan) -->
-                    <div class="relative flex items-center justify-center gap-32">
-                        <!-- Connecting Solid Horizontal Tree Bar between Lurah & Seklur -->
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-1 bg-gray-700 -z-0"></div>
-
+                    <div class="relative z-10 flex items-start justify-center gap-32 pt-10">
                         <!-- 1. Lurah Konda (Pimpinan Utama) -->
                         <div class="relative z-10 flex flex-col items-center">
                             <div class="px-3.5 py-0.5 rounded-full bg-orange-500 text-white font-bold text-[10px] uppercase tracking-wider mb-2 shadow-sm">
                                 Lurah
                             </div>
 
-                            <div class="relative">
+                            <div class="relative" data-org-anchor="lurah">
                                 <div class="w-24 h-24 rounded-full border-4 border-amber-400 p-1 bg-white shadow-lg overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
                                          alt="H. La Ode Muhammad Nasir, S.Sos, M.Si" 
@@ -274,7 +366,7 @@
                                 Seklur
                             </div>
 
-                            <div class="relative">
+                            <div class="relative" data-org-anchor="seklur">
                                 <div class="w-24 h-24 rounded-full border-4 border-amber-400 p-1 bg-white shadow-lg overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
                                          alt="Siti Nurhaliza, S.STP, M.AP" 
@@ -294,27 +386,20 @@
                         </div>
                     </div>
 
-                    <!-- Vertical Tree Trunk from Leadership down to Sekretariat -->
-                    <div class="flex justify-center -my-3">
-                        <div class="w-1 h-8 bg-gray-700"></div>
-                    </div>
-
                     <!-- TIER 2: Sekretariat & Staf Pelaksana Administrasi -->
-                    <div class="relative flex items-center justify-center gap-12">
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-1 bg-gray-700 -z-0"></div>
-
+                    <div class="relative z-10 flex items-center justify-center gap-12 pt-12">
                         <!-- Staf Umum 1 (Left Circular Avatar) -->
-                        <div class="relative z-10 flex flex-col items-center">
+                        <div class="relative z-10 w-24 flex flex-col items-center" data-org-anchor="staf1">
                             <div class="w-16 h-16 rounded-full border-2 border-amber-400 p-0.5 bg-white shadow-md overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" 
                                      alt="Kafa Birrasyid, S.Ag" 
                                      class="w-full h-full object-cover rounded-full">
                             </div>
-                            <span class="text-[10px] font-bold text-gray-700 mt-1">Staf Pelaksana</span>
+                            <span class="text-[10px] font-bold text-gray-700 mt-1 text-center">Staf Pelaksana</span>
                         </div>
 
                         <!-- Center Box 1: Sekretariat 1 -->
-                        <div class="relative z-10 bg-white rounded-xl border border-sky-300 shadow-sm overflow-hidden min-w-[170px]">
+                        <div data-org-anchor="sek1" class="relative z-10 bg-white rounded-xl border border-sky-300 shadow-sm overflow-hidden w-[185px]">
                             <div class="bg-amber-400 text-amber-950 font-bold text-[9px] uppercase tracking-wider py-0.5 px-3 text-center">
                                 SEKRETARIAT 1
                             </div>
@@ -325,7 +410,7 @@
                         </div>
 
                         <!-- Center Box 2: Sekretariat 2 -->
-                        <div class="relative z-10 bg-white rounded-xl border border-sky-300 shadow-sm overflow-hidden min-w-[170px]">
+                        <div data-org-anchor="sek2" class="relative z-10 bg-white rounded-xl border border-sky-300 shadow-sm overflow-hidden w-[185px]">
                             <div class="bg-amber-400 text-amber-950 font-bold text-[9px] uppercase tracking-wider py-0.5 px-3 text-center">
                                 SEKRETARIAT 2
                             </div>
@@ -336,38 +421,29 @@
                         </div>
 
                         <!-- Staf Umum 2 (Right Circular Avatar) -->
-                        <div class="relative z-10 flex flex-col items-center">
+                        <div class="relative z-10 w-24 flex flex-col items-center" data-org-anchor="staf2">
                             <div class="w-16 h-16 rounded-full border-2 border-amber-400 p-0.5 bg-white shadow-md overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80" 
                                      alt="Luthfi Abdul Karim, S.Ag" 
                                      class="w-full h-full object-cover rounded-full">
                             </div>
-                            <span class="text-[10px] font-bold text-gray-700 mt-1">Staf Pelaksana</span>
+                            <span class="text-[10px] font-bold text-gray-700 mt-1 text-center">Staf Pelaksana</span>
                         </div>
                     </div>
 
-                    <!-- Vertical Tree Trunk from Sekretariat to 7 Division Columns -->
-                    <div class="flex justify-center -my-3">
-                        <div class="w-1 h-8 bg-gray-700"></div>
-                    </div>
-
                     <!-- TIER 3: The 7 Seksi Divisions -->
-                    <div class="relative">
-                        <div class="absolute top-4 left-10 right-10 h-1 bg-gray-700 -z-0"></div>
-
-                        <div class="grid grid-cols-7 gap-3 pt-0 relative z-10">
-                            @foreach($divisiList as $div)
-                                <div class="flex flex-col items-center space-y-6">
+                    <div class="relative z-10 pt-14">
+                        <div class="grid grid-cols-7 gap-3 relative z-10">
+                            @foreach($divisiList as $divIdx => $div)
+                                <div class="org-col-group flex flex-col items-center gap-6" data-branch-col="{{ $divIdx }}">
                                     <!-- Orange Division Header Tag -->
-                                    <div class="w-full py-1.5 px-1 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-[10px] text-center uppercase tracking-wider shadow-sm border border-amber-300">
+                                    <div data-org-anchor="div-{{ $divIdx }}" class="w-full py-1.5 px-1 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-[10px] text-center uppercase tracking-wider shadow-sm border border-amber-300 transition-transform duration-200 group-hover:scale-[1.03]">
                                         {{ $div['header'] }}
                                     </div>
 
-                                    <div class="w-0.5 h-3 bg-gray-600 -my-3"></div>
-
                                     <!-- Upper Node: Kepala Seksi / Koordinator -->
-                                    <div class="flex flex-col items-center text-center">
-                                        <div class="relative">
+                                    <div data-org-card="kasi-{{ $divIdx }}" class="flex flex-col items-center text-center w-full">
+                                        <div class="relative" data-org-anchor="kasi-{{ $divIdx }}">
                                             <div class="w-16 h-16 rounded-full border-3 border-amber-400 p-0.5 bg-white shadow-md overflow-hidden">
                                                 <img src="{{ $div['kasi']['foto'] }}" 
                                                      alt="{{ $div['kasi']['nama'] }}" 
@@ -388,11 +464,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="w-0.5 h-6 bg-gray-600 -my-2"></div>
-
                                     <!-- Lower Node: Staf Pelaksana / Anggota -->
-                                    <div class="flex flex-col items-center text-center">
-                                        <div class="relative">
+                                    <div class="flex flex-col items-center text-center w-full">
+                                        <div class="relative" data-org-anchor="anggota-{{ $divIdx }}">
                                             <div class="w-16 h-16 rounded-full border-3 border-amber-400 p-0.5 bg-white shadow-md overflow-hidden">
                                                 <img src="{{ $div['anggota']['foto'] }}" 
                                                      alt="{{ $div['anggota']['nama'] }}" 
@@ -552,6 +626,157 @@
 </section>
 
 <script>
+    function drawOrgTreeConnectors() {
+        const canvas = document.getElementById('org-tree-canvas');
+        const svg = document.getElementById('org-tree-svg');
+        const pathsGroup = document.getElementById('org-tree-paths');
+        if (!canvas || !svg || !pathsGroup) return;
+
+        const canvasRect = canvas.getBoundingClientRect();
+        if (canvasRect.width === 0 || canvasRect.height === 0) return;
+
+        svg.setAttribute('viewBox', `0 0 ${canvasRect.width} ${canvasRect.height}`);
+
+        const measure = (selector) => {
+            const el = canvas.querySelector(selector);
+            if (!el) return null;
+            const r = el.getBoundingClientRect();
+            return {
+                left: r.left - canvasRect.left,
+                right: r.right - canvasRect.left,
+                top: r.top - canvasRect.top,
+                bottom: r.bottom - canvasRect.top,
+                cx: (r.left + r.right) / 2 - canvasRect.left,
+                cy: (r.top + r.bottom) / 2 - canvasRect.top,
+                w: r.width,
+                h: r.height,
+            };
+        };
+
+        const advisory = measure('[data-org-anchor="advisory"]');
+        const lurah = measure('[data-org-anchor="lurah"]');
+        const seklur = measure('[data-org-anchor="seklur"]');
+        const staf1 = measure('[data-org-anchor="staf1"]');
+        const sek1 = measure('[data-org-anchor="sek1"]');
+        const sek2 = measure('[data-org-anchor="sek2"]');
+        const staf2 = measure('[data-org-anchor="staf2"]');
+
+        if (!lurah || !seklur || !sek1 || !sek2) return;
+
+        const ns = 'http://www.w3.org/2000/svg';
+        pathsGroup.innerHTML = '';
+
+        const addPath = (d, railClass, flowClass, branchId = null) => {
+            const rail = document.createElementNS(ns, 'path');
+            rail.setAttribute('d', d);
+            rail.setAttribute('class', railClass);
+            pathsGroup.appendChild(rail);
+
+            const flow = document.createElementNS(ns, 'path');
+            flow.setAttribute('d', d);
+            flow.setAttribute('class', flowClass);
+            if (branchId !== null) {
+                flow.dataset.branch = String(branchId);
+            }
+            pathsGroup.appendChild(flow);
+        };
+
+        const addJunction = (x, y, color = '#0284C7') => {
+            const halo = document.createElementNS(ns, 'circle');
+            halo.setAttribute('cx', x);
+            halo.setAttribute('cy', y);
+            halo.setAttribute('r', '6');
+            halo.setAttribute('fill', color);
+            halo.setAttribute('fill-opacity', '0.22');
+            halo.setAttribute('class', 'org-junction-halo');
+            pathsGroup.appendChild(halo);
+
+            const dot = document.createElementNS(ns, 'circle');
+            dot.setAttribute('cx', x);
+            dot.setAttribute('cy', y);
+            dot.setAttribute('r', '3.5');
+            dot.setAttribute('fill', color);
+            dot.setAttribute('stroke', '#FFFFFF');
+            dot.setAttribute('stroke-width', '1.5');
+            pathsGroup.appendChild(dot);
+        };
+
+        const roundedElbow = (x1, y1, x2, y2, r = 10) => {
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const sx = dx >= 0 ? 1 : -1;
+            const sy = dy >= 0 ? 1 : -1;
+            const cr = Math.min(r, Math.abs(dx) / 2, Math.abs(dy) / 2);
+            if (cr <= 0) {
+                return `M ${x1} ${y1} L ${x2} ${y1} L ${x2} ${y2}`;
+            }
+            return `M ${x1} ${y1} L ${x2 - sx * cr} ${y1} Q ${x2} ${y1} ${x2} ${y1 + sy * cr} L ${x2} ${y2}`;
+        };
+
+        const tier1Y = (lurah.cy + seklur.cy) / 2;
+        const commandMidX = (lurah.cx + seklur.cx) / 2;
+
+        // 0. Advisory (Camat & LPM) dashed coordination path to Tier 1 Command Axis
+        if (advisory) {
+            const elbowY = Math.min(advisory.bottom + 18, lurah.top - 18);
+            const advD = `M ${advisory.cx} ${advisory.bottom} L ${advisory.cx} ${elbowY - 10} Q ${advisory.cx} ${elbowY} ${advisory.cx + 10} ${elbowY} L ${commandMidX - 10} ${elbowY} Q ${commandMidX} ${elbowY} ${commandMidX} ${elbowY + 10} L ${commandMidX} ${tier1Y}`;
+            addPath(advD, 'org-rail-advisory', 'org-flow-advisory');
+            addJunction(advisory.cx, advisory.bottom, '#F59E0B');
+        }
+
+        // 1. Tier 1 Coordination Line (Lurah <-> Seklur)
+        addPath(`M ${lurah.cx} ${tier1Y} L ${seklur.cx} ${tier1Y}`, 'org-rail-solid', 'org-flow-stream');
+
+        // 2. Central Trunk from Tier 1 Junction down through Tier 2 to Tier 3 Distribution Bus
+        const tier2BusY = Math.min(sek1.top, sek2.top) - 22;
+        const tier2RowY = (sek1.cy + sek2.cy) / 2;
+        const divNodes = [];
+        for (let i = 0; i < 7; i++) {
+            const dNode = measure(`[data-org-anchor="div-${i}"]`);
+            const kAvatar = measure(`[data-org-anchor="kasi-${i}"]`);
+            const kCard = measure(`[data-org-card="kasi-${i}"]`);
+            const aAvatar = measure(`[data-org-anchor="anggota-${i}"]`);
+            if (dNode && kAvatar && kCard && aAvatar) {
+                divNodes.push({ i, dNode, kAvatar, kCard, aAvatar });
+            }
+        }
+
+        const tier3BusY = divNodes.length ? divNodes[0].dNode.top - 26 : tier2RowY + 70;
+
+        // Continuous central vertical command spine
+        addPath(`M ${commandMidX} ${tier1Y} L ${commandMidX} ${tier3BusY}`, 'org-rail-solid', 'org-flow-stream');
+        addJunction(commandMidX, tier1Y, '#0284C7');
+
+        // Tier 2 branching to Sekretariat 1 & 2 + Horizontal link to Staf Pelaksana
+        addPath(roundedElbow(commandMidX, tier2BusY, sek1.cx, sek1.top, 8), 'org-rail-solid', 'org-flow-stream');
+        addPath(roundedElbow(commandMidX, tier2BusY, sek2.cx, sek2.top, 8), 'org-rail-solid', 'org-flow-stream');
+        addJunction(commandMidX, tier2BusY, '#059669');
+
+        if (staf1 && staf2) {
+            addPath(`M ${sek1.left} ${tier2RowY} L ${staf1.cx} ${tier2RowY}`, 'org-rail-solid', 'org-flow-stream');
+            addPath(`M ${sek2.right} ${tier2RowY} L ${staf2.cx} ${tier2RowY}`, 'org-rail-solid', 'org-flow-stream');
+        }
+
+        // 3. Tier 3 Distribution Bus -> 7 Seksi Columns & Continuous Column Stems
+        if (divNodes.length) {
+            addJunction(commandMidX, tier3BusY, '#F59E0B');
+
+            divNodes.forEach(({ i, dNode, kAvatar, kCard, aAvatar }) => {
+                // Distribution branch from center spine to Division header top
+                const distD = Math.abs(dNode.cx - commandMidX) < 2
+                    ? `M ${commandMidX} ${tier3BusY} L ${dNode.cx} ${dNode.top}`
+                    : roundedElbow(commandMidX, tier3BusY, dNode.cx, dNode.top, 9);
+                addPath(distD, 'org-rail-solid', 'org-flow-stream org-flow-branch', i);
+
+                // Vertical stem: Division Header bottom -> Kasi Avatar center
+                addPath(`M ${dNode.cx} ${dNode.bottom} L ${kAvatar.cx} ${kAvatar.cy}`, 'org-rail-solid', 'org-flow-stream org-flow-branch', i);
+
+                // Vertical stem: Kasi Card bottom -> Anggota Avatar center
+                addPath(`M ${kCard.cx} ${kCard.bottom} L ${aAvatar.cx} ${aAvatar.cy}`, 'org-rail-solid', 'org-flow-stream org-flow-branch', i);
+            });
+        }
+    }
+
     function switchStrukturMode(mode) {
         const posterContainer = document.getElementById('struktur-poster-container');
         const cardContainer = document.getElementById('struktur-card-container');
@@ -572,6 +797,8 @@
                 btnCard.classList.remove('bg-[#0284C7]', 'text-white', 'shadow-xs');
                 btnCard.classList.add('text-gray-600');
             }
+
+            requestAnimationFrame(() => drawOrgTreeConnectors());
         } else {
             if (posterContainer) posterContainer.classList.add('hidden');
             if (cardContainer) cardContainer.classList.remove('hidden');
@@ -588,12 +815,33 @@
         }
     }
 
-    // Auto-detect mobile screen on load to default to card view
+    // Auto-detect mobile screen on load & redraw SVG connectors smoothly
     document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth < 1024) {
             switchStrukturMode('card');
         } else {
             switchStrukturMode('poster');
         }
+
+        const canvas = document.getElementById('org-tree-canvas');
+        if (canvas && typeof ResizeObserver !== 'undefined') {
+            new ResizeObserver(() => requestAnimationFrame(drawOrgTreeConnectors)).observe(canvas);
+        }
+
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => requestAnimationFrame(drawOrgTreeConnectors));
+        }
+
+        document.querySelectorAll('.org-col-group').forEach((col) => {
+            const branchId = col.dataset.branchCol;
+            col.addEventListener('mouseenter', () => {
+                document.querySelectorAll(`.org-flow-branch[data-branch="${branchId}"]`).forEach((p) => p.classList.add('is-highlighted'));
+            });
+            col.addEventListener('mouseleave', () => {
+                document.querySelectorAll(`.org-flow-branch[data-branch="${branchId}"]`).forEach((p) => p.classList.remove('is-highlighted'));
+            });
+        });
+
+        window.addEventListener('resize', () => requestAnimationFrame(drawOrgTreeConnectors));
     });
 </script>
