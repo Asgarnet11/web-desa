@@ -135,6 +135,11 @@ class PublicPagesTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Satu Data');
         $response->assertSee('Open Data Hub');
+
+        // Verify cached hit remains valid with serializable_classes => false
+        $cachedResponse = $this->get(route('satu-data.index'));
+        $cachedResponse->assertStatus(200);
+        $cachedResponse->assertSee('Pemerintahan');
     }
 
     public function test_satu_data_export_csv_downloads_successfully(): void

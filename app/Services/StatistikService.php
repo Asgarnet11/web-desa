@@ -31,7 +31,8 @@ class StatistikService
                 ->with('kategori')
                 ->get()
                 ->groupBy('kategori.nama')
-                ->map->count();
+                ->map->count()
+                ->all();
 
             $infrastrukturBaik = Infrastruktur::where('wilayah_id', $wilayahId)
                 ->where('kondisi', KondisiFisik::Baik)
@@ -41,7 +42,8 @@ class StatistikService
 
             $indikatorSosial = KondisiSosial::where('wilayah_id', $wilayahId)
                 ->latest('periode')
-                ->get();
+                ->get()
+                ->toArray();
 
             return [
                 'wilayah' => [

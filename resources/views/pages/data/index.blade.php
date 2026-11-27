@@ -32,7 +32,7 @@
             $totalPendudukReal = (int) ($demografiData['total_penduduk'] ?? 0);
             $totalKkReal = (int) ($demografiData['total_kk'] ?? 0);
             $rwCountReal = (int) ($statistik['wilayah']['rw_count'] ?? 0);
-            $luasWilayah = (float) ($wilayah?->luas ?? 1.48);
+            $luasWilayah = (float) ($wilayah?->luas ?? 4.65);
             $kepadatanReal = $luasWilayah > 0 ? round($totalPendudukReal / $luasWilayah, 0) : 0;
             $rincianData = $demografiData['rincian'] ?? [];
             $mutasiReal = $rincianData['mutasi_tahun_ini'] ?? [];
@@ -60,7 +60,7 @@
                     <span class="text-[10px] font-bold uppercase tracking-wider">Luas Wilayah</span>
                 </div>
                 <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#1B4332] tabular-nums">
-                    {{ $wilayah?->luas ?? '1.48' }} <span class="text-base font-bold text-gray-500">km²</span>
+                    {{ $wilayah?->luas ?? '4.65' }} <span class="text-base font-bold text-gray-500">km²</span>
                 </h3>
                 <span class="text-[11px] text-gray-500 block tabular-nums">
                     {{ $rwCountReal }} Rukun Warga (RW)
