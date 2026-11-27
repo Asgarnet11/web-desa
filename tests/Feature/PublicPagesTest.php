@@ -7,6 +7,7 @@ use App\Models\DokumenPublik;
 use App\Models\Wilayah;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PublicPagesTest extends TestCase
@@ -206,5 +207,29 @@ class PublicPagesTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertEquals($initialDownloads + 1, $dokumen->fresh()->download_count);
+    }
+
+    public function test_all_seeded_dokumen_files_exist_and_serve_valid_binary_content(): void
+    {
+        $allDocs = DokumenPublik::all();
+        $this->assertCount(16, $allDocs);
+
+        foreach ($allDocs as $doc) {
+            $this->assertTrue(
+                Storage::disk('public')->exists($doc->file_path),
+                "Missing public storage file: {$doc->file_path}"
+            );
+        }
+
+        $pdfDoc = $allDocs->first(fn (DokumenPublik $d) => str_ends_with($d->file_path, '.pdf'));
+        $docxDoc = $allDocs->first(fn (DokumenPublik $d) => str_ends_with($d->file_path, '.docx'));
+
+        $pdfResponse = $this->get(route('dokumen.download', $pdfDoc));
+        $pdfResponse->assertStatus(200);
+        $this->assertStringStartsWith('%PDF-', $pdfResponse->streamedContent());
+
+        $docxResponse = $this->get(route('dokumen.download', $docxDoc));
+        $docxResponse->assertStatus(200);
+        $this->assertStringStartsWith('PK', $docxResponse->streamedContent());
     }
 }

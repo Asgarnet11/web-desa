@@ -61,20 +61,36 @@ class DokumenPublikController extends Controller
             return Storage::disk('public')->download($dokumen->file_path, basename($dokumen->file_path));
         }
 
-        // Fallback streamed dummy PDF/Document for demo / sample seeded documents
+        // Fallback streamed valid single-page PDF if an ad-hoc DB record lacks an uploaded file
         $filename = Str::slug($dokumen->judul).'.pdf';
 
         return response()->streamDownload(function () use ($dokumen) {
-            echo "%PDF-1.4\n";
-            echo "1 0 obj << /Title ({$dokumen->judul}) /Author (Pemerintah Kelurahan Konda) >> endobj\n";
-            echo "2 0 obj << /Type /Catalog /Pages 3 0 R >> endobj\n";
-            echo "3 0 obj << /Type /Pages /Kids [4 0 R] /Count 1 >> endobj\n";
-            echo "4 0 obj << /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 5 0 R >> endobj\n";
-            echo "5 0 obj << /Length 44 >> stream\n";
-            echo "BT /F1 12 Tf 50 700 TD ({$dokumen->judul}) Tj ET\n";
-            echo "endstream endobj\n";
-            echo "xref\n0 6\n0000000000 65535 f\n";
-            echo "trailer << /Size 6 /Root 2 0 R /Info 1 0 R >>\nstartxref\n400\n%%EOF";
+            $safeTitle = str_replace(['\\', '(', ')'], ['\\\\', '\\(', '\\)'], Str::ascii($dokumen->judul));
+            $streamText = "BT /F1 14 Tf 54 740 Td (PEMERINTAH KELURAHAN KONDA - KONAWE SELATAN) Tj 0 -26 Td /F1 11 Tf ({$safeTitle}) Tj 0 -22 Td /F1 10 Tf (Dokumen arsip resmi Kelurahan Konda - silakan hubungi loket bila lampiran belum tersedia.) Tj ET";
+
+            $objects = [
+                1 => '<< /Type /Catalog /Pages 2 0 R >>',
+                2 => '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+                3 => '<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595 842] /Contents 5 0 R >>',
+                4 => '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+                5 => '<< /Length '.strlen($streamText)." >>\nstream\n{$streamText}\nendstream",
+            ];
+
+            $pdf = "%PDF-1.4\n";
+            $offsets = [0];
+            foreach ($objects as $num => $body) {
+                $offsets[$num] = strlen($pdf);
+                $pdf .= "{$num} 0 obj\n{$body}\nendobj\n";
+            }
+
+            $xrefPos = strlen($pdf);
+            $pdf .= "xref\n0 ".(count($objects) + 1)."\n0000000000 65535 f \n";
+            foreach ($objects as $num => $_) {
+                $pdf .= sprintf("%010d 00000 n \n", $offsets[$num]);
+            }
+            $pdf .= "trailer\n<< /Size ".(count($objects) + 1)." /Root 1 0 R >>\nstartxref\n{$xrefPos}\n%%EOF";
+
+            echo $pdf;
         }, $filename, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'attachment; filename="'.$filename.'"',
